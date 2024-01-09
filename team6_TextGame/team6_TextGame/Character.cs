@@ -63,10 +63,8 @@
             atk = 10;
             def = 5;
             hp = 100;
+            mp = 50;
             job = "전사";
-            f_atk = atk;
-            f_def = def;
-            f_hp  = hp;
         }
     }
 
@@ -77,10 +75,8 @@
             atk = 12;
             def = 3;
             hp = 100;
+            mp = 40;
             job = "궁수";
-            f_atk = atk;
-            f_def = def;
-            f_hp = hp;
         }
     }
 
@@ -88,13 +84,11 @@
     {
         public Mage()
         {
-            atk = 10;
-            def = 5;
+            atk = 8;
+            def = 4;
             hp = 100;
-            job = "전사";
-            f_atk = atk;
-            f_def = def;
-            f_hp = hp;
+            mp = 70;
+            job = "마법사";
         }
     }
 
