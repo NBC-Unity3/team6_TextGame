@@ -18,7 +18,7 @@
         public int f_hp;
         public int f_mp;
 
-        public List<Item> inven = new List<Item>();
+        public List<Item> inventory = new List<Item>();      //장비 아이템 리스트
 
         public Character()
         {
@@ -47,7 +47,8 @@
 
         public void AddInventory(Item item)
         {
-            inven.Add( item );
+            inventory.Add(item);
+
         }
 
         public void ChangeStatus(int atk, int def, int hp)

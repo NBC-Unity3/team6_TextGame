@@ -158,7 +158,7 @@ class Program
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         Console.WriteLine("[아이템 목록]\n");
 
-        foreach (EquipmentItem item in player.inven)
+        foreach (EquipmentItem item in player.inventory)
         {
             Console.WriteLine($"- {item.ToString()}");
         }
@@ -197,7 +197,7 @@ class Program
             Console.WriteLine("[아이템 목록]\n");
 
             int i = 1;
-            foreach (EquipmentItem item in player.inven)
+            foreach (Item item in player.inventory)
             {
                 Console.WriteLine($"{i++} {item.ToString()}");
             }
@@ -207,14 +207,14 @@ class Program
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            if(!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inven.Count || num < 0)
+            if(!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
             {
                 Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
             }
             else
             {
                 if (num == 0) break;
-                player.inven[num - 1].eqip(player);
+                player.inventory[num - 1].equip(player);    
             }
         }
     }
@@ -310,7 +310,7 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int i = 1;
-            foreach (EquipmentItem item in player.inven)
+            foreach (EquipmentItem item in player.inventory)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
             }
@@ -319,7 +319,7 @@ class Program
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inven.Count || num < 0)
+            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
             {
                 Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
             }

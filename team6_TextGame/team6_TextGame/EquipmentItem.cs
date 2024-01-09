@@ -6,7 +6,7 @@ namespace team6_TextGame
 {
     internal class EquipmentItem : Item
     {
-        public bool isEqipped { get; set; } = false;
+        public bool isEquipped { get; set; } = false;
 
 
         public EquipmentItem(int id, string name, int atk, int def, int hp, string info, int price) : base(id, name, atk, def, hp, info, price)
@@ -23,7 +23,7 @@ namespace team6_TextGame
         public override string ToString()
         {
             var sb = new StringBuilder();
-            if(isEqipped) { sb.Append("[E]"); }
+            if(isEquipped) { sb.Append("[E]"); }
             sb.Append(name);
             sb.Append(" | ");
             if(atk != 0) { sb.Append("공격력 +" +  atk + " "); }
@@ -35,16 +35,16 @@ namespace team6_TextGame
             return sb.ToString();
         }
 
-        public void eqip(Character player)
+        public void equip(Character player)
         {
-            if (isEqipped)
+            if (isEquipped)
             {
-                isEqipped = false;
+                isEquipped = false;
                 player.ChangeStatus(-atk, -def, -hp);
             }
             else
             {
-                isEqipped = true;
+                isEquipped = true;
                 player.ChangeStatus(atk, def, hp);
             }
         }
