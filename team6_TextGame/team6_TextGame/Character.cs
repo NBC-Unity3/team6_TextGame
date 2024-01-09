@@ -9,12 +9,14 @@
         public int atk {  get; set; }
         public int def {  get; set; }
         public int hp {  get; set; }
+        public int mp {  get; set; }
         public int gold { get; set; }
 
         //아이템, 스킬로 인한 최종 능력치
         public int f_atk;
         public int f_def;
         public int f_hp;
+        public int f_mp;
 
         public List<Item> inven = new List<Item>();
 
@@ -23,6 +25,7 @@
             f_atk = atk;
             f_def = def;
             f_hp = hp;
+            f_mp = mp;
         }
         
         public void ShowInfo()
