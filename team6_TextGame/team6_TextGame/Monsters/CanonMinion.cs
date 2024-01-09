@@ -6,11 +6,11 @@ namespace team6_TextGame.Monsters
     {
         public CanonMinion()
         {
-            string name = "대포 미니언";   //이름
-            int level = 5;  //레벨
-            int atk = 8;    //공격력
-            int hp = 25;     //체력
-            int exp = 5;    //경험치 계수
+            this.name = "대포 미니언";   //이름
+            this.level = 5;  //레벨
+            this.atk = 8;    //공격력
+            this.hp = 25;     //체력
+            this.exp = 5;    //경험치 계수
         }
     }
 }
