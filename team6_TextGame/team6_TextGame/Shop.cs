@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 
-namespace NBC_TextGame
+namespace team6_TextGame
 {
     internal class Shop
     {
