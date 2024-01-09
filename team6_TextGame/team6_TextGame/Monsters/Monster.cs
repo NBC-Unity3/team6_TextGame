@@ -53,10 +53,13 @@ namespace team6_TextGame.Monsters
                 Console.WriteLine("Lv. " + character.level + " " + character.name);
                 Console.Write("HP " + character.hp + " -> ");
                 character.hp -= atk;
-                if (hp > 0)
-                    Console.WriteLine("HP " + hp);  // 체력이 남아있으면 남은 체력을 출력
+                if (character.hp > 0)
+                    Console.WriteLine("HP " + character.hp);  // 체력이 남아있으면 남은 체력을 출력
                 else
+                {
+                    character.hp = 0;
                     Console.WriteLine("Dead");  // 체력이 다 떨어지면 죽는 Dead 텍스트를 출력
+                }
             }
         }
     }
