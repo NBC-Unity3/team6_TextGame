@@ -18,7 +18,7 @@ namespace NBC_TextGame
         public int f_def;
         public int f_hp;
 
-        public List<Item> inven = new List<Item>();
+        public List<EquipmentItem> inven = new List<EquipmentItem>();
 
         
         public Character()
@@ -34,7 +34,7 @@ namespace NBC_TextGame
             Console.WriteLine($"Lv. {level}\n{name} ({job})\n공격력 : {f_atk} (+{f_atk - atk})\n방어력 : {f_def} (+{f_def - def})\n체력 : {f_hp} (+{f_hp - hp})\nGold : {gold} G");
         }
 
-        public void AddInventory(Item item)
+        public void AddInventory(EquipmentItem item)
         {
             inven.Add( item );
         }
