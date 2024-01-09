@@ -347,7 +347,7 @@ class Program
             int i = 1;
             foreach (Quest quest in questboard.quests)
             {
-                Console.WriteLine($"{i++} {quest.name}");
+                Console.WriteLine($"{i++}. {quest.name}");
             }
 
             Console.WriteLine("\n0. 나가기\n");
@@ -382,21 +382,35 @@ class Program
                 }
                 else
                 {
-                    if (num == 1) questboard.QuestClear(questboard.quests[n], player);
+                    if (num == 1)
+                    {
+                        questboard.ReceiveReward(questboard.quests[n], player);
+                        break;
+                    }
                     else if (num == 2) break;
                 }
             }
             else if (!questboard.quests[n].isActive && !questboard.quests[n].isClear)
             {
-                Console.WriteLine("1. 수락\n2.거절\n원하시는 행동을 입력해주세요.");
-                if (!int.TryParse(Console.ReadLine(), out int num) || num <= 0 || num > 2)
+                Console.WriteLine("0. 나가기\n1. 수락\n2. 거절\n원하시는 행동을 입력해주세요.");
+                if (!int.TryParse(Console.ReadLine(), out int num) || num < 0 || num > 2)
                 {
                     Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
                 }
                 else
                 {
-                    if (num == 1) questboard.quests[n].isActive = true;
-                    else if (num == 2) questboard.quests.RemoveAt(n);
+                    if (num == 1)
+                    {
+                        questboard.quests[n].isActive = true;
+                        questboard.SaveOptions();
+                        break;
+                    }
+                    else if (num == 2)
+                    {
+                        questboard.RemoveQuest(questboard.quests[n]);
+                        break;
+                    }
+                    else break;
                 }
             }
             else
