@@ -1,26 +1,23 @@
-﻿
-
-namespace team6_TextGame
+﻿namespace NBC_TextGame
 {
     internal class Character
     {
         //자동구현 프로퍼티가 자동으로 private field를 만든다.
         public int level { get; set; } = 1;
-        public string name { get; set; } = "Chad";
-        public string job {  get; set; } = "전사";
-        public int atk {  get; set; } = 10;
-        public int def {  get; set; } = 5;
-        public int hp {  get; set; } = 100;
-        public int gold { get; set; } = 1500;
+        public string name { get; set; }
+        public string job {  get; set; }
+        public int atk {  get; set; }
+        public int def {  get; set; }
+        public int hp {  get; set; }
+        public int gold { get; set; }
 
         //아이템, 스킬로 인한 최종 능력치
         public int f_atk;
         public int f_def;
         public int f_hp;
 
-        public List<EquipmentItem> inven = new List<EquipmentItem>();
+        public List<Item> inven = new List<Item>();
 
-        
         public Character()
         {
             f_atk = atk;
@@ -28,13 +25,22 @@ namespace team6_TextGame
             f_hp = hp;
         }
         
-        
         public void ShowInfo()
         {
-            Console.WriteLine($"Lv. {level}\n{name} ({job})\n공격력 : {f_atk} (+{f_atk - atk})\n방어력 : {f_def} (+{f_def - def})\n체력 : {f_hp} (+{f_hp - hp})\nGold : {gold} G");
+            //Console.WriteLine($"Lv. {level}\n{name} ({job})\n공격력 : {f_atk} (+{f_atk - atk})\n방어력 : {f_def} (+{f_def - def})\n체력 : {f_hp} (+{f_hp - hp})\nGold : {gold} G");
+
+            Console.WriteLine($"Lv. {level}");
+            Console.WriteLine($"{name} ({job})");
+            Console.Write($"공격력 : {f_atk} ");
+            if (f_atk - atk != 0) Program.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            Console.Write($"방어력 : {f_def} ");
+            if (f_def - def != 0) Program.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            Console.Write($"체력 : {f_hp} ");
+            if (f_hp - hp != 0) Program.TextColor($"(+{f_hp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            Console.WriteLine($"Gold : {gold} G");
         }
 
-        public void AddInventory(EquipmentItem item)
+        public void AddInventory(Item item)
         {
             inven.Add( item );
         }
@@ -45,5 +51,10 @@ namespace team6_TextGame
             f_def += def;
             f_hp += hp;
         }
+    }
+
+    class Warrior : Character
+    {
+
     }
 }
