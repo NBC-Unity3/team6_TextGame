@@ -54,6 +54,11 @@
             f_def += def;
             f_hp += hp;
         }
+
+        public virtual void Skill()
+        {
+
+        }
     }
 
     class Warrior : Character
@@ -69,6 +74,11 @@
             f_def = def;
             f_hp = hp;
             f_mp = mp;
+        }
+
+        public override void Skill()
+        {
+            
         }
     }
 
