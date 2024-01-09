@@ -12,5 +12,20 @@
         public bool isClear {  get; set; } = false;
         public List<EquipmentItem> item_rewards = new List<EquipmentItem>(); // 보상 아이템
 
+        public override string ToString()
+        {
+            string str = "";
+            str += name + "\n\n";
+            str += explain + "\n- ";
+            str += goal_description + "(" + achieve_count + "/" + goal_count + ")\n\n- ";
+            str += "보상\n";
+            foreach (EquipmentItem item in item_rewards)
+            {
+                str += item.name + "\n";
+            }
+            str += gold_reward + "G\n";
+
+            return str;
+        }
     }
 }
