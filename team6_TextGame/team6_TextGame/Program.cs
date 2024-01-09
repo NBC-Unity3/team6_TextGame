@@ -257,7 +257,7 @@ class Program
     }
 
     //TextColor("입력할 문구", ConsoleColor.Yellow); 식으로 사용
-    static void TextColor(string text, ConsoleColor clr)
+    public static void TextColor(string text, ConsoleColor clr)
     {
         Console.ForegroundColor = clr;
         Console.WriteLine(text);
