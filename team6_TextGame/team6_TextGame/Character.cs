@@ -4,8 +4,8 @@
     {
         //자동구현 프로퍼티가 자동으로 private field를 만든다.
         public int level { get; set; } = 1;
-        public string name { get; set; }
-        public string job {  get; set; }
+        public string name { get; set; } = "";
+        public string job { get; set; }
         public int atk {  get; set; }
         public int def {  get; set; }
         public int hp {  get; set; }
@@ -55,6 +55,15 @@
 
     class Warrior : Character
     {
-
+        public Warrior()
+        {
+            atk = 10;
+            def = 5;
+            hp = 100;
+            job = "전사";
+            f_atk = atk;
+            f_def = def;
+            f_hp  = hp;
+        }
     }
 }
