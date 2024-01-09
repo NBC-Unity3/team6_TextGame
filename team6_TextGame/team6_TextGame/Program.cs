@@ -1,5 +1,6 @@
 ﻿using team6_TextGame;
 using Newtonsoft.Json;
+using System.Xml.Linq;
 
 
 class Program
@@ -9,11 +10,36 @@ class Program
 
     static void Main(String[] args)
     {
-        LoadGame();
-
-        StartGame();
+        //LoadGame();
+        CreateCharacter();
+        //StartGame();
     }
 
+    static void CreateCharacter()
+    {
+        string name;
+        //이름 입력
+        while(true)
+        {
+            Console.Clear();
+            Console.WriteLine("당신의 이름은 무엇입니까?");
+            name = Console.ReadLine();
+            Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
+            Console.WriteLine("1. 맞습니다.");
+            Console.WriteLine("2. 아닙니다.\n");
+
+            var key = Console.ReadKey(true).Key;
+            if (key ==  ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+        
+    }
 
     static void StartGame()
     {
