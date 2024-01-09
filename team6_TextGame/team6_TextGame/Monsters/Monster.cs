@@ -1,7 +1,5 @@
 ﻿
 using NBC_TextGame;
-using System.Runtime.ConstrainedExecution;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace team6_TextGame.Monsters
 {
