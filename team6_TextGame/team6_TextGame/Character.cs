@@ -10,7 +10,7 @@
         public int def {  get; set; }
         public int hp {  get; set; }
         public int mp {  get; set; }
-        public int gold { get; set; }
+        public int gold { get; set; } = 1500;
 
         //아이템, 스킬로 인한 최종 능력치
         public int f_atk;
@@ -96,6 +96,11 @@
             f_hp = hp;
             f_mp = mp;
         }
+
+        public override void Skill()
+        {
+
+        }
     }
 
     class Mage : Character
@@ -111,6 +116,11 @@
             f_def = def;
             f_hp = hp;
             f_mp = mp;
+        }
+
+        public override void Skill()
+        {
+
         }
     }
 
