@@ -11,7 +11,24 @@ namespace team6_TextGame
             quests.Add(quest);
             SaveOptions();
         }
+        public void RemoveQuest(Quest quest)
+        {
+            quests.Remove(quest);
+            SaveOptions();
+        }
 
+        public void ClearCheck()
+        {
+            foreach (Quest quest in quests)
+            {
+                if (quest.achieve_count >= quest.goal_count)
+                {
+                    quest.isClear = true;
+                }
+            }
+            SaveOptions();
+        }
+        public void ReceiveReward(Quest quest, Character character)
         public void RemoveQuest(Quest quest)
         {
             quests.Remove(quest);
