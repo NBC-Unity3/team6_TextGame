@@ -83,7 +83,7 @@ class Program
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         Console.WriteLine("[아이템 목록]\n");
 
-        foreach (Item item in player.inven)
+        foreach (EquipmentItem item in player.inven)
         {
             Console.WriteLine($"- {item.ToString()}");
         }
@@ -122,7 +122,7 @@ class Program
             Console.WriteLine("[아이템 목록]\n");
 
             int i = 1;
-            foreach (Item item in player.inven)
+            foreach (EquipmentItem item in player.inven)
             {
                 Console.WriteLine($"{i++} {item.ToString()}");
             }
@@ -157,7 +157,7 @@ class Program
         Shop shop = new Shop();
         shop.LoadOptions();
 
-        foreach (Item item in shop.items)
+        foreach (EquipmentItem item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
@@ -201,7 +201,7 @@ class Program
             shop.LoadOptions();
 
             int i = 1;
-            foreach (Item item in shop.items)
+            foreach (EquipmentItem item in shop.items)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {item.price} G");
             }
@@ -235,7 +235,7 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int i = 1;
-            foreach (Item item in player.inven)
+            foreach (EquipmentItem item in player.inven)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
             }
