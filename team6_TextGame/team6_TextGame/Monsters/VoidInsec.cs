@@ -6,11 +6,11 @@ namespace team6_TextGame.Monsters
     {
         public VoidInsec()
         {
-            string name = "공허충";   //이름
-            int level = 3;  //레벨
-            int atk = 9;    //공격력
-            int hp = 10;     //체력
-            int exp = 3;    //경험치 계수
+            this.name = "공허충";   //이름
+            this.level = 3;  //레벨
+            this.atk = 9;    //공격력
+            this.hp = 10;     //체력
+            this.exp = 3;    //경험치 계수
         }
     }
 }
