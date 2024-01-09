@@ -6,16 +6,16 @@ using System.Xml.Linq;
 class Program
 {
     static Shop shop = new Shop();
-    static Character player = new Character();
+    static Character player;
 
     static void Main(String[] args)
     {
         //LoadGame();
-        CreateCharacter();
-        //StartGame();
+        player = CreateCharacter();
+        StartGame();
     }
 
-    static void CreateCharacter()
+    static Character CreateCharacter()
     {
         string name;
         Character character;
@@ -39,45 +39,55 @@ class Program
                 continue;
             }
         }
-        
-        while(true)
-        {
-            Console.WriteLine("원하는 직업을 선택해주세요. ");
+        //직업 선택
 
-            Console.WriteLine("         |   1. 전사    |   2. 궁수    |  3. 마법사  ");
-            Console.WriteLine("---------|--------------|--------------|--------------");
-            Console.WriteLine(" 공격력  |      10      |      12      |      8  ");
-            Console.WriteLine("---------|--------------|--------------|--------------");
-            Console.WriteLine(" 방어력  |      5       |      3       |      5  ");
-            Console.WriteLine("---------|--------------|--------------|--------------");
-            Console.WriteLine("  H   P  |     100      |     100      |      80  ");
-            Console.WriteLine("---------|--------------|--------------|--------------");
-            Console.WriteLine("  M   P  |      50      |      40      |      70  ");
+        Console.Clear();
+        Console.WriteLine("원하는 직업을 선택해주세요. ");
+
+        Console.WriteLine("======================================================");
+        Console.WriteLine("         |   1. 전사    |   2. 궁수    |  3. 마법사  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine(" 공격력  |      10      |      12      |      8  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine(" 방어력  |      5       |      3       |      5  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine("  H   P  |     100      |     100      |      80  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine("  M   P  |      50      |      40      |      70  ");
+        Console.WriteLine("======================================================");
+
+        bool isFirst = true;
+        while (true)
+        {
+            if(!isFirst)
+            {
+                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+            }
+
+            isFirst = false;
 
             var key = Console.ReadKey(true).Key;
 
-            switch (key)
+            if(key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
             {
-                case ConsoleKey n when (n == ConsoleKey.D1 || n == ConsoleKey.NumPad1):
-                    character = new Warrior();
-                    character.name = name;
-                    Console.WriteLine(character.atk + " + " + character.f_atk);
-                    break;
-                case ConsoleKey n when (n == ConsoleKey.D2 || n == ConsoleKey.NumPad2):
-                    character = new Archer();
-                    character.name = name;
-                    Console.WriteLine(character.atk + " + " + character.f_atk);
-                    break;
-                case ConsoleKey n when (n == ConsoleKey.D3 || n == ConsoleKey.NumPad3):
-                    character = new Mage();
-                    character.name = name;
-                    Console.WriteLine(character.atk + " + " + character.f_atk);
-                    break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
-                    continue;
+                character = new Warrior();
+                break;
+            } else if(key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
+            {
+                character = new Archer();
+                break;
+            } else if(key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
+            {
+                character = new Mage();
+                break;
+            } else
+            {
+                continue;
             }
         }
+
+        character.name = name;
+        return character;
     }
 
     static void StartGame()
