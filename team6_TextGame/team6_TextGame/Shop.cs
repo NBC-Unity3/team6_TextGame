@@ -5,9 +5,9 @@ namespace team6_TextGame
 {
     internal class Shop
     {
-        public List<EquipmentItem> items = new List<EquipmentItem>();
+        public List<Item> items = new List<Item>();
 
-        public void AddItem(EquipmentItem item)
+        public void AddItem(Item item)
         {
             this.items.Add(item);
         }
@@ -29,10 +29,10 @@ namespace team6_TextGame
 
         public void SellItem(int index, Character player)
         {
-            EquipmentItem item = player.inven[index];
+            Item item = player.inventory[index];
             player.gold += (int)(item.price * 0.8);
             AddItem(item);
-            player.inven.RemoveAt(index);
+            player.inventory.RemoveAt(index);
             SaveOptions();
         }
 
@@ -51,7 +51,7 @@ namespace team6_TextGame
 
             string json = File.ReadAllText(path);
 
-            List<EquipmentItem> items = JsonConvert.DeserializeObject<List<EquipmentItem>>(json);
+            List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
 
             this.items = items;
 
