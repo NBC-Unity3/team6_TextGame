@@ -26,7 +26,7 @@ class Program
             var key = Console.ReadKey(true).Key;
             switch (key)
             {
-                case ConsoleKey.D1:
+                case ConsoleKey n when(n==ConsoleKey.D1 || n==ConsoleKey.NumPad1):
                     Status();
                     break;
                 case ConsoleKey.D2:
