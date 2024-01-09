@@ -1,7 +1,4 @@
-﻿
-using NBC_TextGame;
-
-namespace team6_TextGame
+﻿namespace team6_TextGame
 {
     internal class Quest
     {
