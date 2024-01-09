@@ -20,7 +20,7 @@ namespace team6_TextGame
             this.price = price;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
             if(isEqipped) { sb.Append("[E]"); }
