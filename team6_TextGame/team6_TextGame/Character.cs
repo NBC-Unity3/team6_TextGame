@@ -65,6 +65,10 @@
             hp = 100;
             mp = 50;
             job = "전사";
+            f_atk = atk;
+            f_def = def;
+            f_hp = hp;
+            f_mp = mp;
         }
     }
 
@@ -77,6 +81,10 @@
             hp = 100;
             mp = 40;
             job = "궁수";
+            f_atk = atk;
+            f_def = def;
+            f_hp = hp;
+            f_mp = mp;
         }
     }
 
@@ -89,6 +97,10 @@
             hp = 100;
             mp = 70;
             job = "마법사";
+            f_atk = atk;
+            f_def = def;
+            f_hp = hp;
+            f_mp = mp;
         }
     }
 
