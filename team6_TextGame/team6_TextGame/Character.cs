@@ -66,4 +66,33 @@
             f_hp  = hp;
         }
     }
+
+    class Archer : Character
+    {
+        public Archer()
+        {
+            atk = 12;
+            def = 3;
+            hp = 100;
+            job = "궁수";
+            f_atk = atk;
+            f_def = def;
+            f_hp = hp;
+        }
+    }
+
+    class Mage : Character
+    {
+        public Mage()
+        {
+            atk = 10;
+            def = 5;
+            hp = 100;
+            job = "전사";
+            f_atk = atk;
+            f_def = def;
+            f_hp = hp;
+        }
+    }
+
 }
