@@ -3,7 +3,7 @@
 
 namespace team6_TextGame
 {
-    internal class Item(int id, string name, int atk, int def, int hp, string info, int price)
+    internal abstract class Item(int id, string name, int atk, int def, int hp, string info, int price)
     {
         public int id { get; set; } = id;
         public string name { get; set; } = name;
@@ -13,15 +13,7 @@ namespace team6_TextGame
         public string info { get; set; } = info;
         public int price { get; set; } = price;
 
-        public string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append(name);
-            sb.Append(" | ");
-            sb.Append(info);
-
-            return sb.ToString();
-        }
+        public abstract string ToString();
 
     }
 }
