@@ -16,4 +16,5 @@ namespace team6_TextGame.Monsters
             this.hp = 15;
             this.exp = 1;
         }
+    }
 }

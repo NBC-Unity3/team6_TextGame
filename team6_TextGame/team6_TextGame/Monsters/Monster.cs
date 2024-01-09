@@ -62,24 +62,4 @@ namespace team6_TextGame.Monsters
             }
         }
     }
-
-
-
-    internal class CanonMinion : Monster
-    {
-        public string name = "대포 미니언";   //이름
-        public int level = 5;  //레벨
-        public int atk = 8;    //공격력
-        public int hp = 25;     //체력
-        public int exp = 5;    //경험치 계수
-    }
-
-    internal class VoidInsec : Monster
-    {
-        public string name = "공허충";   //이름
-        public int level = 3;  //레벨
-        public int atk = 9;    //공격력
-        public int hp = 10;     //체력
-        public int exp = 3;    //경험치 계수
-    }
 }
