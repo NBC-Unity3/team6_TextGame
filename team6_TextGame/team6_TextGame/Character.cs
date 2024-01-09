@@ -38,8 +38,10 @@
             if (f_atk - atk != 0) Program.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"방어력 : {f_def} ");
             if (f_def - def != 0) Program.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
-            Console.Write($"체력 : {f_hp} ");
+            Console.Write($"H    P : {f_hp} ");
             if (f_hp - hp != 0) Program.TextColor($"(+{f_hp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            Console.Write($"M    P : {f_mp} ");
+            if (f_mp - mp != 0) Program.TextColor($"(+{f_mp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.WriteLine($"Gold : {gold} G");
         }
 
