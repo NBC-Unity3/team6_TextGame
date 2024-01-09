@@ -1,4 +1,4 @@
-﻿using NBC_TextGame;
+﻿using team6_TextGame;
 using Newtonsoft.Json;
 
 
