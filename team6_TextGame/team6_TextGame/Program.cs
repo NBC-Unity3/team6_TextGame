@@ -1,11 +1,12 @@
-﻿using NBC_TextGame;
+﻿using team6_TextGame;
 using Newtonsoft.Json;
+using System.Xml.Linq;
 
 
 class Program
 {
     static Shop shop = new Shop();
-    static Character player = new Character();
+    static Character player;
 
     static void Main(String[] args)
     {
@@ -14,6 +15,80 @@ class Program
         StartGame();
     }
 
+    static Character CreateCharacter()
+    {
+        string name;
+        Character character;
+        //이름 입력
+        while(true)
+        {
+            Console.Clear();
+            Console.WriteLine("당신의 이름은 무엇입니까?");
+            name = Console.ReadLine();
+            Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
+            Console.WriteLine("1. 맞습니다.");
+            Console.WriteLine("2. 아닙니다.\n");
+
+            var key = Console.ReadKey(true).Key;
+            if (key ==  ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+        //직업 선택
+
+        Console.Clear();
+        Console.WriteLine("원하는 직업을 선택해주세요. ");
+
+        Console.WriteLine("======================================================");
+        Console.WriteLine("         |   1. 전사    |   2. 궁수    |  3. 마법사  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine(" 공격력  |      10      |      12      |      8  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine(" 방어력  |      5       |      3       |      5  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine("  H   P  |     100      |     100      |      80  ");
+        Console.WriteLine("---------|--------------|--------------|--------------");
+        Console.WriteLine("  M   P  |      50      |      40      |      70  ");
+        Console.WriteLine("======================================================");
+
+        bool isFirst = true;
+        while (true)
+        {
+            if(!isFirst)
+            {
+                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+            }
+
+            isFirst = false;
+
+            var key = Console.ReadKey(true).Key;
+
+            if(key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            {
+                character = new Warrior();
+                break;
+            } else if(key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
+            {
+                character = new Archer();
+                break;
+            } else if(key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
+            {
+                character = new Mage();
+                break;
+            } else
+            {
+                continue;
+            }
+        }
+
+        character.name = name;
+        return character;
+    }
 
     static void StartGame()
     {
@@ -83,7 +158,7 @@ class Program
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         Console.WriteLine("[아이템 목록]\n");
 
-        foreach (Item item in player.inven)
+        foreach (EquipmentItem item in player.inven)
         {
             Console.WriteLine($"- {item.ToString()}");
         }
@@ -122,7 +197,7 @@ class Program
             Console.WriteLine("[아이템 목록]\n");
 
             int i = 1;
-            foreach (Item item in player.inven)
+            foreach (EquipmentItem item in player.inven)
             {
                 Console.WriteLine($"{i++} {item.ToString()}");
             }
@@ -157,7 +232,7 @@ class Program
         Shop shop = new Shop();
         shop.LoadOptions();
 
-        foreach (Item item in shop.items)
+        foreach (EquipmentItem item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
@@ -201,7 +276,7 @@ class Program
             shop.LoadOptions();
 
             int i = 1;
-            foreach (Item item in shop.items)
+            foreach (EquipmentItem item in shop.items)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {item.price} G");
             }
@@ -235,7 +310,7 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int i = 1;
-            foreach (Item item in player.inven)
+            foreach (EquipmentItem item in player.inven)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
             }
@@ -257,7 +332,7 @@ class Program
     }
 
     //TextColor("입력할 문구", ConsoleColor.Yellow); 식으로 사용
-    static void TextColor(string text, ConsoleColor clr)
+    public static void TextColor(string text, ConsoleColor clr)
     {
         Console.ForegroundColor = clr;
         Console.WriteLine(text);
@@ -274,7 +349,11 @@ class Program
     static void LoadGame()
     {
         string path = System.IO.Directory.GetCurrentDirectory() + "/player.json";
-        if(!File.Exists(path)) SaveGame();
+        if(!File.Exists(path))
+        {
+            player = CreateCharacter();
+            SaveGame();
+        }
 
         string json = File.ReadAllText(path);
 
