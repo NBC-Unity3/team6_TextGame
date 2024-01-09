@@ -1,0 +1,14 @@
+{
+  "f_atk": 10,
+  "f_def": 5,
+  "f_hp": 100,
+  "inven": [
+  ],
+  "level": 1,
+  "name": "Chad",
+  "job": "전사",
+  "atk": 10,
+  "def": 5,
+  "hp": 100,
+  "gold": 1500
+}
