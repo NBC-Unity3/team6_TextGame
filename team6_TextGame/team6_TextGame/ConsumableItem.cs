@@ -1,4 +1,5 @@
-﻿using team6_TextGame;
+﻿using System.Text;
+using team6_TextGame;
 
 namespace team6_TextGame
 {
@@ -16,6 +17,18 @@ namespace team6_TextGame
             this.info = info;
             this.price = price;
             this.effect = effect;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append(name);
+            sb.Append(" | ");
+            sb.Append(effect);
+            sb.Append("| ");
+            sb.Append(info);
+
+            return sb.ToString();
         }
     }
 }

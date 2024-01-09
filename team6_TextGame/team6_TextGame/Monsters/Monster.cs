@@ -1,5 +1,4 @@
 ﻿
-using NBC_TextGame;
 
 namespace team6_TextGame.Monsters
 {
