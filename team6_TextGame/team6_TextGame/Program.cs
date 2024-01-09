@@ -10,8 +10,8 @@ class Program
 
     static void Main(String[] args)
     {
-        //LoadGame();
-        player = CreateCharacter();
+        LoadGame();
+
         StartGame();
     }
 
@@ -349,7 +349,11 @@ class Program
     static void LoadGame()
     {
         string path = System.IO.Directory.GetCurrentDirectory() + "/player.json";
-        if(!File.Exists(path)) SaveGame();
+        if(!File.Exists(path))
+        {
+            player = CreateCharacter();
+            SaveGame();
+        }
 
         string json = File.ReadAllText(path);
 
