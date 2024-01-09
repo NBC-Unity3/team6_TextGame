@@ -3,11 +3,11 @@ using NBC_TextGame;
 using System.Runtime.ConstrainedExecution;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace team6_TextGame
+namespace team6_TextGame.Monsters
 {
     internal class Monster
     {
-        public string name {  get; set; }   //이름
+        public string name { get; set; }   //이름
         public int level { get; set; }  //레벨
         public int atk { get; set; }    //공격력
         public int hp { get; set; }     //체력
@@ -16,8 +16,8 @@ namespace team6_TextGame
 
         public void ShowState() // 현재 상태를 출력
         {
-            if (hp > 0) 
-            { 
+            if (hp > 0)
+            {
                 Console.WriteLine("Lv. " + level + " " + name + "  HP " + hp);
             }
             else
@@ -34,11 +34,11 @@ namespace team6_TextGame
             int damage = rand.Next(9, 12);  // 9~11의 랜덤한 값에 0.1을 곱하는 방식으로 구함
 
             Console.WriteLine(character.name + "의 공격!");
-            Console.WriteLine("Lv. " + level + " " + name + "을(를) 맞췄습니다. [데미지 : " + (int)((float)character.atk * (0.1 * (float)damage)) + "]");
+            Console.WriteLine("Lv. " + level + " " + name + "을(를) 맞췄습니다. [데미지 : " + (int)(character.atk * (0.1 * damage)) + "]");
             Console.WriteLine("");
             Console.WriteLine("Lv. " + level + " " + name);
             Console.Write("HP " + hp + " -> ");
-            hp -= (int)((float)character.atk * (0.1 * (float)damage));
+            hp -= (int)(character.atk * (0.1 * damage));
             if (hp > 0)
                 Console.WriteLine("HP " + hp);  // 체력이 남아있으면 남은 체력을 출력
             else
@@ -47,7 +47,7 @@ namespace team6_TextGame
 
         public void IsAttack(Character character)   //몬스터가 공격하는 함수
         {
-            if(hp > 0)
+            if (hp > 0)
             {
                 Console.WriteLine("Lv. " + level + " " + name + "의 공격!");
                 Console.WriteLine(character.name + "을(를) 맞췄습니다. [데미지 : " + atk + "]");
@@ -63,14 +63,7 @@ namespace team6_TextGame
         }
     }
 
-    internal class Minion : Monster
-    {
-        public string name = "미니언";   //이름
-        public int level = 2;  //레벨
-        public int atk = 5;    //공격력
-        public int hp = 15;     //체력
-        public int exp = 1;    //경험치 계수
-    }
+
 
     internal class CanonMinion : Monster
     {
