@@ -156,14 +156,11 @@ namespace team6_TextGame
         public override int Skill_1(Monster monster)
         {
             //단일기, 명중 부위 따라 데미지가 다른 설정
-            Random rand = new Random();
-
+            int damage = 0;
             mp -= 15;
 
+            Random rand = new Random();
             int part = rand.Next(1, 3);
-
-            int damage = 0;
-
             switch (part)
             {
                 case 1: //급소 관통
@@ -176,6 +173,8 @@ namespace team6_TextGame
                     damage = (int)Math.Round(atk * 0.8);
                     break;
             }
+
+            //monster.hp -= damage;
             return damage;
         }
 
