@@ -53,14 +53,18 @@ namespace team6_TextGame
             {
                 Console.Clear();
 
-                Console.WriteLine("Battle!!\n");
+                //Console.WriteLine("Battle!!\n");
+                Program.TextColor("Battle!!\n", ConsoleColor.Yellow);
                 foreach (var monster in monsters)
                 {
                     //Console.WriteLine($"Lv.{monster.Level} {monster.Name} HP {monster.HP}");
                     monster.ShowState();
                 }
                 Console.WriteLine();
-                Console.WriteLine($"[내정보]\n" +
+                /*Console.WriteLine($"[내정보]\n" +
+                    $"Lv.{player.level} {player.name} ({player.job})\n" +
+                    $"HP {player.hp}/100\n");*/
+                Program.WriteColoredNumbers($"[내정보]\n" +
                     $"Lv.{player.level} {player.name} ({player.job})\n" +
                     $"HP {player.hp}/100\n");
 
@@ -73,8 +77,10 @@ namespace team6_TextGame
                 switch (key)
                 {
                     case ConsoleKey n when (n == ConsoleKey.D1 || n == ConsoleKey.NumPad1):
-                        Attack();
-                        break;
+                        if (Attack())
+                            break;
+                        else
+                            continue;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
                         continue;
@@ -124,7 +130,7 @@ namespace team6_TextGame
                 VictoryResult();
             }
         }
-        private void Attack()
+        private bool Attack()
         {
             Console.Clear();
             Console.WriteLine("Battle!!\n");
@@ -173,7 +179,7 @@ namespace team6_TextGame
                         switch (key)
                         {
                             case ConsoleKey n when (n == ConsoleKey.D0 || n == ConsoleKey.NumPad0):
-                                return;
+                                return true;
                             default:
                                 Console.WriteLine("잘못된 입력입니다.");
                                 break;
@@ -182,6 +188,7 @@ namespace team6_TextGame
                 }
                 else
                 {
+                    if (choice == 0) return false;
                     Console.WriteLine("잘못된 입력입니다");
                 }
             }
