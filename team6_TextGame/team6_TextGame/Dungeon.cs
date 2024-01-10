@@ -1,4 +1,4 @@
-using System.Net.Security;
+using Newtonsoft.Json;
 using team6_TextGame.Monsters;
 
 namespace team6_TextGame
@@ -15,12 +15,14 @@ namespace team6_TextGame
         {
             this.player = player;
             this.level = level;
+            LoadDungeon();
             monsters = new List<Monster>();
 
             for (int i = 0; i < rand.Next(level, 4 + level); i++)
             {
                 monsters.Add(GenerateRandomMonster());
             }
+
         }
 
         private Monster GenerateRandomMonster()
@@ -38,7 +40,6 @@ namespace team6_TextGame
                 int minimumLevel = (int)monsterType.GetMethod("GetMinimumLevel").Invoke(null, null);
                 return minimumLevel <= this.level;
             }).ToList();
-
             if (availableMonsterGenerators.Count == 0) return null;
 
             int randomIndex = rand.Next(availableMonsterGenerators.Count);
@@ -224,7 +225,7 @@ namespace team6_TextGame
         private void VictoryResult()
         {
             level++;
-
+            SaveDungeon();
             Console.Clear();
 
             Program.TextColor("Battle!! - Result\n", ConsoleColor.Yellow);
@@ -294,5 +295,32 @@ namespace team6_TextGame
             return finalAttack;
         }
         */
+        private void SaveDungeon()
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                Formatting = Formatting.Indented
+            };
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.json");
+            string json = JsonConvert.SerializeObject(level, settings);
+            File.WriteAllText(path, json);
+        }
+        private void LoadDungeon()
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.json");
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                int loadlevel = JsonConvert.DeserializeObject<int>(json, settings);
+                level = loadlevel;
+            }
+        }
     }
 }
