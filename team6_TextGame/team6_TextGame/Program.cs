@@ -224,6 +224,10 @@ class Program
                 {
                     equipmentItem.equip(player);
                 }
+                else
+                {
+                    Console.WriteLine("해당 아이템은 장착할 수 없습니다.");
+                }
             }
         }
     }
