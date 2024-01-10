@@ -1,6 +1,7 @@
 ﻿using team6_TextGame;
 using Newtonsoft.Json;
 using System.Xml.Linq;
+using System.Numerics;
 
 
 class Program
@@ -444,26 +445,30 @@ class Program
 
     static void SaveGame()
     {
-        string path = System.IO.Directory.GetCurrentDirectory() + "/player.json";
-        string json = JsonConvert.SerializeObject(player, Formatting.Indented);
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            Formatting = Formatting.Indented
+        };
+
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "player.json");
+        string json = JsonConvert.SerializeObject(player, settings);
         File.WriteAllText(path, json);
     }
 
     static void LoadGame()
     {
-        string path = System.IO.Directory.GetCurrentDirectory() + "/player.json";
-        if(!File.Exists(path))
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto
+        };
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "player.json");
+        if (!File.Exists(path))
         {
             player = CreateCharacter();
             SaveGame();
         }
-
         string json = File.ReadAllText(path);
-
-        Character data = JsonConvert.DeserializeObject<Character>(json);
-
-        player = data;
+        player = JsonConvert.DeserializeObject<Character>(json, settings);
     }
-
-
 }

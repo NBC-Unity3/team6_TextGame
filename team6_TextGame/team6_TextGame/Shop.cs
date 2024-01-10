@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Numerics;
 
 
 namespace team6_TextGame
@@ -14,7 +15,7 @@ namespace team6_TextGame
 
         public void BuyItem(int index, Character player)
         {
-            if (items[index].price >  player.gold)
+            if (items[index].price > player.gold)
             {
                 Console.WriteLine("Gold가 부족합니다.");
             }
@@ -39,22 +40,36 @@ namespace team6_TextGame
 
         public void SaveOptions()
         {
-            string path = System.IO.Directory.GetCurrentDirectory() + "/shop.json";
-            string json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                Formatting = Formatting.Indented
+            };
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "shop.json");
+            string json = JsonConvert.SerializeObject(items, settings);
             File.WriteAllText(path, json);
         }
 
         public void LoadOptions()
         {
-            string path = System.IO.Directory.GetCurrentDirectory() + "/shop.json";
-            if (!File.Exists(path)) SaveOptions();
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
 
-            string json = File.ReadAllText(path);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "shop.json");
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                List<Item> loadedItems = JsonConvert.DeserializeObject<List<Item>>(json, settings);
 
-            List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
+                if (loadedItems != null)
+                {
+                    items = loadedItems;
 
-            this.items = items;
-
+                }
+            }
         }
     }
 }
