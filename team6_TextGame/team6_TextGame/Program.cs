@@ -1,6 +1,7 @@
 ﻿using team6_TextGame;
 using Newtonsoft.Json;
 using System.Xml.Linq;
+using System.Numerics;
 
 
 class Program
@@ -162,7 +163,7 @@ class Program
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         Console.WriteLine("[아이템 목록]\n");
 
-        foreach (EquipmentItem item in player.inven)
+        foreach (EquipmentItem item in player.inventory)
         {
             Console.WriteLine($"- {item.ToString()}");
         }
@@ -201,7 +202,7 @@ class Program
             Console.WriteLine("[아이템 목록]\n");
 
             int i = 1;
-            foreach (EquipmentItem item in player.inven)
+            foreach (Item item in player.inventory)
             {
                 Console.WriteLine($"{i++} {item.ToString()}");
             }
@@ -211,14 +212,23 @@ class Program
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            if(!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inven.Count || num < 0)
+            if(!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
             {
                 Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
             }
             else
             {
                 if (num == 0) break;
-                player.inven[num - 1].eqip(player);
+                Item selectedItem = player.inventory[num - 1];
+
+                if (selectedItem is EquipmentItem equipmentItem)
+                {
+                    equipmentItem.equip(player);
+                }
+                else
+                {
+                    Console.WriteLine("해당 아이템은 장착할 수 없습니다.");
+                }
             }
         }
     }
@@ -314,7 +324,7 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int i = 1;
-            foreach (EquipmentItem item in player.inven)
+            foreach (EquipmentItem item in player.inventory)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
             }
@@ -323,7 +333,7 @@ class Program
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inven.Count || num < 0)
+            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
             {
                 Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
             }
@@ -454,26 +464,30 @@ class Program
     }
     static void SaveGame()
     {
-        string path = System.IO.Directory.GetCurrentDirectory() + "/player.json";
-        string json = JsonConvert.SerializeObject(player, Formatting.Indented);
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            Formatting = Formatting.Indented
+        };
+
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "player.json");
+        string json = JsonConvert.SerializeObject(player, settings);
         File.WriteAllText(path, json);
     }
 
     static void LoadGame()
     {
-        string path = System.IO.Directory.GetCurrentDirectory() + "/player.json";
-        if(!File.Exists(path))
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto
+        };
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "player.json");
+        if (!File.Exists(path))
         {
             player = CreateCharacter();
             SaveGame();
         }
-
         string json = File.ReadAllText(path);
-
-        Character data = JsonConvert.DeserializeObject<Character>(json);
-
-        player = data;
+        player = JsonConvert.DeserializeObject<Character>(json, settings);
     }
-
-
 }

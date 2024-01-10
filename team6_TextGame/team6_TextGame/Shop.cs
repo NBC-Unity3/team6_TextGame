@@ -1,20 +1,21 @@
 ﻿using Newtonsoft.Json;
+using System.Numerics;
 
 
 namespace team6_TextGame
 {
     internal class Shop
     {
-        public List<EquipmentItem> items = new List<EquipmentItem>();
+        public List<Item> items = new List<Item>();
 
-        public void AddItem(EquipmentItem item)
+        public void AddItem(Item item)
         {
             this.items.Add(item);
         }
 
         public void BuyItem(int index, Character player)
         {
-            if (items[index].price >  player.gold)
+            if (items[index].price > player.gold)
             {
                 Console.WriteLine("Gold가 부족합니다.");
             }
@@ -29,32 +30,46 @@ namespace team6_TextGame
 
         public void SellItem(int index, Character player)
         {
-            EquipmentItem item = player.inven[index];
+            Item item = player.inventory[index];
             player.gold += (int)(item.price * 0.8);
             AddItem(item);
-            player.inven.RemoveAt(index);
+            player.inventory.RemoveAt(index);
             SaveOptions();
         }
 
 
         public void SaveOptions()
         {
-            string path = System.IO.Directory.GetCurrentDirectory() + "/shop.json";
-            string json = JsonConvert.SerializeObject(items, Formatting.Indented);
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                Formatting = Formatting.Indented
+            };
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "shop.json");
+            string json = JsonConvert.SerializeObject(items, settings);
             File.WriteAllText(path, json);
         }
 
         public void LoadOptions()
         {
-            string path = System.IO.Directory.GetCurrentDirectory() + "/shop.json";
-            if (!File.Exists(path)) SaveOptions();
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
 
-            string json = File.ReadAllText(path);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "shop.json");
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                List<Item> loadedItems = JsonConvert.DeserializeObject<List<Item>>(json, settings);
 
-            List<EquipmentItem> items = JsonConvert.DeserializeObject<List<EquipmentItem>>(json);
+                if (loadedItems != null)
+                {
+                    items = loadedItems;
 
-            this.items = items;
-
+                }
+            }
         }
     }
 }
