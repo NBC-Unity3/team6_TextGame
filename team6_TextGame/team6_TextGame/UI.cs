@@ -3,41 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using team6_TextGame.Items;
 
 namespace team6_TextGame
 {
     internal class UI
     {
 
-        public int SelectList<T>(List<T> list, int cursor = -1)
+        public int ShowList<T>(List<T> list)
         {
             int first, last, now;
 
-            if (cursor == -1) cursor = Console.CursorTop;   //초기 위치를 입력받지 않을 시 현재커서위치로 설정
-            Console.SetCursorPosition(0, cursor);
 
             first = Console.CursorTop;
             foreach (T item in list)
             {
-                if (item is Quest)
-                {
-                    Quest q = new Quest();
-                    q = item as Quest;
-                    WriteColoredNumbers($"   {q.name}");
-                    if (q.isClear == true)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(" (Clear!)\n");
-                        Console.ResetColor();
-                    }
-                    else Console.WriteLine();
-                }
-                else if (item is EquipItem equipItem)
-                {
-                    WriteColoredNumbers($"   {equipItem.ToString()}\n");
-                }
-                else WriteColoredNumbers($"   {item}\n");
+                Console.WriteLine($"   {item}");
             }
             last = Console.CursorTop - 1;
 
@@ -48,7 +28,6 @@ namespace team6_TextGame
             while(true)
             {
                 var key = Console.ReadKey(true).Key;
-
                 switch(key)
                 {
                     case ConsoleKey.DownArrow:
@@ -56,6 +35,7 @@ namespace team6_TextGame
                         {
                             WriteAt("  ", now++);
                             WriteAt("=>", now);
+                            break;
                         }
                         continue;
                     case ConsoleKey.UpArrow:
@@ -63,11 +43,10 @@ namespace team6_TextGame
                         {
                             WriteAt("  ", now--);
                             WriteAt("=>", now);
+                            break;
                         }
                         continue;
                     case ConsoleKey.Enter:
-                        Console.SetCursorPosition(0, last + 2);
-                        if (list.Count == 0) return -1;
                         return now - first;
                     case ConsoleKey.Escape:
                         return -1;
