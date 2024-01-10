@@ -385,7 +385,7 @@ class Program
 
             if (questboard.quests[n].isActive && questboard.quests[n].isClear)
             {
-                Console.WriteLine("1. 보상 받기\n2. 돌아가기");
+                Console.WriteLine("1. 보상 받기\n2. 돌아가기\n");
                 if (!int.TryParse(Console.ReadLine(), out int num) || num <= 0 || num > 2)
                 {
                     Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
@@ -402,7 +402,7 @@ class Program
             }
             else if (!questboard.quests[n].isActive && !questboard.quests[n].isClear)
             {
-                Console.WriteLine("0. 나가기\n1. 수락\n2. 거절\n원하시는 행동을 입력해주세요.");
+                Console.WriteLine("0. 나가기\n1. 수락\n2. 거절\n\n원하시는 행동을 입력해주세요.");
                 if (!int.TryParse(Console.ReadLine(), out int num) || num < 0 || num > 2)
                 {
                     Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
@@ -425,7 +425,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("퀘스트가 진행중입니다.\n0. 나가기");
+                Console.WriteLine("퀘스트가 진행중입니다.\n0. 나가기\n");
                 if (!int.TryParse(Console.ReadLine(), out int num) || num != 0)
                 {
                     Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
