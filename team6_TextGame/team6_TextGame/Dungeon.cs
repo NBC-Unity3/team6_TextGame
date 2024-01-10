@@ -229,7 +229,7 @@ namespace team6_TextGame
 
             Program.TextColor("Battle!! - Result\n", ConsoleColor.Yellow);
 
-            Console.WriteLine("Victory\n");
+            Program.TextColor("Victory\n", ConsoleColor.Green);
 
             Program.WriteColoredNumbers($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.\n\n");
 
@@ -259,7 +259,7 @@ namespace team6_TextGame
 
             Program.TextColor("Battle!! - Result\n", ConsoleColor.Yellow);
 
-            Console.WriteLine("You Lose\n");
+            Program.TextColor("You Lose\n", ConsoleColor.Red);
 
             Program.WriteColoredNumbers($"Lv.{player.level} {player.name}\n");
             Program.WriteColoredNumbers($"HP {start_player_hp} -> {player.hp}\n\n");
