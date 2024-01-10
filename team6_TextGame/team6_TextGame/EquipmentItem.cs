@@ -9,7 +9,7 @@ namespace team6_TextGame
         public bool isEqipped { get; set; } = false;
 
 
-        public EquipmentItem(int id, string name, int atk, int def, int hp, string info, int price) : base(id, name, atk, def, hp, info, price)
+        public EquipmentItem(int id, string name, int atk, int def, int hp, string info, int price)
         {
             this.id = id;
             this.name = name;
