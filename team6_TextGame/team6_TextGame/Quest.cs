@@ -10,8 +10,7 @@
         public int gold_reward { get; set; } // 보상 골드
         public List<EquipmentItem> item_rewards = new List<EquipmentItem>(); // 보상 아이템
         public bool isActive { get; set; } = false;
-        public bool isClear {  get; set; } = false;
-        public List<EquipmentItem> item_rewards = new List<EquipmentItem>(); // 보상 아이템
+        public bool isClear { get; set; } = false;
 
         public override string ToString()
         {
