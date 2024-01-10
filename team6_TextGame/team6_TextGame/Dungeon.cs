@@ -218,6 +218,8 @@ namespace team6_TextGame
         */
         private void VictoryResult()
         {
+            level++;
+
             Console.Clear();
 
             Console.WriteLine("Battle!! - Result\n");
