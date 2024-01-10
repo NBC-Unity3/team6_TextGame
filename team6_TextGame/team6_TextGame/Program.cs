@@ -5,6 +5,7 @@ using System.Xml.Linq;
 
 class Program
 {
+    static QuestBoard questboard = new QuestBoard();
     static Shop shop = new Shop();
     static Character player;
 
@@ -95,7 +96,7 @@ class Program
         while (true) {
             Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
-            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 저장하기\n\n");
+            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 퀘스트\n5. 저장하기\n\n");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             var key = Console.ReadKey(true).Key;
@@ -111,6 +112,9 @@ class Program
                     Shop();
                     break;
                 case ConsoleKey.D4:
+                    Quest();
+                    break;
+                case ConsoleKey.D5:
                     SaveGame();
                     break;
                 default:
@@ -327,6 +331,96 @@ class Program
             {
                 if (num == 0) break;
                 shop.SellItem(num - 1, player);
+            }
+        }
+    }
+
+    static void Quest()
+    {
+        while (true)
+        {
+            Console.Clear();
+            TextColor("Quest!!\n", ConsoleColor.Yellow);
+            
+            questboard.LoadOptions();
+
+            int i = 1;
+            foreach (Quest quest in questboard.quests)
+            {
+                Console.WriteLine($"{i++}. {quest.name}");
+            }
+
+            Console.WriteLine("\n0. 나가기\n");
+
+            Console.WriteLine("원하시는 퀘스트를 선택해주세요.");
+
+            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > questboard.quests.Count || num < 0)
+            {
+                Console.WriteLine("잘못된 입력입니다");
+            }
+            else
+            {
+                if (num == 0) break;
+                QuestDetail(num - 1);
+            }
+        }
+    }
+
+    static void QuestDetail(int n)
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine(questboard.quests[n]);
+
+            if (questboard.quests[n].isActive && questboard.quests[n].isClear)
+            {
+                Console.WriteLine("1. 보상 받기\n2. 돌아가기");
+                if (!int.TryParse(Console.ReadLine(), out int num) || num <= 0 || num > 2)
+                {
+                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+                }
+                else
+                {
+                    if (num == 1)
+                    {
+                        questboard.ReceiveReward(questboard.quests[n], player);
+                        break;
+                    }
+                    else if (num == 2) break;
+                }
+            }
+            else if (!questboard.quests[n].isActive && !questboard.quests[n].isClear)
+            {
+                Console.WriteLine("0. 나가기\n1. 수락\n2. 거절\n원하시는 행동을 입력해주세요.");
+                if (!int.TryParse(Console.ReadLine(), out int num) || num < 0 || num > 2)
+                {
+                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+                }
+                else
+                {
+                    if (num == 1)
+                    {
+                        questboard.quests[n].isActive = true;
+                        questboard.SaveOptions();
+                        break;
+                    }
+                    else if (num == 2)
+                    {
+                        questboard.RemoveQuest(questboard.quests[n]);
+                        break;
+                    }
+                    else break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("퀘스트가 진행중입니다.\n0. 나가기");
+                if (!int.TryParse(Console.ReadLine(), out int num) || num != 0)
+                {
+                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+                }
+                else break;
             }
         }
     }

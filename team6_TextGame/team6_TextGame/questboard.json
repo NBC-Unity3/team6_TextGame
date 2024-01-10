@@ -1,0 +1,57 @@
+[
+  {
+    "item_rewards": [
+      {
+        "isEqipped": false,
+        "id": 10,
+        "name": "쓸만한 방패",
+        "atk": 0,
+        "def": 2,
+        "hp": 0,
+        "info": "그냥 그런 방패이다.",
+        "price": 100
+      }
+    ],
+    "name": "마을을 위협하는 미니언 처치",
+    "explain": "이봐! 마을 근처에 미니언들이 너무 많아졌다고 생각하지 않나?\n마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\n모험가인 자네가 좀 처치해주게!\n",
+    "goal_description": "미니언 5마리 처치",
+    "achieve_count": 0,
+    "goal_count": 5,
+    "gold_reward": 50,
+    "isActive": false,
+    "isClear": false
+  },
+  {
+    "item_rewards": [
+      {
+        "isEqipped": false,
+        "id": 11,
+        "name": "쓸만한 검",
+        "atk": 2,
+        "def": 0,
+        "hp": 0,
+        "info": "그냥 그런 검이다.",
+        "price": 100
+      }
+    ],
+    "name": "장비를 장착해보자",
+    "explain": "진정한 모험가라면 장비가 중요하다는 것쯤은 알고 있겠지?\n아무 장비라도 좋으니 한 번이라도 장비를 착용해보게.\n",
+    "goal_description": "장비 장착해보기",
+    "achieve_count": 0,
+    "goal_count": 1,
+    "gold_reward": 50,
+    "isActive": false,
+    "isClear": false
+  },
+  {
+    "item_rewards": [],
+    "name": "더욱 더 강해지기!",
+    "explain": "행색을 보아하니 아직 햇병아리 모험가구만!\n더 성장해서 나보다 강해지면 보상을 주마!\n",
+    "goal_description": "공격력 20 이상으로 올리기",
+    "achieve_count": 0,
+    "goal_count": 20,
+    "gold_reward": 60,
+    "isActive": false,
+    "isClear": false
+  }
+]
