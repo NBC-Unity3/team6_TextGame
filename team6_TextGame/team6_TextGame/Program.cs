@@ -214,7 +214,12 @@ class Program
             else
             {
                 if (num == 0) break;
-                player.inventory[num - 1].equip(player);    
+                Item selectedItem = player.inventory[num - 1];
+
+                if (selectedItem is EquipmentItem equipmentItem)
+                {
+                    equipmentItem.equip(player);
+                }
             }
         }
     }
