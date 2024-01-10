@@ -59,13 +59,13 @@ namespace team6_TextGame
             f_hp += hp;
         }
 
-        public virtual int Skill1(Monster monster)
+        public virtual int Skill_1(Monster monster)
         {
             //단일기
             return 0;
         }
 
-        public virtual int Skill2(Monster[] monster)
+        public virtual int Skill_2(Monster[] monster)
         {
             //광역기
             return 0;
@@ -87,7 +87,7 @@ namespace team6_TextGame
             f_mp = mp;
         }
 
-        public override int Skill1(Monster monster)
+        public override int Skill_1(Monster monster)
         {
             //단일기
             int damage = atk * 2;
@@ -99,7 +99,7 @@ namespace team6_TextGame
             return damage;
         }
 
-        public virtual int Skill2(Monster[] monster)
+        public virtual int Skill_2(Monster[] monster)
         {
             //광역기
             int damage = (int) Math.Round(atk * 1.2);
@@ -133,7 +133,7 @@ namespace team6_TextGame
             f_mp = mp;
         }
 
-        public override int Skill1(Monster monster)
+        public override int Skill_1(Monster monster)
         {
             //단일기, 명중 부위 따라 데미지가 다른 설정
             Random rand = new Random();
@@ -159,7 +159,7 @@ namespace team6_TextGame
             return damage;
         }
 
-        public virtual int Skill2(Monster[] monster)
+        public virtual int Skill_2(Monster[] monster)
         {
             mp -= 5; //자주 사용 가능하게, 하지만 위력 안높음
 
@@ -184,21 +184,20 @@ namespace team6_TextGame
             f_mp = mp;
         }
 
-        public override int Skill1(Monster monster)
+        public override int Skill_1(Monster monster)
         {
             //속성 단일 공격 -> 몬스터마다 다르게 설정하고 싶은데 몬스터 받아오는 형태로 여기서 공격할지
             //                  아니면 그냥 진짜 데미지값만 리턴할지 모르겠음
-            int damage = 0;
-
-            Random rand = new Random();
+            int damage = atk * 2;
+            mp -= 10;
 
             return damage;
         }
 
-        public virtual int Skill2(Monster[] monster)
+        public virtual int Skill_2(Monster[] monster)
         {
             //광역기
-            int damage = atk;
+            int damage = (int)Math.Round(atk * 1.5);
             return damage;
         }
     }
