@@ -29,7 +29,7 @@ namespace team6_TextGame
 
         public void SellItem(int index, Character player)
         {
-            EquipmentItem item = player.inven[index];
+            EquipmentItem item = player.inven[index] as EquipmentItem;
             player.gold += (int)(item.price * 0.8);
             AddItem(item);
             player.inven.RemoveAt(index);
