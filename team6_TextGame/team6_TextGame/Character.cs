@@ -59,14 +59,16 @@ namespace team6_TextGame
             f_hp += hp;
         }
 
-        public virtual void Skill1(Monster monster)
+        public virtual int Skill1(Monster monster)
         {
             //단일기
+            return 0;
         }
 
-        public virtual void Skill2(Monster[] monster)
+        public virtual int Skill2(Monster[] monster)
         {
             //광역기
+            return 0;
         }
     }
 
@@ -85,26 +87,29 @@ namespace team6_TextGame
             f_mp = mp;
         }
 
-        public override void Skill1(Monster monster)
+        public override int Skill1(Monster monster)
         {
             //단일기
             int damage = atk * 2;
-            monster.hp -= damage;
-            Console.WriteLine($"알파 스트라이크!\n{monster.name}에게 {damage}만큼의 대미지를 입혔습니다.");
+            //monster.hp -= damage;
+            //Console.WriteLine($"알파 스트라이크!\n{monster.name}에게 {damage}만큼의 대미지를 입혔습니다.");
+            return damage;
         }
 
-        public virtual void Skill2(Monster[] monster)
+        public virtual int Skill2(Monster[] monster)
         {
             //광역기
             int damage = (int) Math.Round(atk * 1.2);
-            string names = "";
-            for(int i = 0; i < monster.Length; i++)
-            {
-                monster[i].hp -= (int) damage;
-                names += monster[i].name = " ";
-            }
+            //string names = "";
+            //for(int i = 0; i < monster.Length; i++)
+            //{
+            //    monster[i].hp -= (int) damage;
+            //    names += monster[i].name = " ";
+            //}
 
-            Console.WriteLine($"더블 스트라이크!\n모두에게 {damage}만큼의 대미지를 입혔습니다.");
+            //Console.WriteLine($"더블 스트라이크!\n모두에게 {damage}만큼의 대미지를 입혔습니다.");
+
+            return damage;
         }
     }
 
@@ -123,14 +128,17 @@ namespace team6_TextGame
             f_mp = mp;
         }
 
-        public override void Skill1(Monster monster)
+        public override int Skill1(Monster monster)
         {
-
+            int damage = atk;
+            return damage;
         }
 
-        public virtual void Skill2(Monster[] monster)
+        public virtual int Skill2(Monster[] monster)
         {
             //광역기
+            int damage = atk;
+            return damage;
         }
     }
 
@@ -149,14 +157,17 @@ namespace team6_TextGame
             f_mp = mp;
         }
 
-        public override void Skill1(Monster monster)
+        public override int Skill1(Monster monster)
         {
-
+            int damage = atk;
+            return damage;
         }
 
-        public virtual void Skill2(Monster[] monster)
+        public virtual int Skill2(Monster[] monster)
         {
             //광역기
+            int damage = atk;
+            return damage;
         }
     }
 
