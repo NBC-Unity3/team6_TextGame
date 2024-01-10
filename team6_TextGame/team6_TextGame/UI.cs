@@ -9,7 +9,7 @@ namespace team6_TextGame
     internal class UI
     {
 
-        public int ShowList<T>(List<T> list)
+        public int SelectList<T>(List<T> list)
         {
             int first, last, now;
 
@@ -35,7 +35,6 @@ namespace team6_TextGame
                         {
                             WriteAt("  ", now++);
                             WriteAt("=>", now);
-                            break;
                         }
                         continue;
                     case ConsoleKey.UpArrow:
@@ -43,7 +42,6 @@ namespace team6_TextGame
                         {
                             WriteAt("  ", now--);
                             WriteAt("=>", now);
-                            break;
                         }
                         continue;
                     case ConsoleKey.Enter:
