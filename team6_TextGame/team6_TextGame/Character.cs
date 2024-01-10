@@ -107,18 +107,32 @@ namespace team6_TextGame
 
         public virtual int Skill_2(Monster[] monster)
         {
-            //광역기
+            //몬스터 무리 중 2마리 랜덤 공격
             int damage = (int) Math.Round(atk * 1.2);
             mp -= 15;
 
-            //string names = "";
-            //for(int i = 0; i < monster.Length; i++)
-            //{
-            //    monster[i].hp -= (int) damage;
-            //    names += monster[i].name = " ";
-            //}
-
-            //Console.WriteLine($"더블 스트라이크!\n모두에게 {damage}만큼의 대미지를 입혔습니다.");
+            /* 공격 여기서 실행할 경우
+            if(monster.Length < 2) //남은 몬스터가 1마리일때
+            {
+                monster[0].hp -= damage;
+                Console.WriteLine($"{monster[0].name}에게 {damage}의 데미지를 입혔습니다.");
+            } else
+            {
+                int first, second;
+                Random rand = new Random();
+                first = rand.Next(0, monster.Length - 1);
+                while(true)
+                {
+                    int b = rand.Next(0, monster.Length - 1);
+                    if (first == b) continue;
+                    else
+                    {
+                        second = b;
+                        break;
+                    }
+                }
+            }
+            */
 
             return damage;
         }
@@ -202,10 +216,15 @@ namespace team6_TextGame
 
         public virtual int Skill_2(Monster[] monster)
         {
-            //광역기
+            //전체 광역기
             int damage = (int)Math.Round(atk * 1.5);
+            mp -= 20;
+            for(int i = 0; i < monster.Length; i++)
+            {
+                monster[i].hp -= damage;
+            }
+
             return damage;
         }
     }
-
 }
