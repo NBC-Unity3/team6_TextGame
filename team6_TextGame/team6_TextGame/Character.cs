@@ -96,7 +96,7 @@ namespace team6_TextGame
         public override int Skill_1(Monster monster)
         {
             //단일기
-            int damage = atk * 2;
+            int damage = f_atk * 2;
             mp -= 10;
 
 
@@ -108,7 +108,7 @@ namespace team6_TextGame
         public virtual int Skill_2(Monster[] monster)
         {
             //몬스터 무리 중 2마리 랜덤 공격
-            int damage = (int) Math.Round(atk * 1.2);
+            int damage = (int) Math.Round(f_atk * 1.2);
             mp -= 15;
 
             /* 공격 여기서 실행할 경우
@@ -164,13 +164,13 @@ namespace team6_TextGame
             switch (part)
             {
                 case 1: //급소 관통
-                    damage = atk * 3;
+                    damage = f_atk * 3;
                     break;
                 case 2: //주요 팔다리 명중
-                    damage = (int)Math.Round(atk * 1.2);
+                    damage = (int)Math.Round(f_atk * 1.2);
                     break;
                 case 3: //빗맞음
-                    damage = (int)Math.Round(atk * 0.8);
+                    damage = (int)Math.Round(f_atk * 0.8);
                     break;
             }
 
@@ -180,10 +180,18 @@ namespace team6_TextGame
 
         public virtual int Skill_2(Monster[] monster)
         {
+            //광역기, 불화살로 본대 전체 타격
+            int damage = f_atk;
             mp -= 5; //자주 사용 가능하게, 하지만 위력 안높음
 
-            //광역기, 불화살로 본대 전체 타격
-            int damage = atk;
+            /* 공격 구현
+            foreach(Monster m in monster)
+            {
+                m.hp -= f_atk;
+            }
+
+            Console.WriteLine($"적진에 불이 붙었습니다.\n모든 몬스터가 {damage}의 데미지를 받습니다.");
+            */
             return damage;
         }
     }
@@ -205,23 +213,37 @@ namespace team6_TextGame
 
         public override int Skill_1(Monster monster)
         {
-            //속성 단일 공격 -> 몬스터마다 다르게 설정하고 싶은데 몬스터 받아오는 형태로 여기서 공격할지
-            //                  아니면 그냥 진짜 데미지값만 리턴할지 모르겠음
-            int damage = atk * 2;
+            int damage = f_atk;
             mp -= 10;
 
+            //속성 단일 공격 -> 몬스터마다 다르게 설정해봄 공허충에 강한 설정
+            /*
+            switch (monster.name)
+            {
+                case "미니언":
+                    damage = f_atk;
+                    break;
+                case "대포 미니언":
+                    damage = (int)Math.Round(f_atk * 0.8);
+                    break;
+                case "공허충":
+                    damage = (int)Math.Round(f_atk * 1.2);
+                    break;
+            }
+            */
             return damage;
         }
 
         public virtual int Skill_2(Monster[] monster)
         {
             //전체 광역기
-            int damage = (int)Math.Round(atk * 1.5);
+            int damage = (int)Math.Round(f_atk * 1.5);
             mp -= 20;
+            /*
             for(int i = 0; i < monster.Length; i++)
             {
                 monster[i].hp -= damage;
-            }
+            } */
 
             return damage;
         }
