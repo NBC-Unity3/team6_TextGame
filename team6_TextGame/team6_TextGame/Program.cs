@@ -218,12 +218,7 @@ class Program
             else
             {
                 if (num == 0) break;
-                Item selectedItem = player.inven[num - 1];
-
-                if (selectedItem is EquipmentItem equipmentItem)
-                {
-                    equipmentItem.eqip(player);
-                }
+                player.inven[num - 1].eqip(player);
             }
         }
     }
