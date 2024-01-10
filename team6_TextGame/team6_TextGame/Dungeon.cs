@@ -53,26 +53,22 @@ namespace team6_TextGame
             {
                 Console.Clear();
 
-                //Console.WriteLine("Battle!!\n");
                 Program.TextColor("Battle!!\n", ConsoleColor.Yellow);
                 foreach (var monster in monsters)
                 {
-                    //Console.WriteLine($"Lv.{monster.Level} {monster.Name} HP {monster.HP}");
                     monster.ShowState();
                 }
                 Console.WriteLine();
-                /*Console.WriteLine($"[내정보]\n" +
-                    $"Lv.{player.level} {player.name} ({player.job})\n" +
-                    $"HP {player.hp}/100\n");*/
+
                 Program.WriteColoredNumbers($"[내정보]\n" +
                     $"Lv.{player.level} {player.name} ({player.job})\n" +
-                    $"HP {player.hp}/100\n");
+                    $"HP {player.hp}/100\n\n");
 
                 // Player's turn
-                Console.WriteLine("1. 공격\n");
+                Program.WriteColoredNumbers("1. 공격\n\n");
 
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
-                Console.Write(">>");
+                Console.Write(">> ");
                 var key = Console.ReadKey(true).Key;
                 switch (key)
                 {
@@ -93,14 +89,14 @@ namespace team6_TextGame
 
                     Console.Clear();
 
-                    Console.WriteLine("Battle!!\n");
+                    Program.TextColor("Battle!!\n", ConsoleColor.Yellow);
 
                     monster.IsAttack(player);
 
                     Console.WriteLine();
-                    Console.WriteLine("0. 다음\n");
+                    Program.WriteColoredNumbers("0. 다음\n\n");
 
-                    Console.WriteLine(">>");
+                    Console.Write(">> ");
 
                     bool tmp = true;
 
@@ -133,26 +129,26 @@ namespace team6_TextGame
         private bool Attack()
         {
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            Program.TextColor("Battle!!\n", ConsoleColor.Yellow);
 
             for (int i = 0; i < monsters.Count; i++)
             {
                 if (monsters[i].hp > 0)
                 {
                     //Console.WriteLine($"{i + 1}. {monsters[i].Name}");
-                    Console.Write($"{i + 1} ");
+                    Program.WriteColoredNumbers($"{i + 1} ");
                     monsters[i].ShowState();
                 }
             }
             Console.WriteLine();
-            Console.WriteLine($"[내정보]\n" +
+            Program.WriteColoredNumbers($"[내정보]\n" +
                 $"Lv.{player.level} {player.name} ({player.job})\n" +
-                $"HP {player.hp}/100\n");
+                $"HP {player.hp}/100\n\n");
 
-            Console.WriteLine("0. 취소\n");
+            Program.WriteColoredNumbers("0. 취소\n\n");
 
             Console.WriteLine("대상을 선택해주세요.");
-            Console.WriteLine(">>");
+            Console.Write(">> ");
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= monsters.Count && monsters[choice - 1].hp > 0)
@@ -164,14 +160,14 @@ namespace team6_TextGame
 
                     Console.Clear();
 
-                    Console.WriteLine("Battle!!\n");
+                    Program.TextColor("Battle!!\n", ConsoleColor.Yellow);
 
                     monsters[choice - 1].IsDamaged(player);
 
                     Console.WriteLine();
-                    Console.WriteLine("0. 다음\n");
+                    Program.WriteColoredNumbers("0. 다음\n\n");
 
-                    Console.WriteLine(">>");
+                    Console.Write(">> ");
 
                     while (true)
                     {
@@ -229,18 +225,18 @@ namespace team6_TextGame
 
             Console.Clear();
 
-            Console.WriteLine("Battle!! - Result\n");
+            Program.TextColor("Battle!! - Result\n", ConsoleColor.Yellow);
 
             Console.WriteLine("Victory\n");
 
-            Console.WriteLine($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.\n");
+            Program.WriteColoredNumbers($"던전에서 몬스터 {monsters.Count}마리를 잡았습니다.\n\n");
 
-            Console.WriteLine($"Lv.{player.level} {player.name}");
-            Console.WriteLine($"HP {start_player_hp} -> {player.hp}\n");
+            Program.WriteColoredNumbers($"Lv.{player.level} {player.name}\n");
+            Program.WriteColoredNumbers($"HP {start_player_hp} -> {player.hp}\n\n");
 
-            Console.WriteLine("0. 다음\n");
+            Program.WriteColoredNumbers("0. 다음\n\n");
 
-            Console.WriteLine(">>");
+            Console.Write(">>  ");
 
             while (true)
             {
@@ -259,16 +255,16 @@ namespace team6_TextGame
         {
             Console.Clear();
 
-            Console.WriteLine("Battle!! - Result\n");
+            Program.TextColor("Battle!! - Result\n", ConsoleColor.Yellow);
 
             Console.WriteLine("You Lose\n");
 
-            Console.WriteLine($"Lv.{player.level} {player.name}");
-            Console.WriteLine($"HP {start_player_hp} -> {player.hp}\n");
+            Program.WriteColoredNumbers($"Lv.{player.level} {player.name}\n");
+            Program.WriteColoredNumbers($"HP {start_player_hp} -> {player.hp}\n\n");
 
-            Console.WriteLine("0. 다음\n");
+            Program.WriteColoredNumbers("0. 다음\n\n");
 
-            Console.WriteLine(">>");
+            Console.Write(">>  ");
 
             while (true)
             {
