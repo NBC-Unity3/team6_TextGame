@@ -9,6 +9,16 @@ namespace team6_TextGame
         public void AddQuest(Quest quest)
         {
             quests.Add(quest);
+        }
+
+        public void QuestClear(Quest quest, Character character)
+        {
+            quests.Remove(quest);
+            character.gold += quest.gold_reward;
+            foreach (EquipmentItem item in quest.item_rewards) 
+            {
+                character.AddInventory(item);
+            }
             SaveOptions();
         }
         public void RemoveQuest(Quest quest)
@@ -56,7 +66,6 @@ namespace team6_TextGame
             List<Quest> quests = JsonConvert.DeserializeObject<List<Quest>>(json);
 
             this.quests = quests;
-
         }
     }
 }
