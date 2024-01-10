@@ -65,7 +65,7 @@ namespace team6_TextGame
                     $"HP {player.hp}/100\n\n");
 
                 // Player's turn
-                Program.WriteColoredNumbers("1. 공격\n\n");
+                Program.WriteColoredNumbers("1. 공격\n0. 도망가기\n\n");
 
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
@@ -77,6 +77,8 @@ namespace team6_TextGame
                             break;
                         else
                             continue;
+                    case ConsoleKey n when (n == ConsoleKey.D0 || n == ConsoleKey.NumPad0):
+                        return;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
                         continue;
