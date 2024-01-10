@@ -9,16 +9,34 @@ namespace team6_TextGame
         public void AddQuest(Quest quest)
         {
             quests.Add(quest);
+            SaveOptions();
+        }
+        public void RemoveQuest(Quest quest)
+        {
+            quests.Remove(quest);
+            SaveOptions();
         }
 
-        public void QuestClear(Quest quest, Character character)
+        public void ClearCheck()
+        {
+            foreach (Quest quest in quests)
+            {
+                if (quest.achieve_count >= quest.goal_count)
+                {
+                    quest.isClear = true;
+                }
+            }
+            SaveOptions();
+        }
+        public void ReceiveReward(Quest quest, Character character)
         {
             quests.Remove(quest);
             character.gold += quest.gold_reward;
-            foreach (EquipmentItem item in quest.item_rewards) 
+            foreach (EquipmentItem item in quest.item_rewards)
             {
                 character.AddInventory(item);
             }
+            SaveOptions();
         }
 
         public void SaveOptions()
