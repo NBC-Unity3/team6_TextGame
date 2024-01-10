@@ -1,4 +1,4 @@
-﻿using team6_TextGame.Monsters;
+using team6_TextGame.Monsters;
 
 namespace team6_TextGame
 {
@@ -8,13 +8,15 @@ namespace team6_TextGame
         private int start_player_hp;
         private List<Monster> monsters;
         private Random rand = new Random();
+        public int level { get; set; }
 
-        public Dungeon(Character player)
+        public Dungeon(Character player, int level = 1)
         {
             this.player = player;
+            this.level = level;
             monsters = new List<Monster>();
-            
-            for (int i = 0; i < rand.Next(1, 5); i++)
+
+            for (int i = 0; i < rand.Next(level, 4 + level); i++)
             {
                 monsters.Add(GenerateRandomMonster());
             }
@@ -22,19 +24,24 @@ namespace team6_TextGame
 
         private Monster GenerateRandomMonster()
         {
-            int randomIndex = rand.Next(3);
-
-            switch (randomIndex)
+            // 현재 던전 레벨에 맞는 몬스터만 필터링
+            var availableMonsterGenerators = new List<Func<Monster>>()
             {
-                case 0:
-                    return new Minion();
-                case 1:
-                    return new VoidInsec();
-                case 2:
-                    return new CanonMinion();
-                default:
-                    throw new InvalidOperationException("Invalid monster type");
-            }
+                () => new Minion(),
+                () => new VoidInsec(),
+                () => new CanonMinion()
+            }.Where(generator =>
+            {
+                // 현재 던전 레벨에 적합한지 확인
+                var monsterType = generator().GetType();
+                int minimumLevel = (int)monsterType.GetMethod("GetMinimumLevel").Invoke(null, null);
+                return minimumLevel <= this.level;
+            }).ToList();
+
+            if (availableMonsterGenerators.Count == 0) return null;
+
+            int randomIndex = rand.Next(availableMonsterGenerators.Count);
+            return availableMonsterGenerators[randomIndex]();
         }
 
         public void StartBattle()
@@ -210,6 +217,8 @@ namespace team6_TextGame
         */
         private void VictoryResult()
         {
+            level++;
+
             Console.Clear();
 
             Console.WriteLine("Battle!! - Result\n");
