@@ -35,7 +35,6 @@ namespace team6_TextGame
                         {
                             WriteAt("  ", now++);
                             WriteAt("=>", now);
-                            break;
                         }
                         continue;
                     case ConsoleKey.UpArrow:
@@ -43,7 +42,6 @@ namespace team6_TextGame
                         {
                             WriteAt("  ", now--);
                             WriteAt("=>", now);
-                            break;
                         }
                         continue;
                     case ConsoleKey.Enter:
