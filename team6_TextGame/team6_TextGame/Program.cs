@@ -433,56 +433,43 @@ class Program
         while (true)
         {
             Console.Clear();
+            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
             Console.WriteLine(questboard.quests[n]);
+            ui.DrawLine();
 
             if (questboard.quests[n].isActive && questboard.quests[n].isClear)
             {
-                Console.WriteLine("1. 보상 받기\n2. 돌아가기\n");
-                if (!int.TryParse(Console.ReadLine(), out int num) || num <= 0 || num > 2)
+                switch (ui.SelectList(new List<string>(new string[] { "보상 받기"})))
                 {
-                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-                }
-                else
-                {
-                    if (num == 1)
-                    {
+                    case 0:
                         questboard.ReceiveReward(questboard.quests[n], player);
                         break;
-                    }
-                    else if (num == 2) break;
+                    case -1:
+                        return;
                 }
             }
             else if (!questboard.quests[n].isActive && !questboard.quests[n].isClear)
             {
-                Console.WriteLine("0. 나가기\n1. 수락\n2. 거절\n\n원하시는 행동을 입력해주세요.");
-                if (!int.TryParse(Console.ReadLine(), out int num) || num < 0 || num > 2)
+                switch (ui.SelectList(new List<string>(new string[] { "수락", "거절" })))
                 {
-                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-                }
-                else
-                {
-                    if (num == 1)
-                    {
+                    case 0:
                         questboard.quests[n].isActive = true;
                         questboard.SaveOptions();
                         break;
-                    }
-                    else if (num == 2)
-                    {
+                    case 1:
                         questboard.RemoveQuest(questboard.quests[n]);
-                        break;
-                    }
-                    else break;
+                        return;
+                    case -1:
+                        return;
                 }
             }
             else
             {
-                Console.WriteLine("퀘스트가 진행중입니다.\n0. 나가기\n");
-                if (!int.TryParse(Console.ReadLine(), out int num) || num != 0)
+                switch (ui.SelectList(new List<string>(new string[] { "퀘스트가 진행중입니다." })))
                 {
-                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+                    case -1:
+                        return;
                 }
-                else break;
             }
         }
     }
