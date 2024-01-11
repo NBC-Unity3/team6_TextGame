@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System;
 using team6_TextGame.Characters;
+using team6_TextGame.Characters.Players;
 
 
 class Program
@@ -79,15 +80,15 @@ class Program
 
             if(key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
             {
-                character = new Warrior();
+                character = new Warrior(name);
                 break;
             } else if(key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
             {
-                character = new Archer();
+                character = new Archer(name);
                 break;
             } else if(key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
             {
-                character = new Mage();
+                character = new Mage(name);
                 break;
             } else
             {
@@ -527,7 +528,10 @@ class Program
             player = CreateCharacter();
             SaveGame();
         }
-        string json = File.ReadAllText(path);
-        player = JsonConvert.DeserializeObject<Player>(json, settings);
+        else
+        {
+            string json = File.ReadAllText(path);
+            player = JsonConvert.DeserializeObject<Player>(json, settings);
+        }
     }
 }
