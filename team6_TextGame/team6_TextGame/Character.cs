@@ -1,4 +1,5 @@
-﻿using team6_TextGame.Items;
+﻿using team6_TextGame;
+using team6_TextGame.Items;
 using team6_TextGame.Monsters;
 
 namespace team6_TextGame
@@ -24,6 +25,8 @@ namespace team6_TextGame
         public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
         public List<ConsumeItem> consumes = new List<ConsumeItem>();
 
+        static UI ui;
+
         public Character()
         {
             f_atk = atk;
@@ -39,13 +42,13 @@ namespace team6_TextGame
             Console.WriteLine($"Lv. {level}");
             Console.WriteLine($"{name} ({job})");
             Console.Write($"공격력 : {f_atk} ");
-            if (f_atk - atk != 0) Program.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_atk - atk != 0) ui.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"방어력 : {f_def} ");
-            if (f_def - def != 0) Program.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_def - def != 0) ui.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"H    P : {f_hp} ");
-            if (f_hp - hp != 0) Program.TextColor($"(+{f_hp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_hp - hp != 0) ui.TextColor($"(+{f_hp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"M    P : {f_mp} ");
-            if (f_mp - mp != 0) Program.TextColor($"(+{f_mp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_mp - mp != 0) ui.TextColor($"(+{f_mp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.WriteLine($"Gold : {gold} G");
         }
 
