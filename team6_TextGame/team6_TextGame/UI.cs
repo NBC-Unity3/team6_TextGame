@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using team6_TextGame.Items;
 
 namespace team6_TextGame
 {
@@ -23,6 +24,10 @@ namespace team6_TextGame
                     q = item as Quest;
                     Console.WriteLine($"   {q.name}");
                 }
+                else if (item is EquipItem equipItem)
+                {
+                    Console.WriteLine($"   {equipItem.ToString()}");
+                }
                 else Console.WriteLine($"   {item}");
             }
             last = Console.CursorTop - 1;
@@ -34,6 +39,7 @@ namespace team6_TextGame
             while(true)
             {
                 var key = Console.ReadKey(true).Key;
+
                 switch(key)
                 {
                     case ConsoleKey.DownArrow:
@@ -51,6 +57,7 @@ namespace team6_TextGame
                         }
                         continue;
                     case ConsoleKey.Enter:
+                        if (list.Count == 0) return -1;
                         return now - first;
                     case ConsoleKey.Escape:
                         return -1;
