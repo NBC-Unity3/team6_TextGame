@@ -34,9 +34,9 @@ namespace team6_TextGame
             {
                 if(quest.name == "더욱 더 강해지기!")
                 {
-                    quest.achieve_count = character.atk;
+                    quest.achieve_count = character.f_atk;
                 }
-                if (quest.achieve_count >= quest.goal_count)
+                if (quest.achieve_count >= quest.goal_count && quest.isActive == true)
                 {
                     quest.isClear = true;
                 }

@@ -23,7 +23,12 @@ namespace team6_TextGame
                     Quest q = new Quest();
                     q = item as Quest;
                     WriteColoredNumbers($"   {q.name}");
-                    if (q.isClear == true) Console.Write("(Clear!)\n");
+                    if (q.isClear == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(" (Clear!)\n");
+                        Console.ResetColor();
+                    }
                     else Console.WriteLine();
                 }
                 else if (item is EquipItem equipItem)

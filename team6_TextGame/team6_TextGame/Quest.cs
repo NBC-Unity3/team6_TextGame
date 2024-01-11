@@ -20,7 +20,7 @@ namespace team6_TextGame
             string str = "";
             str += name + "\n\n";
             str += explain + "\n- ";
-            str += goal_description + "(" + achieve_count + "/" + goal_count + ")\n\n- ";
+            str += goal_description + " (" + achieve_count + "/" + goal_count + ")\n\n- ";
             str += "보상\n";
             foreach (EquipItem item in item_rewards)
             {
