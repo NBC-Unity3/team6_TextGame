@@ -17,7 +17,13 @@ namespace team6_TextGame
             first = Console.CursorTop;
             foreach (T item in list)
             {
-                Console.WriteLine($"   {item}");
+                if (item is Quest)
+                {
+                    Quest q = new Quest();
+                    q = item as Quest;
+                    Console.WriteLine($"   {q.name}");
+                }
+                else Console.WriteLine($"   {item}");
             }
             last = Console.CursorTop - 1;
 
