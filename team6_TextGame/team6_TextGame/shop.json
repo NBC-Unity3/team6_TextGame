@@ -1,5 +1,6 @@
 [
   {
+    "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
     "id": 1,
     "isEqipped": false,
     "name": "수련자 갑옷",
@@ -10,6 +11,7 @@
     "price": 1000
   },
   {
+    "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
     "id": 2,
     "isEqipped": false,
     "name": "무쇠갑옷",
@@ -20,6 +22,7 @@
     "price": 2000
   },
   {
+    "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
     "id": 3,
     "isEqipped": false,
     "name": "스파르타의 갑옷",
@@ -30,6 +33,7 @@
     "price": 3500
   },
   {
+    "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
     "id": 4,
     "isEqipped": false,
     "name": "낡은 검",
@@ -40,6 +44,7 @@
     "price": 600
   },
   {
+    "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
     "id": 5,
     "isEqipped": false,
     "name": "청동 도끼",
@@ -50,6 +55,7 @@
     "price": 1500
   },
   {
+    "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
     "id": 6,
     "isEqipped": false,
     "name": "스파르타의 창",
