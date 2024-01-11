@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 using System.Xml.Linq;
 using System.Numerics;
 using team6_TextGame.Items;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System;
 
 
 class Program
@@ -11,6 +14,7 @@ class Program
     static Shop shop = new Shop();
     static Character player;
     static Dungeon dungeon;
+    static UI ui = new UI();
 
     static void Main(String[] args)
     {
@@ -94,6 +98,7 @@ class Program
         return character;
     }
 
+    /*
     static void StartGame()
     {
         while (true) {
@@ -129,9 +134,48 @@ class Program
             }
         }
     }
+    */
+
+    static void StartGame()
+    {
+        while (true)
+        {
+            Console.Clear();
+            ui.TextColor("인벤토리", ConsoleColor.Yellow);
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            ui.DrawLine();
+
+            switch (ui.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.level + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
+            {
+                case 0:
+                    Status();
+                    break;
+                case 1:
+                    dungeon.StartBattle();
+                    break;
+                case 2:
+                    Inventory();
+                    break;
+                case 3:
+                    Shop();
+                    break;
+                case 4:
+                    Quest();
+                    break;
+                case 5: 
+                    SaveGame();
+                    break;
+                case -1:
+                    return;
+            }
+        }
+    }
+
+
 
     static void Status()
     {
+        /*
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("상태 보기");
@@ -156,84 +200,99 @@ class Program
             }
             break;
         }
+        */
 
+        Console.Clear();
+        ui.TextColor("상태 보기", ConsoleColor.Yellow);
+        Console.WriteLine("캐릭터의 정보가 표시됩니다.\n");
+        ui.DrawLine();
+
+        player.ShowInfo();
+
+        while (true)
+        {
+            Console.WriteLine();
+            switch (ui.SelectList(new List<string>(new string[] { "0. 나가기" })))
+            {
+                case 0:
+                    return;
+                case -1:
+                    return;
+            }
+        }
     }
 
     static void Inventory()
     {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("인벤토리");
-        Console.ResetColor();
-        Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-        Console.WriteLine("[아이템 목록]\n");
-
-        foreach (EquipItem item in player.inventory)
-        {
-            Console.WriteLine($"- {item.ToString()}");
-        }
-
-
-        Console.WriteLine("\n1. 장착 관리\n0. 나가기\n");
-
         while (true)
         {
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            var key = Console.ReadKey(true).Key;
-            switch (key)
+            Console.Clear();
+            ui.TextColor("인벤토리", ConsoleColor.Yellow);
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            ui.DrawLine();
+
+            switch (ui.SelectList(new List<string>(new string[] { "- 장비 아이템 관리", "- 소비 아이템 관리" })))
             {
-                case ConsoleKey.D0:
+                case 0:
+                    EquipManage();
                     break;
-                case ConsoleKey.D1:
-                    EqipManage();
+                case 1:
+                    ConsumeManage();
                     break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
-                    continue;
+                case -1:
+                    return;
             }
-            break;
         }
     }
 
-    static void EqipManage()
+    static void EquipManage()
     {
         while (true)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("인벤토리 - 장착 관리");
-            Console.ResetColor();
+            ui.TextColor("인벤토리 - 장비 아이템", ConsoleColor.Yellow);
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-            Console.WriteLine("[아이템 목록]\n");
+            ui.DrawLine();
 
-            int i = 1;
-            foreach (Item item in player.inventory)
+            int index = ui.SelectList(player.equips);
+            if (index == -1) return;
+
+            Console.Clear();
+            ui.TextColor("선택한 아이템:", ConsoleColor.Yellow);
+            Console.WriteLine($"{player.equips[index].ToString()}\n");
+            ui.DrawLine();
+
+            switch (ui.SelectList(new List<string>(new string[] { "- 장착/장착해제" })))
             {
-                Console.WriteLine($"{i++} {item.ToString()}");
+                case 0:
+                    player.equips[index].equip(player);
+                    break;
+                case -1:
+                    break;
             }
+        }
+    }
 
+    static void ConsumeManage()
+    {
+        while (true)
+        {
+            Console.Clear();
+            ui.TextColor("인벤토리 - 소비 아이템", ConsoleColor.Yellow);
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            ui.DrawLine();
 
-            Console.WriteLine("\n0. 나가기\n");
+            int index = ui.SelectList(player.consumes);
+            if (index == -1) return;
+            ui.DrawLine();
 
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-
-            if(!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
+            switch (ui.SelectList(new List<string>(new string[] { "- 사용" })))
             {
-                Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-            }
-            else
-            {
-                if (num == 0) break;
-                Item selectedItem = player.inventory[num - 1];
-
-                if (selectedItem is EquipItem equipmentItem)
-                {
-                    equipmentItem.equip(player);
-                }
-                else
-                {
-                    Console.WriteLine("해당 아이템은 장착할 수 없습니다.");
-                }
+                case 0:
+                    // write code
+                    break;
+                case -1:
+                    break;
             }
         }
     }
@@ -255,26 +314,21 @@ class Program
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
+        Console.WriteLine("");
 
-        Console.WriteLine("\n1. 아이템 구매\n2. 아이템 판매\n0. 나가기\n");
 
         while (true)
         {
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            var key = Console.ReadKey(true).Key;
-            switch (key)
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "2. 아이템 판매", "0.나가기" })))
             {
-                case ConsoleKey.D0:
-                    break;
-                case ConsoleKey.D1:
+                case 0:
                     BuyItem();
                     break;
-                case ConsoleKey.D2:
+                case 1:
                     SellItem();
                     break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
-                    continue;
+                case 2:
+                    break;
             }
             break;
         }
@@ -294,24 +348,15 @@ class Program
 
             shop.LoadOptions();
 
-            int i = 1;
-            foreach (EquipItem item in shop.items)
-            {
-                Console.WriteLine($"{i++} {item.ToString()} | {item.price} G");
-            }
+            int index = ui.SelectList(shop.items);
 
-            Console.WriteLine("\n0. 나가기\n");
-            
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > shop.items.Count || num < 0)
+            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
             {
-                Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-            }
-            else
-            {
-                if (num == 0) break;
-                shop.BuyItem(num - 1, player);
+                case 0:
+                    shop.BuyItem(index, player);
+                    break;
+                case -1:
+                    return;
             }
         } 
     }
@@ -328,25 +373,36 @@ class Program
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
 
-            int i = 1;
-            foreach (EquipItem item in player.inventory)
+            int index = ui.SelectList(player.equips);
+
+            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 판매" })))
             {
-                Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
+                case 0:
+                    shop.SellItem(index, player);
+                    break;
+                case -1:
+                    return;
             }
 
-            Console.WriteLine("\n0. 나가기\n");
+            //int i = 1;
+            //foreach (EquipItem item in player.equips)
+            //{
+            //    Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
+            //}
 
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            //Console.WriteLine("\n0. 나가기\n");
 
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
-            {
-                Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-            }
-            else
-            {
-                if (num == 0) break;
-                shop.SellItem(num - 1, player);
-            }
+            //Console.WriteLine("원하시는 행동을 입력해주세요.");
+
+            //if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.equips.Count || num < 0)
+            //{
+            //    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+            //}
+            //else
+            //{
+            //    if (num == 0) break;
+            //    shop.SellItem(num - 1, player);
+            //}
         }
     }
 
@@ -355,7 +411,24 @@ class Program
         while (true)
         {
             Console.Clear();
-            TextColor("Quest!!\n", ConsoleColor.Yellow);
+            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
+            Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
+            ui.DrawLine();
+            questboard.LoadOptions();
+
+            int index = ui.SelectList(questboard.quests);
+
+            if (index >= 0)
+            {
+                QuestDetail(index);
+            }
+            else break;
+        }
+        /*
+        while (true)
+        {
+            Console.Clear();
+            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
             
             questboard.LoadOptions();
 
@@ -378,7 +451,7 @@ class Program
                 if (num == 0) break;
                 QuestDetail(num - 1);
             }
-        }
+        }*/
     }
 
     static void QuestDetail(int n)
@@ -386,67 +459,47 @@ class Program
         while (true)
         {
             Console.Clear();
+            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
             Console.WriteLine(questboard.quests[n]);
+            ui.DrawLine();
 
             if (questboard.quests[n].isActive && questboard.quests[n].isClear)
             {
-                Console.WriteLine("1. 보상 받기\n2. 돌아가기\n");
-                if (!int.TryParse(Console.ReadLine(), out int num) || num <= 0 || num > 2)
+                switch (ui.SelectList(new List<string>(new string[] { "보상 받기"})))
                 {
-                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-                }
-                else
-                {
-                    if (num == 1)
-                    {
+                    case 0:
                         questboard.ReceiveReward(questboard.quests[n], player);
                         break;
-                    }
-                    else if (num == 2) break;
+                    case -1:
+                        return;
                 }
             }
             else if (!questboard.quests[n].isActive && !questboard.quests[n].isClear)
             {
-                Console.WriteLine("0. 나가기\n1. 수락\n2. 거절\n\n원하시는 행동을 입력해주세요.");
-                if (!int.TryParse(Console.ReadLine(), out int num) || num < 0 || num > 2)
+                switch (ui.SelectList(new List<string>(new string[] { "수락", "거절" })))
                 {
-                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-                }
-                else
-                {
-                    if (num == 1)
-                    {
+                    case 0:
                         questboard.quests[n].isActive = true;
                         questboard.SaveOptions();
                         break;
-                    }
-                    else if (num == 2)
-                    {
+                    case 1:
                         questboard.RemoveQuest(questboard.quests[n]);
-                        break;
-                    }
-                    else break;
+                        return;
+                    case -1:
+                        return;
                 }
             }
             else
             {
-                Console.WriteLine("퀘스트가 진행중입니다.\n0. 나가기\n");
-                if (!int.TryParse(Console.ReadLine(), out int num) || num != 0)
+                switch (ui.SelectList(new List<string>(new string[] { "퀘스트가 진행중입니다." })))
                 {
-                    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+                    case -1:
+                        return;
                 }
-                else break;
             }
         }
     }
 
-    //TextColor("입력할 문구", ConsoleColor.Yellow); 식으로 사용
-    public static void TextColor(string text, ConsoleColor clr)
-    {
-        Console.ForegroundColor = clr;
-        Console.WriteLine(text);
-        Console.ResetColor();
-    }
 
     static void SaveGame()
     {

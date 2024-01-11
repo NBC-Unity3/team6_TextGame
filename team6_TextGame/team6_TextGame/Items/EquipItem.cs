@@ -25,9 +25,9 @@ namespace team6_TextGame.Items
             if (isEquipped) { sb.Append("[E]"); }
             sb.Append(name);
             sb.Append(" | ");
-            if (atk != 0) { sb.Append("공격력 +" + atk + " "); }
-            if (def != 0) { sb.Append("방어력 +" + def + " "); }
-            if (hp != 0) { sb.Append("체력 +" + hp + " "); }
+            if (atk != 0) { sb.Append("공격력 + " + atk + " "); }
+            if (def != 0) { sb.Append("방어력 + " + def + " "); }
+            if (hp != 0) { sb.Append("체력 + " + hp + " "); }
             sb.Append("| ");
             sb.Append(info);
 
