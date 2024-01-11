@@ -240,7 +240,7 @@ class Program
             ui.DrawLine();
             Console.WriteLine("");
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 장비 아이템 관리", "- 소비 아이템 관리" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 장비 아이템 관리", "2. 소비 아이템 관리", "3. 나가기" })))
             {
                 case 0:
                     EquipManage();
@@ -248,6 +248,8 @@ class Program
                 case 1:
                     ConsumeManage();
                     break;
+                case 2:
+                    return;
                 case -1:
                     return;
             }
@@ -274,7 +276,7 @@ class Program
             Console.WriteLine($"{player.equips[index].ToString()}\n");
             ui.DrawLine();
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 장착/장착해제" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 장착/장착해제" , "2. 취소" })))
             {
                 case 0:
                     player.equips[index].equip(player);
@@ -289,6 +291,8 @@ class Program
                             }
                         }
                     }
+                    break;
+                case 1:
                     break;
                 case -1:
                     break;
@@ -312,10 +316,12 @@ class Program
             if (index == -1) return;
             ui.DrawLine();
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 사용" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 사용" ,"2. 취소"})))
             {
                 case 0:
                     // write code
+                    break;
+                case 1:
                     break;
                 case -1:
                     break;
@@ -348,27 +354,24 @@ class Program
         }
         Console.WriteLine("");
 
-
-        while (true)
+        switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "2. 아이템 판매", "0. 나가기" })))
         {
-            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "2. 아이템 판매", "0.나가기" })))
-            {
-                case 0:
-                    BuyItem();
-                    break;
-                case 1:
-                    SellItem();
-                    break;
-                case 2:
-                    break;
-            }
-            break;
+            case 0:
+                BuyItem();
+                break;
+            case 1:
+                SellItem();
+                break;
+            case 2:
+                return;
+            case -1:
+                return;
         }
     }
 
     static void BuyItem()
     {
-        while(true)
+        while (true)
         {
             Console.Clear();
             ui.TextColor(" - 상점(아이템 구매) -", ConsoleColor.Yellow);
@@ -388,16 +391,23 @@ class Program
 
             int index = ui.SelectList(shop.items);
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 구매", "- 취소" })))
+            if(index == -1)
+            { break; }
+
+            Console.WriteLine($"{shop.items[index].name}은(는) {shop.items[index].price}G 입니다. 구매하시겠습니까?");
+
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "2. 취소" })))
             {
                 case 0:
                     shop.BuyItem(index, player);
                     SaveGame();
                     break;
+                case 1:
+                    break;
                 case -1:
                     return;
             }
-        } 
+        }
     }
 
     static void SellItem()
@@ -420,10 +430,17 @@ class Program
 
             int index = ui.SelectList(player.equips);
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 판매", "- 취소" })))
+            if (index == -1)
+            { break; }
+
+            Console.WriteLine($"{player.equips[index].name}은(는) {player.equips[index].price}G 입니다. 판매하시겠습니까?");
+
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 판매", "2. 취소" })))
             {
                 case 0:
                     shop.SellItem(index, player);
+                    break;
+                case 1:
                     break;
                 case -1:
                     return;
