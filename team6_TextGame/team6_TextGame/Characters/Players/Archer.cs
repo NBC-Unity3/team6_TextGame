@@ -8,17 +8,9 @@ namespace team6_TextGame.Characters.Players
 {
     internal class Archer : Player
     {
-        public Archer()
+        public Archer(string name, int level = 1, int atk = 12, int def = 3, int hp = 100, int mp = 40, string jop = "궁수", int gold = 1500)
+            : base(name, level, atk, def, hp, mp, jop, gold)
         {
-            atk = 12;
-            def = 3;
-            hp = 100;
-            mp = 40;
-            job = "궁수";
-            f_atk = atk;
-            f_def = def;
-            f_hp = hp;
-            f_mp = mp;
         }
 
         public override int Skill_1(Monster monster)

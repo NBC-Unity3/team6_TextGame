@@ -2,32 +2,31 @@
 
 namespace team6_TextGame.Characters
 {
-    internal class Player
+    internal class Player : Character
     {
         //자동구현 프로퍼티가 자동으로 private field를 만든다.
-        public int level { get; set; } = 1;
-        public string name { get; set; } = "";
         public string job { get; set; }
-        public int atk { get; set; }
-        public int def { get; set; }
-        public int hp { get; set; }
-        public int mp { get; set; }
         public int gold { get; set; } = 1500;
 
-        //아이템, 스킬로 인한 최종 능력치
-        public int f_atk;
-        public int f_def;
-        public int f_hp;
-        public int f_mp;
+        //public List<Item> inventory = new List<Item>();      //장비 아이템 리스트
+        static UI ui = new UI();
+        public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
+        public List<ConsumeItem> consumes = new List<ConsumeItem>();
 
-        public List<Item> inventory = new List<Item>();      //장비 아이템 리스트
-
-        public Player()
+        protected Player(string name = "", int level = 1, int atk = 0, int def = 0, int hp = 0, int mp = 0, string jop = "플레이어", int gold = 1500)
         {
-            f_atk = atk;
-            f_def = def;
-            f_hp = hp;
-            f_mp = mp;
+            this.level = level;
+            this.gold =
+            this.f_atk = atk;
+            this.atk = atk;
+            this.f_def = def;
+            this.def = def;
+            this.maxhp = hp;
+            this.hp = hp;
+            this.maxmp = mp;
+            this.mp = mp;
+            this.job = jop;
+            this.gold = gold;
         }
 
         public void ShowInfo()
@@ -37,27 +36,38 @@ namespace team6_TextGame.Characters
             Console.WriteLine($"Lv. {level}");
             Console.WriteLine($"{name} ({job})");
             Console.Write($"공격력 : {f_atk} ");
-            if (f_atk - atk != 0) Program.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_atk - atk != 0) ui.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"방어력 : {f_def} ");
-            if (f_def - def != 0) Program.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
-            Console.Write($"H    P : {f_hp} ");
-            if (f_hp - hp != 0) Program.TextColor($"(+{f_hp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
-            Console.Write($"M    P : {f_mp} ");
-            if (f_mp - mp != 0) Program.TextColor($"(+{f_mp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_def - def != 0) ui.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            Console.Write($"H    P : {hp} \n");
+            //if (maxhp - hp != 0) Program.ui.TextColor($"(+{maxhp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            Console.Write($"M    P : {mp} \n");
+            //if (maxmp - mp != 0) Program.ui.TextColor($"(+{maxmp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.WriteLine($"Gold : {gold} G");
         }
 
+        /*
         public void AddInventory(Item item)
         {
             inventory.Add(item);
+        }
+        */
 
+        public void AddEquipsInven(Item item)
+        {
+            equips.Add(item as EquipItem);
+        }
+
+        public void AddConsumesInven(Item item)
+        {
+            consumes.Add(item as ConsumeItem);
         }
 
         public void ChangeStatus(int atk, int def, int hp)
         {
             f_atk += atk;
             f_def += def;
-            f_hp += hp;
+            maxhp += hp;
         }
 
         public virtual int Skill_1(Monster monster)

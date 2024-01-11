@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 using team6_TextGame.Characters;
-using team6_TextGame.Monsters;
+using team6_TextGame.Characters.Monsters;
 
 namespace team6_TextGame
 {
