@@ -303,6 +303,8 @@ class Program
                     break;
                 case 2:
                     break;
+                case -1:
+                    break;
             }
             break;
         }
@@ -310,7 +312,7 @@ class Program
 
     static void BuyItem()
     {
-        while(true)
+        while (true)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -322,17 +324,21 @@ class Program
 
             shop.LoadOptions();
 
-            int index = ui.SelectList(shop.items);
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
+            int index = ui.SelectList(shop.items);
+            if (index == -1) return;
+            Console.WriteLine("");
+            ui.DrawLine();
+
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "0. 나가기" })))
             {
                 case 0:
                     shop.BuyItem(index, player);
                     break;
-                case -1:
-                    return;
+                case 1:
+                    break;
             }
-        } 
+        }
     }
 
     static void SellItem()
@@ -348,14 +354,17 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int index = ui.SelectList(player.equips);
+            if (index == -1) return;
+            Console.WriteLine("");
+            ui.DrawLine();
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 판매" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 판매", "0. 나가기" })))
             {
                 case 0:
                     shop.SellItem(index, player);
                     break;
-                case -1:
-                    return;
+                case 1:
+                    break; ;
             }
 
             //int i = 1;
