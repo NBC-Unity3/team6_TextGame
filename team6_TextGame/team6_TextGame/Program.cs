@@ -235,6 +235,11 @@ class Program
             ui.DrawLine();
 
             int index = ui.SelectList(player.equips);
+            if (index == -1) return;
+
+            Console.Clear();
+            ui.TextColor("선택한 아이템:", ConsoleColor.Yellow);
+            Console.WriteLine($"{player.equips[index].ToString()}\n");
             ui.DrawLine();
 
             switch (ui.SelectList(new List<string>(new string[] { "- 장착/장착해제" })))
@@ -258,6 +263,7 @@ class Program
             ui.DrawLine();
 
             int index = ui.SelectList(player.consumes);
+            if (index == -1) return;
             ui.DrawLine();
 
             switch (ui.SelectList(new List<string>(new string[] { "- 사용" })))
