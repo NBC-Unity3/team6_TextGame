@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.Xml.Linq;
 using System.Numerics;
+using team6_TextGame.Items;
 
 
 class Program
@@ -9,11 +10,12 @@ class Program
     static QuestBoard questboard = new QuestBoard();
     static Shop shop = new Shop();
     static Character player;
+    static Dungeon dungeon;
 
     static void Main(String[] args)
     {
         LoadGame();
-
+        dungeon = new Dungeon(player);
         StartGame();
     }
 
@@ -97,7 +99,7 @@ class Program
         while (true) {
             Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
-            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 퀘스트\n5. 저장하기\n\n");
+            Console.WriteLine($"1. 상태 보기\n2. 전투 시작 (현재 진행 : {dungeon.level}층)\n3. 인벤토리\n4. 상점\n5. 퀘스트\n6. 저장하기\n\n");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             var key = Console.ReadKey(true).Key;
@@ -106,16 +108,19 @@ class Program
                 case ConsoleKey n when(n==ConsoleKey.D1 || n==ConsoleKey.NumPad1):
                     Status();
                     break;
-                case ConsoleKey.D2:
+                case ConsoleKey n when (n == ConsoleKey.D2 || n == ConsoleKey.NumPad2):
+                    dungeon.StartBattle();
+                    break;
+                case ConsoleKey n when (n == ConsoleKey.D3 || n == ConsoleKey.NumPad3):
                     Inventory();
                     break;
-                case ConsoleKey.D3:
+                case ConsoleKey n when (n == ConsoleKey.D4 || n == ConsoleKey.NumPad4):
                     Shop();
                     break;
-                case ConsoleKey.D4:
+                case ConsoleKey n when (n == ConsoleKey.D5 || n == ConsoleKey.NumPad5):
                     Quest();
                     break;
-                case ConsoleKey.D5:
+                case ConsoleKey n when (n == ConsoleKey.D6 || n == ConsoleKey.NumPad6):
                     SaveGame();
                     break;
                 default:
@@ -163,7 +168,7 @@ class Program
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         Console.WriteLine("[아이템 목록]\n");
 
-        foreach (EquipmentItem item in player.inventory)
+        foreach (EquipItem item in player.inventory)
         {
             Console.WriteLine($"- {item.ToString()}");
         }
@@ -221,7 +226,7 @@ class Program
                 if (num == 0) break;
                 Item selectedItem = player.inventory[num - 1];
 
-                if (selectedItem is EquipmentItem equipmentItem)
+                if (selectedItem is EquipItem equipmentItem)
                 {
                     equipmentItem.equip(player);
                 }
@@ -246,7 +251,7 @@ class Program
         Shop shop = new Shop();
         shop.LoadOptions();
 
-        foreach (EquipmentItem item in shop.items)
+        foreach (EquipItem item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
@@ -290,7 +295,7 @@ class Program
             shop.LoadOptions();
 
             int i = 1;
-            foreach (EquipmentItem item in shop.items)
+            foreach (EquipItem item in shop.items)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {item.price} G");
             }
@@ -324,7 +329,7 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int i = 1;
-            foreach (EquipmentItem item in player.inventory)
+            foreach (EquipItem item in player.inventory)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
             }

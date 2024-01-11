@@ -1,8 +1,6 @@
-﻿
-
-namespace team6_TextGame.ConsumableItem
+﻿namespace team6_TextGame.Items
 {
-    internal class AtkPotion : ConsumableItem
+    internal class AtkPotion : ConsumeItem
     {
         public AtkPotion()
         {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using team6_TextGame.Items;
 
 namespace team6_TextGame
 {
@@ -15,7 +16,7 @@ namespace team6_TextGame
         {
             quests.Remove(quest);
             character.gold += quest.gold_reward;
-            foreach (EquipmentItem item in quest.item_rewards) 
+            foreach (EquipItem item in quest.item_rewards) 
             {
                 character.AddInventory(item);
             }
@@ -42,7 +43,7 @@ namespace team6_TextGame
         {
             quests.Remove(quest);
             character.gold += quest.gold_reward;
-            foreach (EquipmentItem item in quest.item_rewards)
+            foreach (EquipItem item in quest.item_rewards)
             {
                 character.AddInventory(item);
             }

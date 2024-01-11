@@ -1,6 +1,4 @@
-﻿using team6_TextGame.ConsumableItem;
-
-namespace team6_TextGame
+﻿namespace team6_TextGame
 {
     internal class Quest
     {
@@ -10,8 +8,7 @@ namespace team6_TextGame
         public int achieve_count { get; set; } // 달성 횟수
         public int goal_count { get; set; } // 필요 달성 횟수
         public int gold_reward { get; set; } // 보상 골드
-        public List<EquipmentItem> item_rewards = new List<EquipmentItem>(); // 보상 아이템
-        public List<ConsumableItem.ConsumableItem> item_rewards2 = new List<ConsumableItem.ConsumableItem>();
+        public List<EquipItem> item_rewards = new List<EquipItem>(); // 보상 아이템
         public bool isActive { get; set; } = false;
         public bool isClear { get; set; } = false;
 
@@ -22,7 +19,7 @@ namespace team6_TextGame
             str += explain + "\n- ";
             str += goal_description + "(" + achieve_count + "/" + goal_count + ")\n\n- ";
             str += "보상\n";
-            foreach (EquipmentItem item in item_rewards)
+            foreach (EquipItem item in item_rewards)
             {
                 str += item.name + "x1\n";
             }
