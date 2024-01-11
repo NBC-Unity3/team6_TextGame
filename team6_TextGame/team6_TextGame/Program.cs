@@ -12,7 +12,7 @@ class Program
     static Shop shop = new Shop();
     static Player player;
     static Dungeon dungeon;
-    static UI ui;
+    static UI ui = new UI();
 
     static void Main(String[] args)
     {
