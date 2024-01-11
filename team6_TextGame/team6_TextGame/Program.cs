@@ -240,7 +240,7 @@ class Program
             ui.DrawLine();
             Console.WriteLine("");
 
-            switch (ui.SelectList(new List<string>(new string[] { "1. 장비 아이템 관리", "2. 소비 아이템 관리", "3. 나가기" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 장비 아이템 관리", "2. 소비 아이템 관리", "0. 나가기" })))
             {
                 case 0:
                     EquipManage();
@@ -276,7 +276,7 @@ class Program
             Console.WriteLine($"{player.equips[index].ToString()}\n");
             ui.DrawLine();
 
-            switch (ui.SelectList(new List<string>(new string[] { "1. 장착/장착해제" , "2. 취소" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 장착/장착해제" , "0. 나가기" })))
             {
                 case 0:
                     player.equips[index].equip(player);
@@ -316,7 +316,7 @@ class Program
             if (index == -1) return;
             ui.DrawLine();
 
-            switch (ui.SelectList(new List<string>(new string[] { "1. 사용" ,"2. 취소"})))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 사용" , "0. 나가기" })))
             {
                 case 0:
                     // write code
@@ -396,7 +396,7 @@ class Program
 
             Console.WriteLine($"{shop.items[index].name}은(는) {shop.items[index].price}G 입니다. 구매하시겠습니까?");
 
-            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "2. 취소" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "0. 나가기" })))
             {
                 case 0:
                     shop.BuyItem(index, player);
@@ -435,7 +435,7 @@ class Program
 
             Console.WriteLine($"{player.equips[index].name}은(는) {player.equips[index].price}G 입니다. 판매하시겠습니까?");
 
-            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 판매", "2. 취소" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 판매", "0. 나가기" })))
             {
                 case 0:
                     shop.SellItem(index, player);
