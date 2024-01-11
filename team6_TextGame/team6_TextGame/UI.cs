@@ -45,6 +45,7 @@ namespace team6_TextGame
                         }
                         continue;
                     case ConsoleKey.Enter:
+                        Console.SetCursorPosition(0, last + 2);
                         return now - first;
                     case ConsoleKey.Escape:
                         return -1;

@@ -1,13 +1,9 @@
-﻿using team6_TextGame;
+using team6_TextGame;
 using Newtonsoft.Json;
 using System.Xml.Linq;
 using System.Numerics;
 using team6_TextGame.Items;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System;
-using team6_TextGame.Characters;
-using team6_TextGame.Characters.Players;
 
 
 class Program
@@ -16,7 +12,7 @@ class Program
     static Shop shop = new Shop();
     static Player player;
     static Dungeon dungeon;
-    static UI ui = new UI();
+    static UI ui;
 
     static void Main(String[] args)
     {
@@ -237,12 +233,12 @@ class Program
             {
                 case 0:
                     EquipManage();
-                    break;
+                    continue;
                 case 1:
                     ConsumeManage();
-                    break;
+                    continue;
                 case -1:
-                    return;
+                    break;
             }
         }
     }
@@ -257,29 +253,13 @@ class Program
             ui.DrawLine();
 
             int index = ui.SelectList(player.equips);
-            if (index == -1) return;
-
-            Console.Clear();
-            ui.TextColor("선택한 아이템:", ConsoleColor.Yellow);
-            Console.WriteLine($"{player.equips[index].ToString()}\n");
             ui.DrawLine();
 
             switch (ui.SelectList(new List<string>(new string[] { "- 장착/장착해제" })))
             {
                 case 0:
                     player.equips[index].equip(player);
-                    foreach (Quest q in questboard.quests)
-                    {
-                        if (player.equips[index].isEquipped == true)
-                        {
-                            if (q.name == "장비를 장착해보자" && q.isActive == true)
-                            {
-                                q.achieve_count = 1;
-                                questboard.SaveOptions();
-                            }
-                        }
-                    }
-                    break;
+                    continue;
                 case -1:
                     break;
             }
@@ -296,14 +276,13 @@ class Program
             ui.DrawLine();
 
             int index = ui.SelectList(player.consumes);
-            if (index == -1) return;
             ui.DrawLine();
 
             switch (ui.SelectList(new List<string>(new string[] { "- 사용" })))
             {
                 case 0:
                     // write code
-                    break;
+                    continue;
                 case -1:
                     break;
             }
@@ -406,17 +385,15 @@ class Program
 
             //Console.WriteLine("\n0. 나가기\n");
 
-            //Console.WriteLine("원하시는 행동을 입력해주세요.");
-
-            //if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.equips.Count || num < 0)
-            //{
-            //    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-            //}
-            //else
-            //{
-            //    if (num == 0) break;
-            //    shop.SellItem(num - 1, player);
-            //}
+            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.equips.Count || num < 0)
+            {
+                Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+            }
+            else
+            {
+                if (num == 0) break;
+                shop.SellItem(num - 1, player);
+            }
         }
     }
 
