@@ -149,7 +149,8 @@ class Program
                     Status();
                     break;
                 case 1:
-                    dungeon.EnterDungeon();
+                    //dungeon.EnterDungeon();
+                    //dungeon.StartBattle();
                     break;
                 case 2:
                     Inventory();
@@ -233,12 +234,12 @@ class Program
             {
                 case 0:
                     EquipManage();
-                    continue;
+                    break;
                 case 1:
                     ConsumeManage();
-                    continue;
-                case -1:
                     break;
+                case -1:
+                    return;
             }
         }
     }
@@ -259,9 +260,9 @@ class Program
             {
                 case 0:
                     player.equips[index].equip(player);
-                    continue;
-                case -1:
                     break;
+                case -1:
+                    return;
             }
         }
     }
@@ -282,9 +283,9 @@ class Program
             {
                 case 0:
                     // write code
-                    continue;
-                case -1:
                     break;
+                case -1:
+                    return;
             }
         }
     }
