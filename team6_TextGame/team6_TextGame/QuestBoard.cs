@@ -12,7 +12,7 @@ namespace team6_TextGame
             quests.Add(quest);
         }
 
-        public void QuestClear(Quest quest, Character character)
+        public void QuestClear(Quest quest, Player character)
         {
             quests.Remove(quest);
             character.gold += quest.gold_reward;
@@ -39,7 +39,7 @@ namespace team6_TextGame
             }
             SaveOptions();
         }
-        public void ReceiveReward(Quest quest, Character character)
+        public void ReceiveReward(Quest quest, Player character)
         {
             quests.Remove(quest);
             character.gold += quest.gold_reward;

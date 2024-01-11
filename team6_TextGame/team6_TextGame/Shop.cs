@@ -14,7 +14,7 @@ namespace team6_TextGame
             this.items.Add(item);
         }
 
-        public void BuyItem(int index, Character player)
+        public void BuyItem(int index, Player player)
         {
             if (items[index].price > player.gold)
             {
@@ -29,7 +29,7 @@ namespace team6_TextGame
             }
         }
 
-        public void SellItem(int index, Character player)
+        public void SellItem(int index, Player player)
         {
             Item item = player.equips[index];
             player.gold += (int)(item.price * 0.8);

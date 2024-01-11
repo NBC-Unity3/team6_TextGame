@@ -12,7 +12,7 @@ class Program
 {
     static QuestBoard questboard = new QuestBoard();
     static Shop shop = new Shop();
-    static Character player;
+    static Player player;
     static Dungeon dungeon;
     static UI ui = new UI();
 
@@ -23,10 +23,10 @@ class Program
         StartGame();
     }
 
-    static Character CreateCharacter()
+    static Player CreateCharacter()
     {
         string name;
-        Character character;
+        Player character;
         //이름 입력
         while(true)
         {
@@ -527,6 +527,6 @@ class Program
             SaveGame();
         }
         string json = File.ReadAllText(path);
-        player = JsonConvert.DeserializeObject<Character>(json, settings);
+        player = JsonConvert.DeserializeObject<Player>(json, settings);
     }
 }

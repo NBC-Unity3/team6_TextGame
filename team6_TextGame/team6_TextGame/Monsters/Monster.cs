@@ -2,7 +2,7 @@
 
 namespace team6_TextGame.Monsters
 {
-    internal class Monster
+    internal class Monster : Character
     {
         public string name { get; set; }   //이름
         public int level { get; set; }  //레벨
@@ -25,7 +25,7 @@ namespace team6_TextGame.Monsters
             }
         }
 
-        public void IsDamaged(Character character)    // 몬스터가 공격받는 함수
+        public void IsDamaged(Player character)    // 몬스터가 공격받는 함수
         {
             Random rand = new Random(); // 공격력의 10% 오차를 내기위한 랜덤 변수
             int damage = rand.Next(9, 12);  // 9~11의 랜덤한 값에 0.1을 곱하는 방식으로 구함
@@ -42,7 +42,7 @@ namespace team6_TextGame.Monsters
                 Console.WriteLine("Dead");    // 체력이 다 떨어지면 죽는 Dead 텍스트를 출력
         }
 
-        public void IsAttack(Character character)   //몬스터가 공격하는 함수
+        public void IsAttack(Player character)   //몬스터가 공격하는 함수
         {
             if (hp > 0)
             {
