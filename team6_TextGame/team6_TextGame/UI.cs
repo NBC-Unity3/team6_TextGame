@@ -103,6 +103,27 @@ namespace team6_TextGame
         }
 
 
+        public void Hwakin()
+        {
+            Console.ForegroundColor = textColor;
+
+            foreach (char c in text)
+            {
+                if (Char.IsDigit(c))
+                {
+                    Console.ForegroundColor = numberColor;
+                    Console.Write(c);
+                    Console.ForegroundColor = textColor;
+                }
+                else
+                {
+                    Console.Write(c);
+                }
+            }
+            Console.ResetColor();
+        }
+
+
         public void Alert()
         {
             Console.Clear();
