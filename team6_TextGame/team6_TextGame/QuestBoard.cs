@@ -45,11 +45,11 @@ namespace team6_TextGame
             character.gold += quest.gold_reward;
             foreach (EquipItem item in quest.item_rewards)
             {
-                character.AddInventory(item);
+                character.equips.Add(item);
             }
             foreach (ConsumeItem item in quest.item_rewards2)
             {
-                character.AddInventory(item);
+                character.consumes.Add(item);
             }
             SaveOptions();
         }

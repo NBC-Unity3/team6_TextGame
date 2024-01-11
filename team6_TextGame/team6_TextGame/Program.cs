@@ -386,6 +386,23 @@ class Program
         {
             Console.Clear();
             ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
+            Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
+            ui.DrawLine();
+            questboard.LoadOptions();
+
+            int index = ui.SelectList(questboard.quests);
+
+            if (index >= 0)
+            {
+                QuestDetail(index);
+            }
+            else break;
+        }
+        /*
+        while (true)
+        {
+            Console.Clear();
+            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
             
             questboard.LoadOptions();
 
@@ -408,7 +425,7 @@ class Program
                 if (num == 0) break;
                 QuestDetail(num - 1);
             }
-        }
+        }*/
     }
 
     static void QuestDetail(int n)
