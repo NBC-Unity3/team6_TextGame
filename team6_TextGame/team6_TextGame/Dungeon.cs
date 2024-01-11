@@ -5,13 +5,13 @@ namespace team6_TextGame
 {
     internal class Dungeon
     {
-        private Character player;
+        private Player player;
         private int start_player_hp;
         private List<Monster> monsters;
         private Random rand = new Random();
         public int level { get; set; }
 
-        public Dungeon(Character player, int level = 1)
+        public Dungeon(Player player, int level = 1)
         {
             this.player = player;
             this.level = level;

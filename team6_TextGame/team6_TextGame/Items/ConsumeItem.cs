@@ -28,7 +28,7 @@ namespace team6_TextGame.Items
                 return;
         }
 
-        public void Consume(Character player)
+        public void Consume(Player player)
         {
             if (atk > 0)
             {
