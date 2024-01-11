@@ -143,9 +143,13 @@ class Program
         while (true)
         {
             Console.Clear();
-            ui.TextColor("인벤토리", ConsoleColor.Yellow);
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            ui.TextColor("- 스파르타 마을 -", ConsoleColor.Yellow);
+            Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
+            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
+            Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+            
             ui.DrawLine();
+            Console.WriteLine("");
 
             switch (ui.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
             {
@@ -205,7 +209,7 @@ class Program
         */
 
         Console.Clear();
-        ui.TextColor("상태 보기", ConsoleColor.Yellow);
+        ui.TextColor("- 상태 보기 -", ConsoleColor.Yellow);
         Console.WriteLine("캐릭터의 정보가 표시됩니다.\n");
         ui.DrawLine();
 
@@ -229,9 +233,12 @@ class Program
         while (true)
         {
             Console.Clear();
-            ui.TextColor("인벤토리", ConsoleColor.Yellow);
+            ui.TextColor("- 인벤토리 -", ConsoleColor.Yellow);
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+
             ui.DrawLine();
+            Console.WriteLine("");
 
             switch (ui.SelectList(new List<string>(new string[] { "- 장비 아이템 관리", "- 소비 아이템 관리" })))
             {
@@ -252,9 +259,12 @@ class Program
         while (true)
         {
             Console.Clear();
-            ui.TextColor("인벤토리 - 장비 아이템", ConsoleColor.Yellow);
+            ui.TextColor("- 인벤토리(장비 아이템) -", ConsoleColor.Yellow);
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+
             ui.DrawLine();
+            Console.WriteLine("");
 
             int index = ui.SelectList(player.equips);
             if (index == -1) return;
@@ -291,9 +301,12 @@ class Program
         while (true)
         {
             Console.Clear();
-            ui.TextColor("인벤토리 - 소비 아이템", ConsoleColor.Yellow);
+            ui.TextColor(" - 인벤토리(소비 아이템) -", ConsoleColor.Yellow);
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+
             ui.DrawLine();
+            Console.WriteLine("");
 
             int index = ui.SelectList(player.consumes);
             if (index == -1) return;
@@ -313,12 +326,18 @@ class Program
     static void Shop()
     {
         Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("상점");
-        Console.ResetColor();
+        ui.TextColor(" - 상점 -", ConsoleColor.Yellow);
         Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
+        Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+
+        ui.DrawLine();
+        Console.WriteLine("");
+
         Console.WriteLine("[보유 골드]");
         Console.WriteLine($"{player.gold} G\n");
+
+        ui.DrawLine();
+        Console.WriteLine("");
 
         Shop shop = new Shop();
         shop.LoadOptions();
@@ -352,18 +371,24 @@ class Program
         while(true)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("상점 - 아이템 구매");
-            Console.ResetColor();
+            ui.TextColor(" - 상점(아이템 구매) -", ConsoleColor.Yellow);
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
+            Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+
+            ui.DrawLine();
+            Console.WriteLine("");
+
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
+
+            ui.DrawLine();
+            Console.WriteLine("");
 
             shop.LoadOptions();
 
             int index = ui.SelectList(shop.items);
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
+            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 구매", "- 취소" })))
             {
                 case 0:
                     shop.BuyItem(index, player);
@@ -380,16 +405,22 @@ class Program
         while (true)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("상점 - 아이템 판매");
-            Console.ResetColor();
+            ui.TextColor(" - 상점(아이템 판매) -", ConsoleColor.Yellow);
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.\n");
+            Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+
+            ui.DrawLine();
+            Console.WriteLine("");
+
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
 
+            ui.DrawLine();
+            Console.WriteLine("");
+
             int index = ui.SelectList(player.equips);
 
-            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 판매" })))
+            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 판매", "- 취소" })))
             {
                 case 0:
                     shop.SellItem(index, player);
@@ -425,9 +456,13 @@ class Program
         while (true)
         {
             Console.Clear();
-            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
-            Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
+            ui.TextColor("- 퀘스트 -\n", ConsoleColor.Yellow);
+            Console.WriteLine("퀘스트를 확인할 수 있습니다.\n");
+            Console.WriteLine("(방향키 : 항목 이동 / Enter : 결정 / ESC : 취소)");
+
             ui.DrawLine();
+            Console.WriteLine("");
+
             questboard.LoadOptions();
             questboard.ClearCheck(player);
 
@@ -446,7 +481,7 @@ class Program
         while (true)
         {
             Console.Clear();
-            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
+            ui.TextColor("- 퀘스트 -\n", ConsoleColor.Yellow);
             Console.WriteLine(questboard.quests[n]);
             ui.DrawLine();
 
