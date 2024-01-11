@@ -19,7 +19,7 @@ namespace team6_TextGame
             character.gold += quest.gold_reward;
             foreach (EquipItem item in quest.item_rewards) 
             {
-                character.AddInventory(item);
+                character.AddEquipsInven(item);
             }
             SaveOptions();
         }

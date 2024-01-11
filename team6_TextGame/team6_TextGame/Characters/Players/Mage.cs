@@ -8,17 +8,9 @@ namespace team6_TextGame.Characters.Players
 {
     internal class Mage : Player
     {
-        public Mage()
+        public Mage(string name, int level = 1, int atk = 8, int def = 4, int hp = 100, int mp = 70, string jop = "마법사", int gold = 1500)
+            : base(name, level, atk, def, hp, mp, jop, gold)
         {
-            atk = 8;
-            def = 4;
-            hp = 100;
-            mp = 70;
-            job = "마법사";
-            f_atk = atk;
-            f_def = def;
-            f_hp = hp;
-            f_mp = mp;
         }
 
         public override int Skill_1(Monster monster)
