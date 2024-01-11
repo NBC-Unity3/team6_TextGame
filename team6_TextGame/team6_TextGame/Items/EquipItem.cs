@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using team6_TextGame.Characters;
 
 
 namespace team6_TextGame.Items

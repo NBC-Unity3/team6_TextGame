@@ -6,6 +6,7 @@ using team6_TextGame.Items;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
+using team6_TextGame.Characters;
 
 
 class Program

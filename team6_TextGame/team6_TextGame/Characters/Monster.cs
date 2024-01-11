@@ -1,6 +1,4 @@
-﻿
-
-namespace team6_TextGame.Monsters
+﻿namespace team6_TextGame.Characters
 {
     internal class Monster : Character
     {
