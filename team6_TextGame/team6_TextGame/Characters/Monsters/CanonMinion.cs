@@ -8,6 +8,7 @@ namespace team6_TextGame.Characters.Monsters
         {
             return 3; // 등장할 수 있는 최소 레벨
         }
+        /*
         public CanonMinion()
         {
             name = "대포 미니언";   //이름
@@ -16,5 +17,6 @@ namespace team6_TextGame.Characters.Monsters
             hp = 25;     //체력
             exp = 5;    //경험치 계수
         }
+        */
     }
 }

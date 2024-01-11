@@ -12,24 +12,25 @@ namespace team6_TextGame.Characters
         public int level { get; set; }
         public int atk { get; set; }
         public int def { get; set; }
-        public int maxhp { get; set; }
-        public int maxmp { get; set; }
+        public int maxHp { get; set; }
+        public int maxMp { get; set; }
         public int crit { get; set; }
         public int dodge { get; set; }
 
         //public int speed { get; set; }
 
 
-        public int hp { get; set; }
-        public int mp { get; set; }
-        public int f_atk { get; set; }
-        public int f_def { get; set; }
+        public int hp { get; set; }     //현재 체력
+        public int mp { get; set; }     //현재 마나
+        public int f_atk { get; set; }  //현재 공격력
+        public int f_def { get; set; }  //현재 방어력
 
 
         public void Attack(Character enemy)
         {
             //UI단
             Console.WriteLine($"{name}의 공격!");
+            enemy.Ondamaged(this);
 
         }
 
@@ -55,13 +56,18 @@ namespace team6_TextGame.Characters
             }
 
             hp -= damage;
-            if (hp < 0) Die();
-
+            if (hp < 0) { hp = 0; }
         }
 
-        public virtual void Die()
+        public bool isDead()
         {
-            // 자식 클래스에서 구현
+            if (hp == 0) return true;
+            else return false;
+        }
+
+        public void Die()
+        {
+            Console.WriteLine($"{name}가 쓰러졌습니다");
         }
 
     }

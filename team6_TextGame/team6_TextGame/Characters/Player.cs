@@ -4,11 +4,9 @@ namespace team6_TextGame.Characters
 {
     internal class Player : Character
     {
-        //자동구현 프로퍼티가 자동으로 private field를 만든다.
         public string job { get; set; }
         public int gold { get; set; } = 1500;
 
-        //public List<Item> inventory = new List<Item>();      //장비 아이템 리스트
         static UI ui = new UI();
         public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
         public List<ConsumeItem> consumes = new List<ConsumeItem>();
@@ -21,9 +19,9 @@ namespace team6_TextGame.Characters
             this.atk = atk;
             this.f_def = def;
             this.def = def;
-            this.maxhp = hp;
+            this.maxHp = hp;
             this.hp = hp;
-            this.maxmp = mp;
+            this.maxMp = mp;
             this.mp = mp;
             this.job = jop;
             this.gold = gold;
@@ -31,7 +29,7 @@ namespace team6_TextGame.Characters
 
         public void ShowInfo()
         {
-            //Console.WriteLine($"Lv. {level}\n{name} ({job})\n공격력 : {f_atk} (+{f_atk - atk})\n방어력 : {f_def} (+{f_def - def})\n체력 : {f_hp} (+{f_hp - hp})\nGold : {gold} G");
+            //Console.WriteLine($"Lv. {floor}\n{name} ({job})\n공격력 : {f_atk} (+{f_atk - atk})\n방어력 : {f_def} (+{f_def - def})\n체력 : {f_hp} (+{f_hp - hp})\nGold : {gold} G");
 
             Console.WriteLine($"Lv. {level}");
             Console.WriteLine($"{name} ({job})");
@@ -40,9 +38,9 @@ namespace team6_TextGame.Characters
             Console.Write($"방어력 : {f_def} ");
             if (f_def - def != 0) ui.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"H    P : {hp} \n");
-            //if (maxhp - hp != 0) Program.ui.TextColor($"(+{maxhp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            //if (maxHp - hp != 0) Program.ui.TextColor($"(+{maxHp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"M    P : {mp} \n");
-            //if (maxmp - mp != 0) Program.ui.TextColor($"(+{maxmp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            //if (maxMp - mp != 0) Program.ui.TextColor($"(+{maxMp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.WriteLine($"Gold : {gold} G");
         }
 
@@ -67,7 +65,7 @@ namespace team6_TextGame.Characters
         {
             f_atk += atk;
             f_def += def;
-            maxhp += hp;
+            maxHp += hp;
         }
 
         public virtual int Skill_1(Monster monster)
