@@ -6,6 +6,7 @@ using team6_TextGame.Items;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
+using System.Security.Cryptography;
 
 
 class Program
@@ -34,11 +35,9 @@ class Program
             Console.WriteLine("당신의 이름은 무엇입니까?");
             name = Console.ReadLine();
             Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
-            Console.WriteLine("1. 맞습니다.");
-            Console.WriteLine("2. 아닙니다.\n");
 
-            var key = Console.ReadKey(true).Key;
-            if (key ==  ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            int cmd = ui.SelectList(new List<string>(new string[] { "1. 맞습니다.", "2. 아닙니다."}));
+            if (cmd == 0)
             {
                 break;
             }
@@ -50,7 +49,7 @@ class Program
         //직업 선택
 
         Console.Clear();
-        Console.WriteLine("원하는 직업을 선택해주세요. ");
+        Console.WriteLine("원하는 직업을 선택해주세요.\n");
 
         Console.WriteLine("======================================================");
         Console.WriteLine("         |   1. 전사    |   2. 궁수    |  3. 마법사  ");
@@ -62,36 +61,27 @@ class Program
         Console.WriteLine("  H   P  |     100      |     100      |      80  ");
         Console.WriteLine("---------|--------------|--------------|--------------");
         Console.WriteLine("  M   P  |      50      |      40      |      70  ");
-        Console.WriteLine("======================================================");
+        Console.WriteLine("======================================================\n");
 
         bool isFirst = true;
         while (true)
         {
-            if(!isFirst)
-            {
-                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
-            }
-
-            isFirst = false;
-
-            var key = Console.ReadKey(true).Key;
-
-            if(key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            int cmd = ui.SelectList(new List<string>(new string[] { "1. 전사", "2. 궁수", "3. 마법사" }));
+            if(cmd == 0)
             {
                 character = new Warrior();
-                break;
-            } else if(key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
+            } else if(cmd == 1)
             {
                 character = new Archer();
-                break;
-            } else if(key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
+            } else if(cmd == 2)
             {
                 character = new Mage();
-                break;
             } else
             {
                 continue;
             }
+
+            break;
         }
 
         character.name = name;
