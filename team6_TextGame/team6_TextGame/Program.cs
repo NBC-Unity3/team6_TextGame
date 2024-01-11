@@ -268,9 +268,13 @@ class Program
                     player.equips[index].equip(player);
                     foreach (Quest q in questboard.quests)
                     {
-                        if(q.name == "장비를 장착해보자")
+                        if (player.equips[index].isEquipped == true)
                         {
-                            q.achieve_count = 1;
+                            if (q.name == "장비를 장착해보자" && q.isActive == true)
+                            {
+                                q.achieve_count = 1;
+                                questboard.SaveOptions();
+                            }
                         }
                     }
                     break;
@@ -361,6 +365,7 @@ class Program
             {
                 case 0:
                     shop.BuyItem(index, player);
+                    SaveGame();
                     break;
                 case -1:
                     return;
@@ -432,34 +437,6 @@ class Program
             }
             else break;
         }
-        /*
-        while (true)
-        {
-            Console.Clear();
-            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
-            
-            questboard.LoadOptions();
-
-            int i = 1;
-            foreach (Quest quest in questboard.quests)
-            {
-                Console.WriteLine($"{i++}. {quest.name}");
-            }
-
-            Console.WriteLine("\n0. 나가기\n");
-
-            Console.WriteLine("원하시는 퀘스트를 선택해주세요.");
-
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > questboard.quests.Count || num < 0)
-            {
-                Console.WriteLine("잘못된 입력입니다");
-            }
-            else
-            {
-                if (num == 0) break;
-                QuestDetail(num - 1);
-            }
-        }*/
     }
 
     static void QuestDetail(int n)
@@ -477,7 +454,7 @@ class Program
                 {
                     case 0:
                         questboard.ReceiveReward(questboard.quests[n], player);
-                        break;
+                        return;
                     case -1:
                         return;
                 }
