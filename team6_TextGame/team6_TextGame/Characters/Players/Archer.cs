@@ -20,7 +20,7 @@ namespace team6_TextGame.Characters.Players
 
             mp -= 15;
 
-            int part = rand.Next(1, 3);
+            int part = rand.Next(1, 4);
 
             int damage = 0;
 
