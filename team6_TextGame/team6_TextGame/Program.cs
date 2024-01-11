@@ -4,6 +4,8 @@ using System.Xml.Linq;
 using System.Numerics;
 using team6_TextGame.Items;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System;
 
 
 class Program
@@ -286,26 +288,21 @@ class Program
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
+        Console.WriteLine("");
 
-        Console.WriteLine("\n1. 아이템 구매\n2. 아이템 판매\n0. 나가기\n");
 
         while (true)
         {
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            var key = Console.ReadKey(true).Key;
-            switch (key)
+            switch (ui.SelectList(new List<string>(new string[] { "1. 아이템 구매", "2. 아이템 판매", "0.나가기" })))
             {
-                case ConsoleKey.D0:
-                    break;
-                case ConsoleKey.D1:
+                case 0:
                     BuyItem();
                     break;
-                case ConsoleKey.D2:
+                case 1:
                     SellItem();
                     break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
-                    continue;
+                case 2:
+                    break;
             }
             break;
         }
@@ -325,24 +322,15 @@ class Program
 
             shop.LoadOptions();
 
-            int i = 1;
-            foreach (EquipItem item in shop.items)
-            {
-                Console.WriteLine($"{i++} {item.ToString()} | {item.price} G");
-            }
+            int index = ui.SelectList(shop.items);
 
-            Console.WriteLine("\n0. 나가기\n");
-            
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > shop.items.Count || num < 0)
+            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
             {
-                Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-            }
-            else
-            {
-                if (num == 0) break;
-                shop.BuyItem(num - 1, player);
+                case 0:
+                    shop.BuyItem(index, player);
+                    break;
+                case -1:
+                    return;
             }
         } 
     }
@@ -359,25 +347,36 @@ class Program
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
 
-            int i = 1;
-            foreach (EquipItem item in player.equips)
+            int index = ui.SelectList(player.equips);
+
+            switch (ui.SelectList(new List<string>(new string[] { "- 아이템 판매" })))
             {
-                Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
+                case 0:
+                    shop.SellItem(index, player);
+                    break;
+                case -1:
+                    return;
             }
 
-            Console.WriteLine("\n0. 나가기\n");
+            //int i = 1;
+            //foreach (EquipItem item in player.equips)
+            //{
+            //    Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
+            //}
 
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            //Console.WriteLine("\n0. 나가기\n");
 
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.equips.Count || num < 0)
-            {
-                Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-            }
-            else
-            {
-                if (num == 0) break;
-                shop.SellItem(num - 1, player);
-            }
+            //Console.WriteLine("원하시는 행동을 입력해주세요.");
+
+            //if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.equips.Count || num < 0)
+            //{
+            //    Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
+            //}
+            //else
+            //{
+            //    if (num == 0) break;
+            //    shop.SellItem(num - 1, player);
+            //}
         }
     }
 
