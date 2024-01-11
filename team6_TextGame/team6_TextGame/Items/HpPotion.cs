@@ -1,8 +1,6 @@
-﻿
-
-namespace team6_TextGame.ConsumableItem
+﻿namespace team6_TextGame.Items
 {
-    internal class HpPotion : ConsumableItem
+    internal class HpPotion : ConsumeItem
     {
         public HpPotion()
         {

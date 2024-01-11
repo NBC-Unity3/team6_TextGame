@@ -1,8 +1,6 @@
-﻿
-
-namespace team6_TextGame.ConsumableItem
+﻿namespace team6_TextGame.Items
 {
-    internal class DefPotion : ConsumableItem
+    internal class DefPotion : ConsumeItem
     {
         public DefPotion()
         {
@@ -10,7 +8,7 @@ namespace team6_TextGame.ConsumableItem
             name = "수호자의 영약";
             atk = 0;
             def = 3;
-            hp = 0; 
+            hp = 0;
             info = "방어력이 영구히 3상승합니다.";
             price = 2500;
             count = 0;

@@ -1,12 +1,12 @@
 ﻿
 using System.Text;
 
-namespace team6_TextGame.ConsumableItem
+namespace team6_TextGame.Items
 {
-    internal class ConsumableItem : Item
+    internal class ConsumeItem : Item
     {
         public int count = 0;
-        
+
         public override string ToString()
         {
             var sb = new StringBuilder();
