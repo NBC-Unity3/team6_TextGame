@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.Xml.Linq;
 using System.Numerics;
+using team6_TextGame.Items;
 
 
 class Program
@@ -167,7 +168,7 @@ class Program
         Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
         Console.WriteLine("[아이템 목록]\n");
 
-        foreach (EquipmentItem item in player.inventory)
+        foreach (EquipItem item in player.inventory)
         {
             Console.WriteLine($"- {item.ToString()}");
         }
@@ -225,7 +226,7 @@ class Program
                 if (num == 0) break;
                 Item selectedItem = player.inventory[num - 1];
 
-                if (selectedItem is EquipmentItem equipmentItem)
+                if (selectedItem is EquipItem equipmentItem)
                 {
                     equipmentItem.equip(player);
                 }
@@ -250,7 +251,7 @@ class Program
         Shop shop = new Shop();
         shop.LoadOptions();
 
-        foreach (EquipmentItem item in shop.items)
+        foreach (EquipItem item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
@@ -294,7 +295,7 @@ class Program
             shop.LoadOptions();
 
             int i = 1;
-            foreach (EquipmentItem item in shop.items)
+            foreach (EquipItem item in shop.items)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {item.price} G");
             }
@@ -328,7 +329,7 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int i = 1;
-            foreach (EquipmentItem item in player.inventory)
+            foreach (EquipItem item in player.inventory)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
             }

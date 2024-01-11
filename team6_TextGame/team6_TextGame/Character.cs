@@ -1,4 +1,5 @@
-﻿using team6_TextGame.Monsters;
+﻿using team6_TextGame.Items;
+using team6_TextGame.Monsters;
 
 namespace team6_TextGame
 {

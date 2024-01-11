@@ -1,15 +1,14 @@
 ﻿using System.Text;
-using team6_TextGame;
 
 
-namespace team6_TextGame
+namespace team6_TextGame.Items
 {
-    internal class EquipmentItem : Item
+    internal class EquipItem : Item
     {
         public bool isEquipped { get; set; } = false;
 
 
-        public EquipmentItem(int id, string name, int atk, int def, int hp, string info, int price)
+        public EquipItem(int id, string name, int atk, int def, int hp, string info, int price)
         {
             this.id = id;
             this.name = name;
@@ -23,12 +22,12 @@ namespace team6_TextGame
         public override string ToString()
         {
             var sb = new StringBuilder();
-            if(isEquipped) { sb.Append("[E]"); }
+            if (isEquipped) { sb.Append("[E]"); }
             sb.Append(name);
             sb.Append(" | ");
-            if(atk != 0) { sb.Append("공격력 +" +  atk + " "); }
-            if(def != 0) { sb.Append("방어력 +" + def + " "); }
-            if(hp != 0) { sb.Append("체력 +" + hp + " "); }
+            if (atk != 0) { sb.Append("공격력 +" + atk + " "); }
+            if (def != 0) { sb.Append("방어력 +" + def + " "); }
+            if (hp != 0) { sb.Append("체력 +" + hp + " "); }
             sb.Append("| ");
             sb.Append(info);
 
