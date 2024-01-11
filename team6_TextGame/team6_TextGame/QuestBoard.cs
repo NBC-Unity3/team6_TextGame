@@ -47,6 +47,10 @@ namespace team6_TextGame
             {
                 character.AddInventory(item);
             }
+            foreach (ConsumeItem item in quest.item_rewards2)
+            {
+                character.AddInventory(item);
+            }
             SaveOptions();
         }
 
