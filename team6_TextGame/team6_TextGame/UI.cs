@@ -22,13 +22,13 @@ namespace team6_TextGame
                 {
                     Quest q = new Quest();
                     q = item as Quest;
-                    Console.WriteLine($"   {q.name}");
+                    WriteColoredNumbers($"   {q.name}\n");
                 }
                 else if (item is EquipItem equipItem)
                 {
-                    Console.WriteLine($"   {equipItem.ToString()}");
+                    WriteColoredNumbers($"   {equipItem.ToString()}\n");
                 }
-                else Console.WriteLine($"   {item}");
+                else WriteColoredNumbers($"   {item}\n");
             }
             last = Console.CursorTop - 1;
 
