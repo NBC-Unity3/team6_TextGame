@@ -22,7 +22,9 @@ namespace team6_TextGame
                 {
                     Quest q = new Quest();
                     q = item as Quest;
-                    WriteColoredNumbers($"   {q.name}\n");
+                    WriteColoredNumbers($"   {q.name}");
+                    if (q.isClear == true) Console.Write("(Clear!)\n");
+                    else Console.WriteLine();
                 }
                 else if (item is EquipItem equipItem)
                 {

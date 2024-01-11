@@ -266,6 +266,13 @@ class Program
             {
                 case 0:
                     player.equips[index].equip(player);
+                    foreach (Quest q in questboard.quests)
+                    {
+                        if(q.name == "장비를 장착해보자")
+                        {
+                            q.achieve_count = 1;
+                        }
+                    }
                     break;
                 case -1:
                     break;
@@ -415,6 +422,7 @@ class Program
             Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
             ui.DrawLine();
             questboard.LoadOptions();
+            questboard.ClearCheck(player);
 
             int index = ui.SelectList(questboard.quests);
 
