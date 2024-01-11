@@ -31,10 +31,10 @@ namespace team6_TextGame
 
         public void SellItem(int index, Character player)
         {
-            Item item = player.inventory[index];
+            Item item = player.equips[index];
             player.gold += (int)(item.price * 0.8);
             AddItem(item);
-            player.inventory.RemoveAt(index);
+            player.equips.RemoveAt(index);
             SaveOptions();
         }
 
