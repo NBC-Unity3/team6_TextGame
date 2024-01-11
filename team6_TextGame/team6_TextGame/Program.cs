@@ -143,7 +143,7 @@ class Program
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
             ui.DrawLine();
 
-            switch (ui.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 :"+ dungeon.level +"층", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.level + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
             {
                 case 0:
                     Status();
@@ -173,6 +173,7 @@ class Program
 
     static void Status()
     {
+        /*
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("상태 보기");
@@ -197,7 +198,26 @@ class Program
             }
             break;
         }
+        */
 
+        Console.Clear();
+        ui.TextColor("상태 보기", ConsoleColor.Yellow);
+        Console.WriteLine("캐릭터의 정보가 표시됩니다.\n");
+        ui.DrawLine();
+
+        player.ShowInfo();
+
+        while (true)
+        {
+            Console.WriteLine();
+            switch (ui.SelectList(new List<string>(new string[] { "0. 나가기" })))
+            {
+                case 0:
+                    return;
+                case -1:
+                    return;
+            }
+        }
     }
 
     static void Inventory()
