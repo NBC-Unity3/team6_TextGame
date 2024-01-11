@@ -1,6 +1,6 @@
-﻿
+﻿using team6_TextGame.Characters;
 
-namespace team6_TextGame.Monsters
+namespace team6_TextGame.Characters.Monsters
 {
     internal class Minion : Monster
     {
@@ -10,11 +10,11 @@ namespace team6_TextGame.Monsters
         }
         public Minion()
         {
-            this.name = "미니언";
-            this.level = 2;
-            this.atk = 5;
-            this.hp = 15;
-            this.exp = 1;
+            name = "미니언";
+            level = 2;
+            atk = 5;
+            hp = 15;
+            exp = 1;
         }
     }
 }

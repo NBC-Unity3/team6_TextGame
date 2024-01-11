@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using team6_TextGame.Characters;
 using team6_TextGame.Items;
 
 namespace team6_TextGame

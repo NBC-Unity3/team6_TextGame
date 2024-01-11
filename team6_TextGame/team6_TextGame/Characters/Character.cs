@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace team6_TextGame
+namespace team6_TextGame.Characters
 {
     internal class Character
     {
-        public string name {  get; set; }
+        public string name { get; set; }
         public int level { get; set; }
         public int atk { get; set; }
         public int def { get; set; }
@@ -43,7 +43,7 @@ namespace team6_TextGame
                 Console.WriteLine("회피");
                 return;
             }
-          
+
             if (crit > new Random().Next(1, 101)) // 치명타시 방어력 무시 및 20% 추가데미지
             {
                 Console.WriteLine("치명적인 공격!");
