@@ -1,4 +1,5 @@
-﻿using team6_TextGame.Items;
+﻿using Newtonsoft.Json;
+using team6_TextGame.Items;
 
 namespace team6_TextGame.Characters
 {
@@ -11,10 +12,11 @@ namespace team6_TextGame.Characters
         public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
         public List<ConsumeItem> consumes = new List<ConsumeItem>();
 
+        [JsonConstructor]
         protected Player(string name = "", int level = 1, int atk = 0, int def = 0, int hp = 0, int mp = 0, string jop = "플레이어", int gold = 1500)
         {
+            this.name = name;
             this.level = level;
-            this.gold =
             this.f_atk = atk;
             this.atk = atk;
             this.f_def = def;
