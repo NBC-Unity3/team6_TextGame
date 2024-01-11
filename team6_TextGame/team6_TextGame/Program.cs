@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Xml.Linq;
 using System.Numerics;
 using team6_TextGame.Items;
+using System.Collections.Generic;
 
 
 class Program
@@ -11,6 +12,7 @@ class Program
     static Shop shop = new Shop();
     static Character player;
     static Dungeon dungeon;
+    static UI ui;
 
     static void Main(String[] args)
     {
@@ -161,79 +163,69 @@ class Program
 
     static void Inventory()
     {
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("인벤토리");
-        Console.ResetColor();
-        Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-        Console.WriteLine("[아이템 목록]\n");
-
-        foreach (EquipItem item in player.inventory)
-        {
-            Console.WriteLine($"- {item.ToString()}");
-        }
-
-
-        Console.WriteLine("\n1. 장착 관리\n0. 나가기\n");
-
         while (true)
         {
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            var key = Console.ReadKey(true).Key;
-            switch (key)
+            Console.Clear();
+            ui.TextColor("인벤토리", ConsoleColor.Yellow);
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            ui.DrawLine();
+
+            switch (ui.SelectList(new List<string>(new string[] { "- 장비 아이템 관리", "- 소비 아이템 관리" })))
             {
-                case ConsoleKey.D0:
-                    break;
-                case ConsoleKey.D1:
-                    EqipManage();
-                    break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
+                case 0:
+                    EquipManage();
                     continue;
+                case 1:
+                    ConsumeManage();
+                    continue;
+                case -1:
+                    break;
             }
-            break;
         }
     }
 
-    static void EqipManage()
+    static void EquipManage()
     {
         while (true)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("인벤토리 - 장착 관리");
-            Console.ResetColor();
+            ui.TextColor("인벤토리 - 장비 아이템", ConsoleColor.Yellow);
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-            Console.WriteLine("[아이템 목록]\n");
+            ui.DrawLine();
 
-            int i = 1;
-            foreach (Item item in player.inventory)
+            int index = ui.SelectList(player.equips);
+            ui.DrawLine();
+
+            switch (ui.SelectList(new List<string>(new string[] { "- 장착/장착해제" })))
             {
-                Console.WriteLine($"{i++} {item.ToString()}");
+                case 0:
+                    player.equips[index].equip(player);
+                    continue;
+                case -1:
+                    break;
             }
+        }
+    }
 
+    static void ConsumeManage()
+    {
+        while (true)
+        {
+            Console.Clear();
+            ui.TextColor("인벤토리 - 소비 아이템", ConsoleColor.Yellow);
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            ui.DrawLine();
 
-            Console.WriteLine("\n0. 나가기\n");
+            int index = ui.SelectList(player.consumes);
+            ui.DrawLine();
 
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-
-            if(!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
+            switch (ui.SelectList(new List<string>(new string[] { "- 사용" })))
             {
-                Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
-            }
-            else
-            {
-                if (num == 0) break;
-                Item selectedItem = player.inventory[num - 1];
-
-                if (selectedItem is EquipItem equipmentItem)
-                {
-                    equipmentItem.equip(player);
-                }
-                else
-                {
-                    Console.WriteLine("해당 아이템은 장착할 수 없습니다.");
-                }
+                case 0:
+                    // write code
+                    continue;
+                case -1:
+                    break;
             }
         }
     }
@@ -329,7 +321,7 @@ class Program
             Console.WriteLine($"{player.gold} G\n");
 
             int i = 1;
-            foreach (EquipItem item in player.inventory)
+            foreach (EquipItem item in player.equips)
             {
                 Console.WriteLine($"{i++} {item.ToString()} | {(int)(item.price * 0.8)} G");
             }
@@ -338,7 +330,7 @@ class Program
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.inventory.Count || num < 0)
+            if (!int.TryParse(Console.ReadLine(), out int num) || num - 1 > player.equips.Count || num < 0)
             {
                 Console.WriteLine("잘못된 입력입니다");     // fix: Console.Clear 후 출력하도록 수정할 것
             }
@@ -440,13 +432,6 @@ class Program
         }
     }
 
-    //TextColor("입력할 문구", ConsoleColor.Yellow); 식으로 사용
-    public static void TextColor(string text, ConsoleColor clr)
-    {
-        Console.ForegroundColor = clr;
-        Console.WriteLine(text);
-        Console.ResetColor();
-    }
 
     static void SaveGame()
     {

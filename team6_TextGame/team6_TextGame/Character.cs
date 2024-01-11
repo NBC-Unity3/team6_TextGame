@@ -21,7 +21,8 @@ namespace team6_TextGame
         public int f_hp;
         public int f_mp;
 
-        public List<Item> inventory = new List<Item>();      //장비 아이템 리스트
+        public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
+        public List<ConsumeItem> consumes = new List<ConsumeItem>();
 
         public Character()
         {
@@ -50,7 +51,7 @@ namespace team6_TextGame
 
         public void AddInventory(Item item)
         {
-            inventory.Add(item);
+            equips.Add(item);
 
         }
 
