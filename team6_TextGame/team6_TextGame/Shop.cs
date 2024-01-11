@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Numerics;
+using team6_TextGame.Characters;
 using team6_TextGame.Items;
 
 
@@ -14,7 +15,7 @@ namespace team6_TextGame
             this.items.Add(item);
         }
 
-        public void BuyItem(int index, Character player)
+        public void BuyItem(int index, Player player)
         {
             if (items[index].price > player.gold)
             {
@@ -23,13 +24,13 @@ namespace team6_TextGame
             else
             {
                 player.gold -= items[index].price;
-                player.AddInventory(items[index]);
+                player.AddEquipsInven(items[index]);
                 items.RemoveAt(index);
                 SaveOptions();
             }
         }
 
-        public void SellItem(int index, Character player)
+        public void SellItem(int index, Player player)
         {
             Item item = player.equips[index];
             player.gold += (int)(item.price * 0.8);

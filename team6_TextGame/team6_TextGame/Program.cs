@@ -6,13 +6,15 @@ using team6_TextGame.Items;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System;
+using team6_TextGame.Characters;
+using team6_TextGame.Characters.Players;
 
 
 class Program
 {
     static QuestBoard questboard = new QuestBoard();
     static Shop shop = new Shop();
-    static Character player;
+    static Player player;
     static Dungeon dungeon;
     static UI ui = new UI();
 
@@ -23,10 +25,10 @@ class Program
         StartGame();
     }
 
-    static Character CreateCharacter()
+    static Player CreateCharacter()
     {
         string name;
-        Character character;
+        Player character;
         //이름 입력
         while(true)
         {
@@ -78,15 +80,15 @@ class Program
 
             if(key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
             {
-                character = new Warrior();
+                character = new Warrior(name);
                 break;
             } else if(key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
             {
-                character = new Archer();
+                character = new Archer(name);
                 break;
             } else if(key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
             {
-                character = new Mage();
+                character = new Mage(name);
                 break;
             } else
             {
@@ -104,7 +106,7 @@ class Program
         while (true) {
             Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
-            Console.WriteLine($"1. 상태 보기\n2. 전투 시작 (현재 진행 : {dungeon.level}층)\n3. 인벤토리\n4. 상점\n5. 퀘스트\n6. 저장하기\n\n");
+            Console.WriteLine($"1. 상태 보기\n2. 전투 시작 (현재 진행 : {dungeon.floor}층)\n3. 인벤토리\n4. 상점\n5. 퀘스트\n6. 저장하기\n\n");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             var key = Console.ReadKey(true).Key;
@@ -145,13 +147,13 @@ class Program
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
             ui.DrawLine();
 
-            switch (ui.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.level + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
+            switch (ui.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
             {
                 case 0:
                     Status();
                     break;
                 case 1:
-                    dungeon.StartBattle();
+                    dungeon.EnterDungeon();
                     break;
                 case 2:
                     Inventory();
@@ -511,7 +513,10 @@ class Program
             player = CreateCharacter();
             SaveGame();
         }
-        string json = File.ReadAllText(path);
-        player = JsonConvert.DeserializeObject<Character>(json, settings);
+        else
+        {
+            string json = File.ReadAllText(path);
+            player = JsonConvert.DeserializeObject<Player>(json, settings);
+        }
     }
 }

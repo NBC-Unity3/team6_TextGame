@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using team6_TextGame.Characters;
 using team6_TextGame.Items;
 
 namespace team6_TextGame
@@ -12,13 +13,13 @@ namespace team6_TextGame
             quests.Add(quest);
         }
 
-        public void QuestClear(Quest quest, Character character)
+        public void QuestClear(Quest quest, Player character)
         {
             quests.Remove(quest);
             character.gold += quest.gold_reward;
             foreach (EquipItem item in quest.item_rewards) 
             {
-                character.AddInventory(item);
+                character.AddEquipsInven(item);
             }
             SaveOptions();
         }
@@ -43,7 +44,7 @@ namespace team6_TextGame
             }
             SaveOptions();
         }
-        public void ReceiveReward(Quest quest, Character character)
+        public void ReceiveReward(Quest quest, Player character)
         {
             quests.Remove(quest);
             character.gold += quest.gold_reward;

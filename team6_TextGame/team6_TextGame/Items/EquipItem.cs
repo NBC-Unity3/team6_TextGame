@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using team6_TextGame.Characters;
 
 
 namespace team6_TextGame.Items
@@ -34,7 +35,7 @@ namespace team6_TextGame.Items
             return sb.ToString();
         }
 
-        public void equip(Character player)
+        public void equip(Player player)
         {
             if (isEquipped)
             {
