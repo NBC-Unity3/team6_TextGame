@@ -96,6 +96,7 @@ class Program
         return character;
     }
 
+    /*
     static void StartGame()
     {
         while (true) {
@@ -131,6 +132,44 @@ class Program
             }
         }
     }
+    */
+
+    static void StartGame()
+    {
+        while (true)
+        {
+            Console.Clear();
+            ui.TextColor("인벤토리", ConsoleColor.Yellow);
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            ui.DrawLine();
+
+            switch (ui.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 :"+ dungeon.level +"층", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
+            {
+                case 0:
+                    Status();
+                    break;
+                case 1:
+                    dungeon.StartBattle();
+                    break;
+                case 2:
+                    Inventory();
+                    break;
+                case 3:
+                    Shop();
+                    break;
+                case 4:
+                    Quest();
+                    break;
+                case 5: 
+                    SaveGame();
+                    break;
+                case -1:
+                    return;
+            }
+        }
+    }
+
+
 
     static void Status()
     {
@@ -174,12 +213,12 @@ class Program
             {
                 case 0:
                     EquipManage();
-                    continue;
+                    break;
                 case 1:
                     ConsumeManage();
-                    continue;
-                case -1:
                     break;
+                case -1:
+                    return;
             }
         }
     }
@@ -200,9 +239,9 @@ class Program
             {
                 case 0:
                     player.equips[index].equip(player);
-                    continue;
-                case -1:
                     break;
+                case -1:
+                    return;
             }
         }
     }
@@ -223,9 +262,9 @@ class Program
             {
                 case 0:
                     // write code
-                    continue;
-                case -1:
                     break;
+                case -1:
+                    return;
             }
         }
     }
