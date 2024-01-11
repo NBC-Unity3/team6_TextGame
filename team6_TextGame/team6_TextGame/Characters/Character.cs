@@ -29,7 +29,7 @@ namespace team6_TextGame.Characters
         public void Attack(Character enemy)
         {
             //UI단
-            Console.WriteLine(name + "의 공격!");
+            Console.WriteLine($"{name}의 공격!");
 
         }
 
@@ -40,7 +40,7 @@ namespace team6_TextGame.Characters
 
             if (dodge > new Random().Next(1, 101))  // 회피율 계산식
             {
-                Console.WriteLine("회피");
+                Console.WriteLine($"{name}가 회피했습니다.");
                 return;
             }
 
