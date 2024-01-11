@@ -28,11 +28,15 @@ namespace team6_TextGame
             SaveOptions();
         }
 
-        public void ClearCheck()
+        public void ClearCheck(Character character)
         {
             foreach (Quest quest in quests)
             {
-                if (quest.achieve_count >= quest.goal_count)
+                if(quest.name == "더욱 더 강해지기!")
+                {
+                    quest.achieve_count = character.f_atk;
+                }
+                if (quest.achieve_count >= quest.goal_count && quest.isActive == true)
                 {
                     quest.isClear = true;
                 }
