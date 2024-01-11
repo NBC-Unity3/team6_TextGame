@@ -52,7 +52,7 @@ namespace team6_TextGame
             Console.WriteLine($"Gold : {gold} G");
         }
 
-        public void AddInventory(Item item)
+        public void AddInventory(EquipItem item)
         {
             equips.Add(item);
 
