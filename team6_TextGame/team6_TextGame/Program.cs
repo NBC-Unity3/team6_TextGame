@@ -246,7 +246,7 @@ class Program
                     player.equips[index].equip(player);
                     break;
                 case -1:
-                    return;
+                    break;
             }
         }
     }
@@ -270,7 +270,7 @@ class Program
                     // write code
                     break;
                 case -1:
-                    return;
+                    break;
             }
         }
     }
