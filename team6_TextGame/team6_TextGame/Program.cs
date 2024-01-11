@@ -12,7 +12,7 @@ class Program
     static Shop shop = new Shop();
     static Character player;
     static Dungeon dungeon;
-    static UI ui;
+    static UI ui = new UI();
 
     static void Main(String[] args)
     {
@@ -386,7 +386,7 @@ class Program
         while (true)
         {
             Console.Clear();
-            TextColor("Quest!!\n", ConsoleColor.Yellow);
+            ui.TextColor("Quest!!\n", ConsoleColor.Yellow);
             
             questboard.LoadOptions();
 

@@ -25,7 +25,7 @@ namespace team6_TextGame
         public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
         public List<ConsumeItem> consumes = new List<ConsumeItem>();
 
-        static UI ui;
+        static UI ui = new UI();
 
         public Character()
         {
@@ -54,7 +54,7 @@ namespace team6_TextGame
 
         public void AddInventory(Item item)
         {
-            equips.Add(item);
+            equips.Add(item as EquipItem);
 
         }
 
