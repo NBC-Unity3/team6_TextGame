@@ -16,7 +16,7 @@ namespace team6_TextGame.Characters.Players
         public override void Skill_1(Monster monster)
         {
             //단일기, 명중 부위 따라 데미지가 다른 설정
-            mp -= 15;
+            ChangeMP(-15);
 
             Random rand = new Random();
             int part = rand.Next(1, 100);
@@ -41,7 +41,7 @@ namespace team6_TextGame.Characters.Players
             //광역기, 한발마다 mp 닳게 몬스터 숫자 비례 mp 사용
             foreach(Monster m in monsters)
             {
-                mp -= 5;
+                ChangeMP(-5);
                 m.Ondamaged(this, 80);
             }
         }

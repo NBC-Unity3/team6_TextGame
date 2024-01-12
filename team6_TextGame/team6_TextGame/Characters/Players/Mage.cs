@@ -15,7 +15,7 @@ namespace team6_TextGame.Characters.Players
 
         public override void Skill_1(Monster monster)
         {
-            mp -= 15;
+            ChangeMP(-15);
             //상대 공격력 비례 공격 5 8 9
             int coef = monster.atk * 8 + 100; // 140 164 172
             monster.Ondamaged(this, coef);
@@ -24,7 +24,7 @@ namespace team6_TextGame.Characters.Players
         public virtual void Skill_2(List<Monster> monsters)
         {
             //단순 광역기
-            mp -= 20;
+            ChangeMP(-20);
             foreach(Monster m in monsters)
             {
                 m.Ondamaged(this, 120);
