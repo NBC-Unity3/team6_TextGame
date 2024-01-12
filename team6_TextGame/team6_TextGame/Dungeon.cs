@@ -19,8 +19,6 @@ namespace team6_TextGame
             this.floor = floor;
             LoadDungeon();
             monsters = new List<Monster>();
-
-            InitMonster();
         }
 
         private Monster GenerateRandomMonster()
@@ -55,7 +53,9 @@ namespace team6_TextGame
 
                 if (StartBattle())
                 {
-                    ui.WriteColoredNumbers($"{floor}층을 클리어했습니다");
+                    Console.Clear();
+
+                    ui.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
                     ui.DrawLine();
 
                     switch (ui.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
@@ -138,7 +138,7 @@ namespace team6_TextGame
             return true;
         }
 
-        private void InitMonster()
+        public void InitMonster()
         {
             int monsterCnt = rand.Next(1 + (int)(floor * 0.2f), 4 + (int)(floor * 0.2f));
             for (int i = 0; i < monsterCnt; i++)

@@ -153,6 +153,7 @@ class Program
                     Status();
                     break;
                 case 1:
+                    dungeon.InitMonster();
                     dungeon.EnterDungeon();
                     break;
                 case 2:
