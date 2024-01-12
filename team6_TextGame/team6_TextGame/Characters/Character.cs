@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,9 +30,16 @@ namespace team6_TextGame.Characters
         public void Attack(Character enemy)
         {
             //UI단
+            Console.Clear();
             Console.WriteLine($"{name}의 공격!");
             enemy.Ondamaged(this);
-
+            switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
+            {
+                case 0:
+                    break;
+                case -1:
+                    break;
+            }
         }
 
         public void Ondamaged(Character enemy, int coefficient = 100)
