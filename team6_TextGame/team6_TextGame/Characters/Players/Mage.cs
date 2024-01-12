@@ -21,7 +21,7 @@ namespace team6_TextGame.Characters.Players
             monster.Ondamaged(this, coef);
         }
 
-        public virtual void Skill_2(List<Monster> monsters)
+        public override void Skill_2(List<Monster> monsters)
         {
             //단순 광역기
             ChangeMP(-20);

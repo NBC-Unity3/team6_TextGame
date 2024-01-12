@@ -36,7 +36,7 @@ namespace team6_TextGame.Characters.Players
             //Console.WriteLine($"{monster.name}에게 {damage}의 데미지를 입혔습니다.");
         }
 
-        public virtual void Skill_2(List<Monster> monsters)
+        public override void Skill_2(List<Monster> monsters)
         {
             //광역기, 한발마다 mp 닳게 몬스터 숫자 비례 mp 사용
             foreach(Monster m in monsters)
