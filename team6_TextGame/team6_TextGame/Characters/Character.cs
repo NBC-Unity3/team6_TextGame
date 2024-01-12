@@ -32,13 +32,14 @@ namespace team6_TextGame.Characters
             Console.Clear();
             Console.WriteLine($"{name}의 공격!");
             enemy.Ondamaged(this);
-            switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
-            {
-                case 0:
-                    break;
-                case -1:
-                    break;
-            }
+            TurnNext();
+            //switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
+            //{
+            //    case 0:
+            //        break;
+            //    case -1:
+            //        break;
+            //}
         }
 
         public void Ondamaged(Character enemy, int coefficient = 100)
@@ -48,7 +49,7 @@ namespace team6_TextGame.Characters
 
             if (dodge > new Random().Next(1, 101))  // 회피율 계산식
             {
-                Console.WriteLine($"{name}가 회피했습니다.");
+                Console.WriteLine($"{name}이/가 회피했습니다.");
                 return;
             }
 
@@ -63,9 +64,21 @@ namespace team6_TextGame.Characters
             }
 
             hp -= damage;
+            Console.WriteLine($"{name}에게 {damage}의 데미지를 가했습니다.");
             if (hp < 0) { hp = 0; }
         }
 
+        public void TurnNext()
+        {
+            Console.WriteLine();
+            switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
+            {
+                case 0:
+                    break;
+                case -1:
+                    break;
+            }
+        }
         public bool isDead()
         {
             if (hp == 0) return true;
