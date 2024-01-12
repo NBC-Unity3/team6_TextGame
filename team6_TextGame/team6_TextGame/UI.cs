@@ -42,7 +42,7 @@ namespace team6_TextGame
                         Console.Write("   (New) ");
                         Console.ResetColor();
                     }
-                    WriteColoredNumbers($"{q.name}\n");
+                    Console.Write($"{q.name}\n");
                 }
                 else if (item is EquipItem equipItem)
                 {
