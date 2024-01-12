@@ -35,7 +35,7 @@ class Program
             name = Console.ReadLine();
             Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
 
-            int cmd = ui.SelectList(new List<string>(new string[] { "1. 맞습니다.", "2. 아닙니다." }));
+            int cmd = UI.SelectList(new List<string>(new string[] { "1. 맞습니다.", "2. 아닙니다." }));
             if (cmd == 0)
             {
                 break;
@@ -64,7 +64,7 @@ class Program
 
         while (true)
         {
-            int cmd = ui.SelectList(new List<string>(new string[] { "1. 전사", "2. 궁수", "3. 마법사" }));
+            int cmd = UI.SelectList(new List<string>(new string[] { "1. 전사", "2. 궁수", "3. 마법사" }));
             if (cmd == 0)
             {
                 player = new Warrior(name);
@@ -131,9 +131,9 @@ class Program
         while (true)
         {
             Console.Clear();
-            ui.TextColor("마을", ConsoleColor.Yellow);
+            UI.TextColor("마을", ConsoleColor.Yellow);
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
-            ui.DrawLine();
+            UI.DrawLine();
 
             switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
             {

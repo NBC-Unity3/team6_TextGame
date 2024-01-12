@@ -102,7 +102,7 @@ namespace team6_TextGame
                     UI.WriteColoredNumbers($"   {monster}\n");
                 }
 
-                Console.WriteLine(); ui.DrawLine();
+                Console.WriteLine(); UI.DrawLine();
 
                 int menu = Console.CursorTop;
 
@@ -122,10 +122,10 @@ namespace team6_TextGame
                         break;
                     case 1:
                         //TODO: 스킬 1,2 출력
-                        switch(ui.SelectList(new List<string>(new string[] { "- 단일 공격", "- 광역 공격" })))
+                        switch(UI.SelectList(new List<string>(new string[] { "- 단일 공격", "- 광역 공격" })))
                         {
                             case 0:
-                                target = monsters[ui.SelectList(monsters, 3)];
+                                target = monsters[UI.SelectList(monsters, 3)];
                                 player.Skill_1(target);
                                 if (target.isDead())
                                 {
