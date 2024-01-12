@@ -13,10 +13,11 @@ namespace team6_TextGame.Items
             var sb = new StringBuilder();
             sb.Append(name);
             sb.Append(" | ");
+            if (atk != 0) { sb.Append("공격력 + " + atk + " "); }
+            if (def != 0) { sb.Append("방어력 + " + def + " "); }
+            if (hp != 0) { sb.Append("체력 + " + hp + " "); }
+            sb.Append(" | ");
             sb.Append(info);
-            sb.Append("| ");
-            sb.Append(count);
-            sb.Append("개");
 
             return sb.ToString();
         }

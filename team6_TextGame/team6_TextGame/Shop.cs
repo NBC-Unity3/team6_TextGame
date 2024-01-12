@@ -9,7 +9,7 @@ namespace team6_TextGame
     internal class Shop
     {
         public List<Item> items = new List<Item>();
-
+        
         public void AddItem(Item item)
         {
             this.items.Add(item);
@@ -24,8 +24,17 @@ namespace team6_TextGame
             else
             {
                 player.gold -= items[index].price;
-                player.AddEquipsInven(items[index]);
-                items.RemoveAt(index);
+
+                if (items[index].type != 3)
+                {
+                    player.AddEquipsInven(items[index]);
+                    items.RemoveAt(index);
+                }
+                else
+                {
+                    player.AddConsumesInven(items[index]);
+                }
+
                 SaveOptions();
             }
         }

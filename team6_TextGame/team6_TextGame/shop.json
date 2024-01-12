@@ -9,7 +9,7 @@
     "hp": 0,
     "info": "수련에 도움을 주는 갑옷입니다. ",
     "price": 1000,
-    "type" :  2
+    "type": 2
   },
   {
     "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",

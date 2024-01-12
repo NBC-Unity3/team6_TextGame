@@ -7,7 +7,6 @@ namespace team6_TextGame.Items
     internal class EquipItem : Item
     {
         public bool isEquipped { get; set; } = false;
-        public int type = 0; // 1 : Weapon , 2 : Armor
 
         public EquipItem(int id, string name, int atk, int def, int hp, string info, int price)
         {

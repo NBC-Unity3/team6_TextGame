@@ -319,7 +319,7 @@ class Program
             switch (ui.SelectList(new List<string>(new string[] { "1. 사용" , "0. 나가기" })))
             {
                 case 0:
-                    // write code
+                    player.consumes[index].Consume(player);
                     break;
                 case 1:
                     break;
@@ -348,7 +348,7 @@ class Program
         Shop shop = new Shop();
         shop.LoadOptions();
 
-        foreach (EquipItem item in shop.items)
+        foreach (Item item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
@@ -388,6 +388,9 @@ class Program
             Console.WriteLine("");
 
             shop.LoadOptions();
+
+            HpPotion hpPotion = new HpPotion();
+            shop.items.Add(hpPotion);
 
             int index = ui.SelectList(shop.items);
 
