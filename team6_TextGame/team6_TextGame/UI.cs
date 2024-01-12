@@ -10,7 +10,7 @@ namespace team6_TextGame
     internal class UI
     {
 
-        public int SelectList<T>(List<T> list, int cursor = -1)
+        public static int SelectList<T>(List<T> list, int cursor = -1)
         {
             int first, last, now;
 
@@ -51,9 +51,17 @@ namespace team6_TextGame
                 {
                     WriteColoredNumbers($"   {equipItem.ToString()}\n");
                 }
-                else if (item is ConsumeItem consumeItem)
+                else if (item is AtkPotion atkpotion)
                 {
-                    WriteColoredNumbers($"   {consumeItem.ToString()}\n");
+                    WriteColoredNumbers($"   {atkpotion.ToString()}\n");
+                }
+                else if (item is DefPotion defposion)
+                {
+                    WriteColoredNumbers($"   {defposion.ToString()}\n");
+                }
+                else if (item is HpPotion hppotion)
+                {
+                    WriteColoredNumbers($"   {hppotion.ToString()}\n");
                 }
                 else WriteColoredNumbers($"   {item}\n");
             }
@@ -97,25 +105,25 @@ namespace team6_TextGame
 
         }
 
-        public void WriteAt(string s, int y)
+        public static void WriteAt(string s, int y)
         {
             Console.SetCursorPosition(0, y);
             Console.Write(s);
         }
 
-        public void WriteAt(string s, int x, int y)
+        public static void WriteAt(string s, int x, int y)
         {
             Console.SetCursorPosition(x, y);
             Console.Write(s);
         }
 
-        public void DrawLine()
+        public static void DrawLine()
         {
             Console.WriteLine("-----------------------------------------------");
         }
 
 
-        public void TextColor(string text, ConsoleColor clr)
+        public static void TextColor(string text, ConsoleColor clr)
         {
             Console.ForegroundColor = clr;
             Console.WriteLine(text);
@@ -163,7 +171,5 @@ namespace team6_TextGame
 
              */
         }
-
-
     }
 }
