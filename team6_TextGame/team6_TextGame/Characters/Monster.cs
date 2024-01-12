@@ -4,11 +4,9 @@ namespace team6_TextGame.Characters
 {
     internal class Monster : Character
     {
-
-        public int exp { get; set; }    // 경험치 계수
         public int minLv { get; set; }   // 등장할 수 있는 최소 레벨
 
-        public Monster(string name, int level, int atk, int def, int maxHp, int maxMp, int crit, int dodge, int exp, int minLv)
+        public Monster(string name, int level, int atk, int def, int maxHp, int maxMp, int crit, int dodge, int minLv)
         {
             this.name = name;
             this.level = level;
@@ -18,7 +16,6 @@ namespace team6_TextGame.Characters
             this.maxMp = maxMp;
             this.crit = crit;
             this.dodge = dodge;
-            this.exp = exp;
             this.minLv = minLv;
 
             hp = maxHp;

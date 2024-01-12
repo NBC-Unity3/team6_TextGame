@@ -17,7 +17,6 @@ namespace team6_TextGame.Characters
         public int maxMp { get; set; }
         public int crit { get; set; }
         public int dodge { get; set; }
-
         //public int speed { get; set; }
 
 
