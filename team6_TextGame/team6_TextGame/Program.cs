@@ -21,6 +21,8 @@ class Program
     {
         LoadGame();
         dungeon = new Dungeon(player);
+        shop.LoadOptions();
+        questboard.LoadOptions();
         StartGame();
     }
 
@@ -320,9 +322,6 @@ class Program
         Console.WriteLine("[보유 골드]");
         Console.WriteLine($"{player.gold} G\n");
 
-        Shop shop = new Shop();
-        shop.LoadOptions();
-
         foreach (Item item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
@@ -359,15 +358,12 @@ class Program
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
 
-            shop.LoadOptions();
-
             int index = UI.SelectList(shop.items);
 
             switch (UI.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
             {
                 case 0:
                     shop.BuyItem(index, player);
-                    SaveGame();
                     break;
                 case -1:
                     return;
@@ -428,7 +424,6 @@ class Program
             UI.TextColor("Quest!!\n", ConsoleColor.Yellow);
             Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
             UI.DrawLine();
-            questboard.LoadOptions();
             questboard.ClearCheck(player);
 
             int index = UI.SelectList(questboard.quests);

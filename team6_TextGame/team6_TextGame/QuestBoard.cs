@@ -26,7 +26,6 @@ namespace team6_TextGame
         public void RemoveQuest(Quest quest)
         {
             quests.Remove(quest);
-            SaveOptions();
         }
 
         public void ClearCheck(Character character)
@@ -42,7 +41,6 @@ namespace team6_TextGame
                     quest.isClear = true;
                 }
             }
-            SaveOptions();
         }
         public void ReceiveReward(Quest quest, Player character)
         {
@@ -61,7 +59,6 @@ namespace team6_TextGame
             {
                 character.consumes.Add(item);
             }
-            SaveOptions();
         }
 
         public void SaveOptions()
