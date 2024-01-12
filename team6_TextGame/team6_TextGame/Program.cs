@@ -27,7 +27,6 @@ class Program
     static Player CreateCharacter()
     {
         string name;
-        Player character;
         //이름 입력
         while(true)
         {
@@ -68,15 +67,15 @@ class Program
             int cmd = ui.SelectList(new List<string>(new string[] { "1. 전사", "2. 궁수", "3. 마법사" }));
             if (cmd == 0)
             {
-                character = new Warrior(name);
+                player = new Warrior(name);
             }
             else if (cmd == 1)
             {
-                character = new Archer(name);
+                player = new Archer(name);
             }
             else if (cmd == 2)
             {
-                character = new Mage(name);
+                player = new Mage(name);
             }
             else
             {
@@ -86,7 +85,7 @@ class Program
             break;
         }
 
-        return character;
+        return player;
     }
 
     /*
@@ -506,7 +505,19 @@ class Program
         else
         {
             string json = File.ReadAllText(path);
-            player = JsonConvert.DeserializeObject<Player>(json, settings);
+            Player save = JsonConvert.DeserializeObject<Player>(json, settings);
+
+            if (save.job == "전사")
+            {
+                player = JsonConvert.DeserializeObject<Warrior>(json, settings);
+            } else if(save.job == "궁수")
+            {
+                player = JsonConvert.DeserializeObject<Archer>(json, settings);
+            }
+            else
+            {
+                player = JsonConvert.DeserializeObject<Mage>(json, settings);
+            }
         }
     }
 }
