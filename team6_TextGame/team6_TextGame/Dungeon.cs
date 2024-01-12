@@ -49,6 +49,10 @@ namespace team6_TextGame
             {
                 Console.Clear();
 
+                // 보상 미리 구해두기, 배틀에서 죽은 몬스터는 배열에서 빠지기 때문
+                int goldReward = CalculateGoldReward(monsters);
+                int expReward = CalculateExpReward(monsters);
+
                 if (StartBattle())
                 {
                     Console.Clear();
@@ -56,7 +60,12 @@ namespace team6_TextGame
                     UI.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
                     UI.DrawLine();
 
+                    // 5층 마다 던전 층 저장
                     if (floor + 1 % 5 == 0) SaveDungeon();
+
+                    // 보상 획득
+                    player.ReceiveGold(goldReward);
+                    player.ReceiveExp(expReward);
 
                     switch (UI.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
                     {
@@ -151,6 +160,35 @@ namespace team6_TextGame
             {
                 monsters.Add(GenerateRandomMonster());
             }
+        }
+        
+        private int CalculateGoldReward(List<Monster> monsters)
+        {
+            int reward = 0;
+
+            foreach (var monster in monsters)
+            {
+                reward += rand.Next(monster.level * 30, monster.level * 60);
+            }
+
+            return reward;
+        }
+        
+        private int CalculateExpReward(List<Monster> monsters)
+        {
+            int reward = 0;
+
+            foreach (var monster in monsters)
+            {
+                reward += monster.level;
+            }
+
+            return reward;
+        }
+
+        private Item CalculateItemReward(List<Monster> monsters)
+        {
+            return null;
         }
 
         private void VictoryResult()

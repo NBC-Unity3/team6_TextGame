@@ -84,7 +84,7 @@ namespace team6_TextGame.Characters
             return 0;
         }
 
-        public void ReceiveGole(int amount)
+        public void ReceiveGold(int amount)
         {
             gold += amount;
         }
