@@ -37,6 +37,18 @@ namespace team6_TextGame
                 {
                     WriteColoredNumbers($"   {equipItem.ToString()}\n");
                 }
+                else if (item is AtkPotion atkpotion)
+                {
+                    WriteColoredNumbers($"   {atkpotion.ToString()}\n");
+                }
+                else if (item is DefPotion defposion)
+                {
+                    WriteColoredNumbers($"   {defposion.ToString()}\n");
+                }
+                else if (item is HpPotion hppotion)
+                {
+                    WriteColoredNumbers($"   {hppotion.ToString()}\n");
+                }
                 else WriteColoredNumbers($"   {item}\n");
             }
             last = Console.CursorTop - 1;

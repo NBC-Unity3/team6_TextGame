@@ -323,7 +323,7 @@ class Program
         Shop shop = new Shop();
         shop.LoadOptions();
 
-        foreach (EquipItem item in shop.items)
+        foreach (Item item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
         }
