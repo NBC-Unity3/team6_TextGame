@@ -96,7 +96,7 @@ namespace team6_TextGame
                     case ConsoleKey.Enter:
                         Console.SetCursorPosition(0, last + 2);
                         if (list.Count == 0) return -1;
-                        return now - first + questIndex;
+                        return now - first;
                     case ConsoleKey.Escape:
                         return -1;
                     default:
