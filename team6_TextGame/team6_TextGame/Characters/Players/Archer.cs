@@ -38,11 +38,10 @@ namespace team6_TextGame.Characters.Players
 
         public virtual void Skill_2(List<Monster> monsters)
         {
-            mp -= 5; //자주 사용 가능하게, 하지만 위력 안높음
-
-            //광역기, 불화살로 본대 전체 타격
+            //광역기, 한발마다 mp 닳게 몬스터 숫자 비례 mp 사용
             foreach(Monster m in monsters)
             {
+                mp -= 5;
                 m.Ondamaged(this, 80);
             }
         }
