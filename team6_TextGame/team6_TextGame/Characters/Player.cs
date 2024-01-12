@@ -8,6 +8,10 @@ namespace team6_TextGame.Characters
         public string job { get; set; }
         public int gold { get; set; } = 1500;
 
+        public bool weaponEquip = false;
+        public bool armorEquip = false;
+
+
         static UI ui = new UI();
         public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
         public List<ConsumeItem> consumes = new List<ConsumeItem>();

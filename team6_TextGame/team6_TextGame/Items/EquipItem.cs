@@ -7,7 +7,7 @@ namespace team6_TextGame.Items
     internal class EquipItem : Item
     {
         public bool isEquipped { get; set; } = false;
-
+        public int type = 0; // 1 : Weapon , 2 : Armor
 
         public EquipItem(int id, string name, int atk, int def, int hp, string info, int price)
         {
@@ -39,13 +39,67 @@ namespace team6_TextGame.Items
         {
             if (isEquipped)
             {
-                isEquipped = false;
-                player.ChangeStatus(-atk, -def, -hp);
+                if (type == 1)
+                {
+                    isEquipped = false;
+                    player.weaponEquip = false;
+                    player.ChangeStatus(-atk, -def, -hp);
+                }
+                else if (type == 2)
+                {
+                    isEquipped = false;
+                    player.armorEquip = false;
+                    player.ChangeStatus(-atk, -def, -hp);
+                }
+                
             }
             else
             {
-                isEquipped = true;
-                player.ChangeStatus(atk, def, hp);
+                if(type == 1)
+                {
+                    if(player.weaponEquip == true)
+                    {
+                        for(int i = 0; i < player.equips.Count; i++)
+                        {
+                            if (player.equips[i].isEquipped == true && player.equips[i].type == 1)
+                            {
+                                player.equips[i].isEquipped = false;
+                                player.ChangeStatus(-player.equips[i].atk, -player.equips[i].def, -player.equips[i].hp);
+                            }
+                        }
+                        isEquipped = true;
+                        player.ChangeStatus(atk, def, hp);
+                    }
+                    else
+                    {
+                        isEquipped = true;
+                        player.weaponEquip = true;
+                        player.ChangeStatus(atk, def, hp);
+                    }
+                    
+                }
+                else if(type == 2)
+                {
+                    if (player.armorEquip == true)
+                    {
+                        for (int i = 0; i < player.equips.Count; i++)
+                        {
+                            if (player.equips[i].isEquipped == true && player.equips[i].type == 2)
+                            {
+                                player.equips[i].isEquipped = false;
+                                player.ChangeStatus(-player.equips[i].atk, -player.equips[i].def, -player.equips[i].hp);
+                            }
+                        }
+                        isEquipped = true;
+                        player.ChangeStatus(atk, def, hp);
+                    }
+                    else
+                    {
+                        isEquipped = true;
+                        player.armorEquip = true;
+                        player.ChangeStatus(atk, def, hp);
+                    }
+                }
             }
         }
     }
