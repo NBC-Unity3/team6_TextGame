@@ -13,34 +13,38 @@ namespace team6_TextGame.Characters.Players
         {
         }
 
-        public override int Skill_1(Monster monster)
+        public override void Skill_1(Monster monster)
         {
+            Console.Clear();
             //단일기
-            int damage = atk * 2;
-            mp -= 10;
-
-
-            //monster.hp -= damage;
+            Console.WriteLine($"전사의 검술! {name}이 단일 공격을 시전했습니다.\n");
+            ChangeMP(-10);
+            monster.Ondamaged(this, 200);
+            TurnNext();
             //Console.WriteLine($"알파 스트라이크!\n{monster.name}에게 {damage}만큼의 대미지를 입혔습니다.");
-            return damage;
         }
 
-        public virtual int Skill_2(Monster[] monster)
+        public override void Skill_2(List<Monster> monsters)
         {
+            Console.Clear();
+            Console.WriteLine($"전사의 포효! {name}이 광역 공격을 시전했습니다.\n");
             //광역기
-            int damage = (int)Math.Round(atk * 1.2);
-            mp -= 15;
+            ChangeMP(-15);
 
-            //string names = "";
-            //for(int i = 0; i < monster.Length; i++)
-            //{
-            //    monster[i].hp -= (int) damage;
-            //    names += monster[i].name = " ";
-            //}
+            //두마리만 데미지 주기
+            int cnt = 0;
 
-            //Console.WriteLine($"더블 스트라이크!\n모두에게 {damage}만큼의 대미지를 입혔습니다.");
+            while(cnt <= 2)
+            {
+                Random rand = new Random();
+                int i = rand.Next(0, monsters.Count - 1);
 
-            return damage;
+                monsters[i].Ondamaged(this, 120);
+                monsters.RemoveAt(i);
+                cnt++;
+            }
+
+            TurnNext();
         }
     }
 }

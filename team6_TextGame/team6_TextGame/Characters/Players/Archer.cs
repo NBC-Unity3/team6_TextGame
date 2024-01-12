@@ -13,39 +13,43 @@ namespace team6_TextGame.Characters.Players
         {
         }
 
-        public override int Skill_1(Monster monster)
+        public override void Skill_1(Monster monster)
         {
+            Console.Clear();
+            Console.WriteLine($"궁수의 한발! {name}이 단일 공격을 시전했습니다.\n");
             //단일기, 명중 부위 따라 데미지가 다른 설정
+            ChangeMP(-15);
+
             Random rand = new Random();
+            int part = rand.Next(1, 100);
 
-            mp -= 15;
-
-            int part = rand.Next(1, 4);
-
-            int damage = 0;
-
-            switch (part)
+            //확률 수정
+            if(part <= 5) //급소 관통
             {
-                case 1: //급소 관통
-                    damage = atk * 3;
-                    break;
-                case 2: //주요 팔다리 명중
-                    damage = (int)Math.Round(atk * 1.2);
-                    break;
-                case 3: //빗맞음
-                    damage = (int)Math.Round(atk * 0.8);
-                    break;
+                monster.Ondamaged(this, 300);
+            } else if(part > 5 && part <= 80) //주요 팔다리 명중
+            {
+                monster.Ondamaged(this, 120);
             }
-            return damage;
+            else //빗맞음
+            {
+                monster.Ondamaged(this, 80);
+            }
+            TurnNext();
+            //Console.WriteLine($"{monster.name}에게 {damage}의 데미지를 입혔습니다.");
         }
 
-        public virtual int Skill_2(Monster[] monster)
+        public override void Skill_2(List<Monster> monsters)
         {
-            mp -= 5; //자주 사용 가능하게, 하지만 위력 안높음
-
-            //광역기, 불화살로 본대 전체 타격
-            int damage = atk;
-            return damage;
+            Console.Clear();
+            //광역기, 한발마다 mp 닳게 몬스터 숫자 비례 mp 사용
+            Console.WriteLine($"궁수의 연사! {name}이 광역 공격을 시전했습니다.\n");
+            foreach (Monster m in monsters)
+            {
+                ChangeMP(-5);
+                m.Ondamaged(this, 80);
+            }
+            TurnNext();
         }
     }
 }

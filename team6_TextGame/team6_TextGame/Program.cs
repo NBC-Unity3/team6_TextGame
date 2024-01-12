@@ -27,7 +27,6 @@ class Program
     static Player CreateCharacter()
     {
         string name;
-        Player character;
         //이름 입력
         while (true)
         {
@@ -35,11 +34,9 @@ class Program
             Console.WriteLine("당신의 이름은 무엇입니까?");
             name = Console.ReadLine();
             Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
-            Console.WriteLine("1. 맞습니다.");
-            Console.WriteLine("2. 아닙니다.\n");
-
-            var key = Console.ReadKey(true).Key;
-            if (key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+          
+            int cmd = UI.SelectList(new List<string>(new string[] { "1. 맞습니다.", "2. 아닙니다." }));
+            if (cmd == 0)
             {
                 break;
             }
@@ -65,41 +62,30 @@ class Program
         Console.WriteLine("  M   P  |      50      |      40      |      70  ");
         Console.WriteLine("======================================================");
 
-        bool isFirst = true;
         while (true)
         {
-            if (!isFirst)
+            int cmd = UI.SelectList(new List<string>(new string[] { "1. 전사", "2. 궁수", "3. 마법사" }));
+            if (cmd == 0)
             {
-                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+                player = new Warrior(name);
             }
-
-            isFirst = false;
-
-            var key = Console.ReadKey(true).Key;
-
-            if (key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            else if (cmd == 1)
             {
-                character = new Warrior(name);
-                break;
+                player = new Archer(name);
             }
-            else if (key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
+            else if (cmd == 2)
             {
-                character = new Archer(name);
-                break;
-            }
-            else if (key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
-            {
-                character = new Mage(name);
-                break;
+                player = new Mage(name);
             }
             else
             {
                 continue;
             }
+
+            break;
         }
 
-        character.name = name;
-        return character;
+        return player;
     }
 
     /*
@@ -145,8 +131,8 @@ class Program
         while (true)
         {
             Console.Clear();
-            UI.TextColor("인벤토리", ConsoleColor.Yellow);
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            UI.TextColor("마을", ConsoleColor.Yellow);
+            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
             UI.DrawLine();
 
             switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : " + dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
@@ -548,7 +534,19 @@ class Program
         else
         {
             string json = File.ReadAllText(path);
-            player = JsonConvert.DeserializeObject<Player>(json, settings);
+            Player save = JsonConvert.DeserializeObject<Player>(json, settings);
+
+            if (save.job == "전사")
+            {
+                player = JsonConvert.DeserializeObject<Warrior>(json, settings);
+            } else if(save.job == "궁수")
+            {
+                player = JsonConvert.DeserializeObject<Archer>(json, settings);
+            }
+            else
+            {
+                player = JsonConvert.DeserializeObject<Mage>(json, settings);
+            }
         }
     }
 }
