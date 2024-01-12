@@ -46,7 +46,6 @@ namespace team6_TextGame
         {
             //TODO : 5층 단위로 마지막 층수의 던전 불러오기
             // ex) 지난번에 47층에서 포기했다면 45층부터 시작
-            //LoadDungeon();
             while (true)
             {
                 Console.Clear();
@@ -58,6 +57,8 @@ namespace team6_TextGame
                     ui.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
                     ui.DrawLine();
 
+                    if (floor + 1 % 5 == 0) SaveDungeon();
+
                     switch (ui.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
                     {
                         case 0:
@@ -67,8 +68,7 @@ namespace team6_TextGame
                             continue;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
-                            if (floor % 5 == 0) SaveDungeon();
-                            else LoadDungeon();
+                            LoadDungeon();
                             return;
                     }
                 }
@@ -140,6 +140,7 @@ namespace team6_TextGame
 
         public void InitMonster()
         {
+            monsters.Clear();
             int monsterCnt = rand.Next(1 + (int)(floor * 0.2f), 4 + (int)(floor * 0.2f));
             for (int i = 0; i < monsterCnt; i++)
             {
