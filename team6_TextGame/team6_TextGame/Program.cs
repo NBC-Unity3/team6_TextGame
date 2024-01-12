@@ -28,13 +28,13 @@ class Program
     {
         string name;
         //이름 입력
-        while(true)
+        while (true)
         {
             Console.Clear();
             Console.WriteLine("당신의 이름은 무엇입니까?");
             name = Console.ReadLine();
             Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
-
+          
             int cmd = UI.SelectList(new List<string>(new string[] { "1. 맞습니다.", "2. 아닙니다." }));
             if (cmd == 0)
             {
@@ -135,7 +135,7 @@ class Program
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
             UI.DrawLine();
 
-            switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
+            switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : " + dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
             {
                 case 0:
                     Status();
@@ -153,7 +153,7 @@ class Program
                 case 4:
                     Quest();
                     break;
-                case 5: 
+                case 5:
                     SaveGame();
                     break;
                 case -1:
@@ -311,10 +311,18 @@ class Program
 
         Shop shop = new Shop();
         shop.LoadOptions();
-
+        /*
         foreach (Item item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
+        }
+        */
+        foreach (var item in shop.items)
+        {
+            if (!player.HasItem(item))
+            {
+                Console.WriteLine($"{item.ToString()} | {item.price} G");
+            }
         }
         Console.WriteLine("");
 
@@ -338,7 +346,7 @@ class Program
 
     static void BuyItem()
     {
-        while(true)
+        while (true)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -350,6 +358,26 @@ class Program
 
             shop.LoadOptions();
 
+            // 플레이어가 구매할 수 있는 아이템 목록 생성
+            List<Item> purchasableItems = shop.items.Where(item => !player.HasItem(item)).ToList();
+            int selectedIndex = UI.SelectList(purchasableItems);
+
+            switch (UI.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
+            {
+                case 0:
+                    if (selectedIndex >= 0 && selectedIndex < purchasableItems.Count)
+                    {
+                        Item selectedItem = purchasableItems[selectedIndex];
+                        int actualIndex = shop.items.IndexOf(selectedItem);
+                        shop.BuyItem(actualIndex, player);
+                        SaveGame();
+                    }
+                    break;
+                case -1:
+                    return;
+            }
+
+            /*
             int index = UI.SelectList(shop.items);
 
             switch (UI.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
@@ -361,7 +389,8 @@ class Program
                 case -1:
                     return;
             }
-        } 
+            */
+        }
     }
 
     static void SellItem()
@@ -441,7 +470,7 @@ class Program
 
             if (questboard.quests[n].isActive && questboard.quests[n].isClear)
             {
-                switch (UI.SelectList(new List<string>(new string[] { "보상 받기"})))
+                switch (UI.SelectList(new List<string>(new string[] { "보상 받기" })))
                 {
                     case 0:
                         questboard.ReceiveReward(questboard.quests[n], player);

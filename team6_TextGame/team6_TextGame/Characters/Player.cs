@@ -54,6 +54,11 @@ namespace team6_TextGame.Characters
             inventory.Add(item);
         }
         */
+        public bool HasItem(Item item)
+        {
+            return equips.Any(equipItem => equipItem.id == item.id) ||
+                   consumes.Any(consumeItem => consumeItem.id == item.id);
+        }
 
         public void AddEquipsInven(Item item)
         {
@@ -92,7 +97,7 @@ namespace team6_TextGame.Characters
         {
             gold += amount;
         }
-        
+
         public void ReceiveExp(int amount)
         {
             if (level > expToLvUp.Count)
