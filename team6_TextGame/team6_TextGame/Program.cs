@@ -266,7 +266,6 @@ class Program
                             if (q.name == "장비를 장착해보자" && q.isActive == true)
                             {
                                 q.achieve_count = 1;
-                                questboard.SaveOptions();
                             }
                         }
                     }
@@ -368,7 +367,6 @@ class Program
                         Item selectedItem = purchasableItems[selectedIndex];
                         int actualIndex = shop.items.IndexOf(selectedItem);
                         shop.BuyItem(actualIndex, player);
-                        SaveGame();
                     }
                     break;
                 case -1:
