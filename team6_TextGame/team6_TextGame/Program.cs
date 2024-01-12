@@ -29,19 +29,16 @@ class Program
     static Player CreateCharacter()
     {
         string name;
-        Player character;
         //이름 입력
-        while(true)
+        while (true)
         {
             Console.Clear();
             Console.WriteLine("당신의 이름은 무엇입니까?");
             name = Console.ReadLine();
             Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
-            Console.WriteLine("1. 맞습니다.");
-            Console.WriteLine("2. 아닙니다.\n");
-
-            var key = Console.ReadKey(true).Key;
-            if (key ==  ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+          
+            int cmd = UI.SelectList(new List<string>(new string[] { "1. 맞습니다.", "2. 아닙니다." }));
+            if (cmd == 0)
             {
                 break;
             }
@@ -67,38 +64,30 @@ class Program
         Console.WriteLine("  M   P  |      50      |      40      |      70  ");
         Console.WriteLine("======================================================");
 
-        bool isFirst = true;
         while (true)
         {
-            if(!isFirst)
+            int cmd = UI.SelectList(new List<string>(new string[] { "1. 전사", "2. 궁수", "3. 마법사" }));
+            if (cmd == 0)
             {
-                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+                player = new Warrior(name);
             }
-
-            isFirst = false;
-
-            var key = Console.ReadKey(true).Key;
-
-            if(key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            else if (cmd == 1)
             {
-                character = new Warrior(name);
-                break;
-            } else if(key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
+                player = new Archer(name);
+            }
+            else if (cmd == 2)
             {
-                character = new Archer(name);
-                break;
-            } else if(key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
-            {
-                character = new Mage(name);
-                break;
-            } else
+                player = new Mage(name);
+            }
+            else
             {
                 continue;
             }
+
+            break;
         }
 
-        character.name = name;
-        return character;
+        return player;
     }
 
     /*
@@ -144,11 +133,11 @@ class Program
         while (true)
         {
             Console.Clear();
-            UI.TextColor("인벤토리", ConsoleColor.Yellow);
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
+            UI.TextColor("마을", ConsoleColor.Yellow);
+            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
             UI.DrawLine();
 
-            switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
+            switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : " + dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
             {
                 case 0:
                     Status();
@@ -166,7 +155,7 @@ class Program
                 case 4:
                     Quest();
                     break;
-                case 5: 
+                case 5:
                     SaveGame();
                     break;
                 case -1:
@@ -322,9 +311,18 @@ class Program
         Console.WriteLine("[보유 골드]");
         Console.WriteLine($"{player.gold} G\n");
 
+        /*
         foreach (Item item in shop.items)
         {
             Console.WriteLine($"- {item.ToString()} | {item.price} G");
+        }
+        */
+        foreach (var item in shop.items)
+        {
+            if (!player.HasItem(item))
+            {
+                Console.WriteLine($"{item.ToString()} | {item.price} G");
+            }
         }
         Console.WriteLine("");
 
@@ -348,7 +346,7 @@ class Program
 
     static void BuyItem()
     {
-        while(true)
+        while (true)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -358,6 +356,26 @@ class Program
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
 
+            // 플레이어가 구매할 수 있는 아이템 목록 생성
+            List<Item> purchasableItems = shop.items.Where(item => !player.HasItem(item)).ToList();
+            int selectedIndex = UI.SelectList(purchasableItems);
+
+            switch (UI.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
+            {
+                case 0:
+                    if (selectedIndex >= 0 && selectedIndex < purchasableItems.Count)
+                    {
+                        Item selectedItem = purchasableItems[selectedIndex];
+                        int actualIndex = shop.items.IndexOf(selectedItem);
+                        shop.BuyItem(actualIndex, player);
+                        SaveGame();
+                    }
+                    break;
+                case -1:
+                    return;
+            }
+
+            /*
             int index = UI.SelectList(shop.items);
 
             switch (UI.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
@@ -368,7 +386,8 @@ class Program
                 case -1:
                     return;
             }
-        } 
+            */
+        }
     }
 
     static void SellItem()
@@ -447,7 +466,7 @@ class Program
 
             if (questboard.quests[n].isActive && questboard.quests[n].isClear)
             {
-                switch (UI.SelectList(new List<string>(new string[] { "보상 받기"})))
+                switch (UI.SelectList(new List<string>(new string[] { "보상 받기" })))
                 {
                     case 0:
                         questboard.ReceiveReward(questboard.quests[n], player);
@@ -511,7 +530,19 @@ class Program
         else
         {
             string json = File.ReadAllText(path);
-            player = JsonConvert.DeserializeObject<Player>(json, settings);
+            Player save = JsonConvert.DeserializeObject<Player>(json, settings);
+
+            if (save.job == "전사")
+            {
+                player = JsonConvert.DeserializeObject<Warrior>(json, settings);
+            } else if(save.job == "궁수")
+            {
+                player = JsonConvert.DeserializeObject<Archer>(json, settings);
+            }
+            else
+            {
+                player = JsonConvert.DeserializeObject<Mage>(json, settings);
+            }
         }
     }
 }

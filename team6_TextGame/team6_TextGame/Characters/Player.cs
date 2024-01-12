@@ -54,6 +54,11 @@ namespace team6_TextGame.Characters
             inventory.Add(item);
         }
         */
+        public bool HasItem(Item item)
+        {
+            return equips.Any(equipItem => equipItem.id == item.id) ||
+                   consumes.Any(consumeItem => consumeItem.id == item.id);
+        }
 
         public void AddEquipsInven(Item item)
         {
@@ -72,23 +77,27 @@ namespace team6_TextGame.Characters
             maxHp += hp;
         }
 
-        public virtual int Skill_1(Monster monster)
+        public void ChangeMP(int amount)
         {
-            //단일기
-            return 0;
+            mp += amount;
+            if(mp < 0) mp = 0;
         }
 
-        public virtual int Skill_2(Monster[] monster)
+        public virtual void Skill_1(Monster monster)
+        {
+            //단일기
+        }
+
+        public virtual void Skill_2(List<Monster> monsters)
         {
             //광역기
-            return 0;
         }
 
         public void ReceiveGold(int amount)
         {
             gold += amount;
         }
-        
+
         public void ReceiveExp(int amount)
         {
             if (level > expToLvUp.Count)
