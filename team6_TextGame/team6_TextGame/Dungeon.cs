@@ -10,7 +10,6 @@ namespace team6_TextGame
         private int start_player_hp;
         private List<Monster> monsters;
         private Random rand = new Random();
-        private UI ui = new UI();
         public int floor { get; set; }
 
         public Dungeon(Player player, int floor = 1)
@@ -54,12 +53,12 @@ namespace team6_TextGame
                 {
                     Console.Clear();
 
-                    ui.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
-                    ui.DrawLine();
+                    UI.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
+                    UI.DrawLine();
 
                     if (floor + 1 % 5 == 0) SaveDungeon();
 
-                    switch (ui.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
+                    switch (UI.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
                     {
                         case 0:
                             //TODO: 다음 층 불러오기
@@ -86,21 +85,21 @@ namespace team6_TextGame
             while (monsters.Count > 0)
             {
                 Console.Clear();
-                ui.TextColor("던전 " + floor + "층", ConsoleColor.DarkYellow);
-                ui.DrawLine(); Console.WriteLine();
+                UI.TextColor("던전 " + floor + "층", ConsoleColor.DarkYellow);
+                UI.DrawLine(); Console.WriteLine();
 
                 foreach (var monster in monsters)
                 {
-                    Console.WriteLine($"   {monster}");
+                    UI.WriteColoredNumbers($"   {monster}\n");
                 }
 
-                Console.WriteLine(); ui.DrawLine();
+                Console.WriteLine(); UI.DrawLine();
                 int menu = Console.CursorTop;
 
-                switch (ui.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
+                switch (UI.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
                 {
                     case 0:
-                        int index = ui.SelectList(monsters, 3);
+                        int index = UI.SelectList(monsters, 3);
                         if (index == -1) continue;
                         Monster target = monsters[index];
                         player.Attack(target);

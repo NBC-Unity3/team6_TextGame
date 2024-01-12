@@ -8,7 +8,6 @@ namespace team6_TextGame.Characters
         public string job { get; set; }
         public int gold { get; set; } = 1500;
 
-        static UI ui = new UI();
         public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
         public List<ConsumeItem> consumes = new List<ConsumeItem>();
 
@@ -36,9 +35,9 @@ namespace team6_TextGame.Characters
             Console.WriteLine($"Lv. {level}");
             Console.WriteLine($"{name} ({job})");
             Console.Write($"공격력 : {f_atk} ");
-            if (f_atk - atk != 0) ui.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_atk - atk != 0) UI.TextColor($"(+{f_atk - atk})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"방어력 : {f_def} ");
-            if (f_def - def != 0) ui.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            if (f_def - def != 0) UI.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"H    P : {hp} \n");
             //if (maxHp - hp != 0) Program.ui.TextColor($"(+{maxHp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"M    P : {mp} \n");

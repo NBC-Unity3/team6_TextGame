@@ -10,7 +10,7 @@ namespace team6_TextGame
     internal class UI
     {
 
-        public int SelectList<T>(List<T> list, int cursor = -1)
+        public static int SelectList<T>(List<T> list, int cursor = -1)
         {
             int first, last, now;
 
@@ -79,25 +79,25 @@ namespace team6_TextGame
 
         }
 
-        public void WriteAt(string s, int y)
+        public static void WriteAt(string s, int y)
         {
             Console.SetCursorPosition(0, y);
             Console.Write(s);
         }
 
-        public void WriteAt(string s, int x, int y)
+        public static void WriteAt(string s, int x, int y)
         {
             Console.SetCursorPosition(x, y);
             Console.Write(s);
         }
 
-        public void DrawLine()
+        public static void DrawLine()
         {
             Console.WriteLine("-----------------------------------------------");
         }
 
 
-        public void TextColor(string text, ConsoleColor clr)
+        public static void TextColor(string text, ConsoleColor clr)
         {
             Console.ForegroundColor = clr;
             Console.WriteLine(text);
@@ -105,7 +105,7 @@ namespace team6_TextGame
         }
 
         // 텍스트 내의 숫자만 다른 색으로 출력 (텍스트, 숫자 색, 텍스트 색)
-        public void WriteColoredNumbers(string text, ConsoleColor numberColor = ConsoleColor.Magenta, ConsoleColor textColor = ConsoleColor.White)
+        public static void WriteColoredNumbers(string text, ConsoleColor numberColor = ConsoleColor.Magenta, ConsoleColor textColor = ConsoleColor.White)
         {
             Console.ForegroundColor = textColor;
 
@@ -145,7 +145,5 @@ namespace team6_TextGame
 
              */
         }
-
-
     }
 }
