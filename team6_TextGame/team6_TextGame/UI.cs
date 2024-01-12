@@ -24,14 +24,25 @@ namespace team6_TextGame
                 {
                     Quest q = new Quest();
                     q = item as Quest;
-                    WriteColoredNumbers($"   {q.name}");
                     if (q.isClear == true)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(" (Clear!)\n");
+                        Console.Write("   (Clear!) ");
                         Console.ResetColor();
                     }
-                    else Console.WriteLine();
+                    else if (q.isActive == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.Write("   (진행중) ");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write("   (New) ");
+                        Console.ResetColor();
+                    }
+                    WriteColoredNumbers($"{q.name}\n");
                 }
                 else if (item is EquipItem equipItem)
                 {
