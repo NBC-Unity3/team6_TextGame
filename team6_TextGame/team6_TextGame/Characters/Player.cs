@@ -72,6 +72,12 @@ namespace team6_TextGame.Characters
             maxHp += hp;
         }
 
+        public void ChangeMP(int amount)
+        {
+            mp += amount;
+            if(mp < 0) mp = 0;
+        }
+
         public virtual void Skill_1(Monster monster)
         {
             //단일기
