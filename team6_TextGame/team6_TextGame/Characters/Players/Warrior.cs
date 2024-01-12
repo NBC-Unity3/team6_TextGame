@@ -15,14 +15,19 @@ namespace team6_TextGame.Characters.Players
 
         public override void Skill_1(Monster monster)
         {
+            Console.Clear();
             //단일기
+            Console.WriteLine($"전사의 검술! {name}이 단일 공격을 시전했습니다.\n");
             ChangeMP(-10);
             monster.Ondamaged(this, 200);
+            TurnNext();
             //Console.WriteLine($"알파 스트라이크!\n{monster.name}에게 {damage}만큼의 대미지를 입혔습니다.");
         }
 
         public override void Skill_2(List<Monster> monsters)
         {
+            Console.Clear();
+            Console.WriteLine($"전사의 포효! {name}이 광역 공격을 시전했습니다.\n");
             //광역기
             ChangeMP(-15);
 
@@ -38,6 +43,8 @@ namespace team6_TextGame.Characters.Players
                 monsters.RemoveAt(i);
                 cnt++;
             }
+
+            TurnNext();
         }
     }
 }
