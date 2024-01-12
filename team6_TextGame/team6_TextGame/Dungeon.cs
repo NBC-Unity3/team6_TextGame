@@ -100,7 +100,9 @@ namespace team6_TextGame
                 switch (ui.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
                 {
                     case 0:
-                        Monster target = monsters[ui.SelectList(monsters, 3)];
+                        int index = ui.SelectList(monsters, 3);
+                        if (index == -1) continue;
+                        Monster target = monsters[index];
                         player.Attack(target);
                         if (target.isDead())
                         {
