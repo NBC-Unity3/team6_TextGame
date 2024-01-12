@@ -19,19 +19,19 @@ namespace team6_TextGame.Characters.Players
             mp -= 15;
 
             Random rand = new Random();
-            int part = rand.Next(1, 3);
+            int part = rand.Next(1, 100);
 
-            switch (part)
+            //확률 수정
+            if(part <= 5) //급소 관통
             {
-                case 1: //급소 관통
-                    monster.Ondamaged(this, 300);
-                    break;
-                case 2: //주요 팔다리 명중
-                    monster.Ondamaged(this, 120);
-                    break;
-                case 3: //빗맞음
-                    monster.Ondamaged(this, 80);
-                    break;
+                monster.Ondamaged(this, 300);
+            } else if(part > 5 && part <= 80) //주요 팔다리 명중
+            {
+                monster.Ondamaged(this, 120);
+            }
+            else //빗맞음
+            {
+                monster.Ondamaged(this, 80);
             }
             //Console.WriteLine($"{monster.name}에게 {damage}의 데미지를 입혔습니다.");
         }
