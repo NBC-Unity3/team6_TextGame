@@ -13,7 +13,7 @@ namespace team6_TextGame.Characters.Players
         {
         }
 
-        public override int Skill_1(Monster monster)
+        public override void Skill_1(Monster monster)
         {
             //단일기
             int damage = atk * 2;
@@ -22,10 +22,9 @@ namespace team6_TextGame.Characters.Players
 
             //monster.hp -= damage;
             //Console.WriteLine($"알파 스트라이크!\n{monster.name}에게 {damage}만큼의 대미지를 입혔습니다.");
-            return damage;
         }
 
-        public virtual int Skill_2(Monster[] monster)
+        public virtual void Skill_2(List<Monster> monsters)
         {
             //광역기
             int damage = (int)Math.Round(atk * 1.2);
@@ -40,7 +39,6 @@ namespace team6_TextGame.Characters.Players
 
             //Console.WriteLine($"더블 스트라이크!\n모두에게 {damage}만큼의 대미지를 입혔습니다.");
 
-            return damage;
         }
     }
 }
