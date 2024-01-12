@@ -35,11 +35,9 @@ class Program
             Console.WriteLine("당신의 이름은 무엇입니까?");
             name = Console.ReadLine();
             Console.WriteLine("\n'{0}' 이 당신의 이름이 맞습니까?\n", name);
-            Console.WriteLine("1. 맞습니다.");
-            Console.WriteLine("2. 아닙니다.\n");
 
-            var key = Console.ReadKey(true).Key;
-            if (key ==  ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            int cmd = ui.SelectList(new List<string>(new string[] { "1. 맞습니다.", "2. 아닙니다." }));
+            if (cmd == 0)
             {
                 break;
             }
@@ -65,37 +63,29 @@ class Program
         Console.WriteLine("  M   P  |      50      |      40      |      70  ");
         Console.WriteLine("======================================================");
 
-        bool isFirst = true;
         while (true)
         {
-            if(!isFirst)
-            {
-                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
-            }
-
-            isFirst = false;
-
-            var key = Console.ReadKey(true).Key;
-
-            if(key == ConsoleKey.D1 || key == ConsoleKey.NumPad1)
+            int cmd = ui.SelectList(new List<string>(new string[] { "1. 전사", "2. 궁수", "3. 마법사" }));
+            if (cmd == 0)
             {
                 character = new Warrior(name);
-                break;
-            } else if(key == ConsoleKey.D2 || key == ConsoleKey.NumPad2)
+            }
+            else if (cmd == 1)
             {
                 character = new Archer(name);
-                break;
-            } else if(key == ConsoleKey.D3 || key == ConsoleKey.NumPad3)
+            }
+            else if (cmd == 2)
             {
                 character = new Mage(name);
-                break;
-            } else
+            }
+            else
             {
                 continue;
             }
+
+            break;
         }
 
-        character.name = name;
         return character;
     }
 
