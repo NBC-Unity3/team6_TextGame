@@ -19,11 +19,8 @@ namespace team6_TextGame
             this.floor = floor;
             LoadDungeon();
             monsters = new List<Monster>();
-            int monsterCnt = rand.Next(this.floor, 4 + this.floor);
-            for (int i = 0; i < monsterCnt; i++)
-            {
-                monsters.Add(GenerateRandomMonster());
-            }
+
+            InitMonster();
         }
 
         private Monster GenerateRandomMonster()
@@ -65,7 +62,8 @@ namespace team6_TextGame
                     {
                         case 0:
                             //TODO: 다음 층 불러오기
-                            NextFloor();
+                            floor++;
+                            InitMonster();
                             continue;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
@@ -140,11 +138,9 @@ namespace team6_TextGame
             return true;
         }
 
-        private void NextFloor()
+        private void InitMonster()
         {
-            floor++;
-
-            int monsterCnt = rand.Next(this.floor, 4 + this.floor);
+            int monsterCnt = rand.Next(1 + (int)(floor * 0.2f), 4 + (int)(floor * 0.2f));
             for (int i = 0; i < monsterCnt; i++)
             {
                 monsters.Add(GenerateRandomMonster());
