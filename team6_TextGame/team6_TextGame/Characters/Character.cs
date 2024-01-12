@@ -32,6 +32,14 @@ namespace team6_TextGame.Characters
             Console.Clear();
             Console.WriteLine($"{name}의 공격!");
             enemy.Ondamaged(this);
+            TurnNext();
+            //switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
+            //{
+            //    case 0:
+            //        break;
+            //    case -1:
+            //        break;
+            //}
         }
 
         public void Ondamaged(Character enemy, int coefficient = 100)
@@ -56,9 +64,21 @@ namespace team6_TextGame.Characters
             }
 
             hp -= damage;
+            Console.WriteLine($"{name}에게 {damage}의 데미지를 가했습니다.");
             if (hp < 0) { hp = 0; }
         }
 
+        public void TurnNext()
+        {
+            Console.WriteLine();
+            switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
+            {
+                case 0:
+                    break;
+                case -1:
+                    break;
+            }
+        }
         public bool isDead()
         {
             if (hp == 0) return true;
