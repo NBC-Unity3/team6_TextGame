@@ -24,29 +24,36 @@ namespace team6_TextGame
                 {
                     Quest q = new Quest();
                     q = item as Quest;
-                    if (q.isClear == true)
+                    if(q.isAvailable == true)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write("   (Clear!) ");
-                        Console.ResetColor();
+                        if (q.isClear == true)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("   (Clear!) ");
+                            Console.ResetColor();
+                        }
+                        else if (q.isActive == true)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.Write("   (진행중) ");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write("   (New) ");
+                            Console.ResetColor();
+                        }
+                        Console.Write($"{q.name}\n");
                     }
-                    else if (q.isActive == true)
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.Write("   (진행중) ");
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write("   (New) ");
-                        Console.ResetColor();
-                    }
-                    Console.Write($"{q.name}\n");
                 }
                 else if (item is EquipItem equipItem)
                 {
                     WriteColoredNumbers($"   {equipItem.ToString()}\n");
+                }
+                else if (item is ConsumeItem consumeItem)
+                {
+                    WriteColoredNumbers($"   {consumeItem.ToString()}\n");
                 }
                 else WriteColoredNumbers($"   {item}\n");
             }
