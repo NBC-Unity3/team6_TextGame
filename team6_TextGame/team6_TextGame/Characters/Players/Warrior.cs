@@ -16,29 +16,29 @@ namespace team6_TextGame.Characters.Players
         public override void Skill_1(Monster monster)
         {
             //단일기
-            int damage = atk * 2;
             mp -= 10;
+            monster.Ondamaged(this, 200);
 
-
-            //monster.hp -= damage;
             //Console.WriteLine($"알파 스트라이크!\n{monster.name}에게 {damage}만큼의 대미지를 입혔습니다.");
         }
 
         public virtual void Skill_2(List<Monster> monsters)
         {
             //광역기
-            int damage = (int)Math.Round(atk * 1.2);
             mp -= 15;
 
-            //string names = "";
-            //for(int i = 0; i < monster.Length; i++)
-            //{
-            //    monster[i].hp -= (int) damage;
-            //    names += monster[i].name = " ";
-            //}
+            //두마리만 데미지 주기
+            int cnt = 0;
 
-            //Console.WriteLine($"더블 스트라이크!\n모두에게 {damage}만큼의 대미지를 입혔습니다.");
+            while(cnt <= 2)
+            {
+                Random rand = new Random();
+                int i = rand.Next(0, monsters.Count - 1);
 
+                monsters[i].Ondamaged(this, 120);
+                monsters.RemoveAt(i);
+                cnt++;
+            }
         }
     }
 }
