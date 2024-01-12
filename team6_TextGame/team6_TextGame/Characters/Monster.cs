@@ -18,6 +18,7 @@ namespace team6_TextGame.Characters
             this.maxMp = maxMp;
             this.crit = crit;
             this.dodge = dodge;
+            this.exp = exp;
             this.minLv = minLv;
 
             hp = maxHp;
