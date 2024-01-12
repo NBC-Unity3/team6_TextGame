@@ -62,14 +62,14 @@
     "item_rewards": [],
     "item_rewards2": [
       {
-        "count": 1,
-        "id": 3,
-        "name": "수호자의 영약",
+        "count": 2,
+        "id": 1,
+        "name": "붉은 포션",
         "atk": 0,
-        "def": 3,
-        "hp": 0,
-        "info": "방어력이 영구히 3상승합니다.",
-        "price": 2500
+        "def": 0,
+        "hp": 50,
+        "info": "체력을 50회복합니다.",
+        "price": 500
       }
     ],
     "name": "더욱 더 강해지기!",
@@ -86,14 +86,14 @@
     "item_rewards": [],
     "item_rewards2": [
       {
-        "count": 3,
-        "id": 1,
-        "name": "붉은 포션",
+        "count": 1,
+        "id": 3,
+        "name": "수호자의 영약",
         "atk": 0,
-        "def": 0,
-        "hp": 50,
-        "info": "체력을 50회복합니다.",
-        "price": 500
+        "def": 3,
+        "hp": 0,
+        "info": "방어력이 영구히 3상승합니다.",
+        "price": 2500
       }
     ],
     "name": "더욱 더 강해지기! (2)",
