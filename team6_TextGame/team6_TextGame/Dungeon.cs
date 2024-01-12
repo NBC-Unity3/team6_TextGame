@@ -142,7 +142,11 @@ namespace team6_TextGame
         public void InitMonster()
         {
             monsters.Clear();
-            int monsterCnt = rand.Next(1 + (int)(floor * 0.2f), 4 + (int)(floor * 0.2f));
+            int monsterCnt = 0;
+            if ((int)(floor * 0.2f) < 5)
+                monsterCnt = rand.Next(1 + (int)(floor * 0.2f), 4 + (int)(floor * 0.2f));
+            else
+                monsterCnt = rand.Next(6, 9);
             for (int i = 0; i < monsterCnt; i++)
             {
                 monsters.Add(GenerateRandomMonster());
@@ -151,8 +155,6 @@ namespace team6_TextGame
 
         private void VictoryResult()
         {
-            floor++;
-            SaveDungeon();
             Console.Clear();
 
             Console.WriteLine("Battle!! - Result\n");
