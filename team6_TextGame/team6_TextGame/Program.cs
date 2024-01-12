@@ -132,9 +132,9 @@ class Program
         while (true)
         {
             Console.Clear();
-            UI.TextColor("인벤토리", ConsoleColor.Yellow);
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-            UI.DrawLine();
+            ui.TextColor("마을", ConsoleColor.Yellow);
+            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
+            ui.DrawLine();
 
             switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : "+ dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
             {
