@@ -102,7 +102,8 @@ namespace team6_TextGame
                     UI.WriteColoredNumbers($"   {monster}\n");
                 }
 
-                Console.WriteLine(); UI.DrawLine();
+                Console.WriteLine(); ui.DrawLine();
+
                 int menu = Console.CursorTop;
 
                 switch (UI.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
@@ -120,7 +121,14 @@ namespace team6_TextGame
                         }
                         break;
                     case 1:
-                        //TODO: 스킬 구현
+                        target = monsters[ui.SelectList(monsters, 3)];
+                        player.Skill_1(target);
+                        if (target.isDead())
+                        {
+                            target.Die();
+                            // TODO: 경험치 획득
+                            monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
+                        }
                         break;
                     case 2:
                         //TODO: 아이템 사용 구현
