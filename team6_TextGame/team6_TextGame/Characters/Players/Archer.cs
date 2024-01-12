@@ -8,8 +8,8 @@ namespace team6_TextGame.Characters.Players
 {
     internal class Archer : Player
     {
-        public Archer(string name, int level = 1, int atk = 12, int def = 3, int hp = 100, int mp = 40, string jop = "궁수", int gold = 1500)
-            : base(name, level, atk, def, hp, mp, jop, gold)
+        public Archer(string name, int atk = 12, int def = 3, int hp = 100, int mp = 40, string jop = "궁수")
+            : base(name, atk, def, hp, mp, jop)
         {
         }
 

@@ -8,8 +8,8 @@ namespace team6_TextGame.Characters.Players
 {
     internal class Mage : Player
     {
-        public Mage(string name, int level = 1, int atk = 8, int def = 4, int hp = 100, int mp = 70, string jop = "마법사", int gold = 1500)
-            : base(name, level, atk, def, hp, mp, jop, gold)
+        public Mage(string name, int atk = 8, int def = 4, int hp = 100, int mp = 70, string jop = "마법사")
+            : base(name, atk, def, hp, mp, jop)
         {
         }
 

@@ -10,7 +10,6 @@ namespace team6_TextGame
         private int start_player_hp;
         private List<Monster> monsters;
         private Random rand = new Random();
-        private UI ui = new UI();
         public int floor { get; set; }
 
         public Dungeon(Player player, int floor = 1)
@@ -19,12 +18,6 @@ namespace team6_TextGame
             this.floor = floor;
             LoadDungeon();
             monsters = new List<Monster>();
-
-            for (int i = 0; i < rand.Next(floor, 4 + floor); i++)
-            {
-                monsters.Add(GenerateRandomMonster());
-            }
-
         }
 
         private Monster GenerateRandomMonster()
@@ -52,29 +45,45 @@ namespace team6_TextGame
         {
             //TODO : 5층 단위로 마지막 층수의 던전 불러오기
             // ex) 지난번에 47층에서 포기했다면 45층부터 시작
-
-            while(true)
+            while (true)
             {
                 Console.Clear();
 
+                // 보상 미리 구해두기, 배틀에서 죽은 몬스터는 배열에서 빠지기 때문
+                int goldReward = CalculateGoldReward(monsters);
+                int expReward = CalculateExpReward(monsters);
+
                 if (StartBattle())
                 {
-                    Console.WriteLine($"{floor}층을 클리어했습니다");
-                    ui.DrawLine();
+                    Console.Clear();
 
-                    switch (ui.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
+                    UI.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
+                    UI.DrawLine();
+
+                    // 5층 마다 던전 층 저장
+                    if (floor + 1 % 5 == 0) SaveDungeon();
+
+                    // 보상 획득
+                    player.ReceiveGold(goldReward);
+                    player.ReceiveExp(expReward);
+
+                    switch (UI.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
                     {
                         case 0:
                             //TODO: 다음 층 불러오기
-
-                            break;
+                            floor++;
+                            InitMonster();
+                            continue;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
+                            LoadDungeon();
                             return;
                     }
-                }else
+                }
+                else
                 {
                     //TODO: 현재 층수 저장
+                    LoadDungeon();
                     return;
                 }
             }
@@ -82,24 +91,26 @@ namespace team6_TextGame
 
         public bool StartBattle()   //승리시 true, 패배시 false 리턴
         {
-            while(monsters.Count > 0)
+            while (monsters.Count > 0)
             {
                 Console.Clear();
-                ui.TextColor("던전 " + floor + "층", ConsoleColor.DarkYellow);
-                ui.DrawLine(); Console.WriteLine();
+                UI.TextColor("던전 " + floor + "층", ConsoleColor.DarkYellow);
+                UI.DrawLine(); Console.WriteLine();
 
                 foreach (var monster in monsters)
                 {
-                    Console.WriteLine($"   {monster}");
+                    UI.WriteColoredNumbers($"   {monster}\n");
                 }
 
-                Console.WriteLine(); ui.DrawLine();
+                Console.WriteLine(); UI.DrawLine();
                 int menu = Console.CursorTop;
 
-                switch (ui.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기"}), menu))
+                switch (UI.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
                 {
                     case 0:
-                        Monster target = monsters[ui.SelectList(monsters, 3)];
+                        int index = UI.SelectList(monsters, 3);
+                        if (index == -1) continue;
+                        Monster target = monsters[index];
                         player.Attack(target);
                         if (target.isDead())
                         {
@@ -137,11 +148,51 @@ namespace team6_TextGame
             return true;
         }
 
+        public void InitMonster()
+        {
+            monsters.Clear();
+            int monsterCnt = 0;
+            if ((int)(floor * 0.2f) < 5)
+                monsterCnt = rand.Next(1 + (int)(floor * 0.2f), 4 + (int)(floor * 0.2f));
+            else
+                monsterCnt = rand.Next(6, 9);
+            for (int i = 0; i < monsterCnt; i++)
+            {
+                monsters.Add(GenerateRandomMonster());
+            }
+        }
+        
+        private int CalculateGoldReward(List<Monster> monsters)
+        {
+            int reward = 0;
+
+            foreach (var monster in monsters)
+            {
+                reward += rand.Next(monster.level * 30, monster.level * 60);
+            }
+
+            return reward;
+        }
+        
+        private int CalculateExpReward(List<Monster> monsters)
+        {
+            int reward = 0;
+
+            foreach (var monster in monsters)
+            {
+                reward += monster.level;
+            }
+
+            return reward;
+        }
+
+        private Item CalculateItemReward(List<Monster> monsters)
+        {
+            return null;
+        }
 
         private void VictoryResult()
         {
-            floor++;
-            SaveDungeon();
             Console.Clear();
 
             Console.WriteLine("Battle!! - Result\n");
@@ -211,9 +262,15 @@ namespace team6_TextGame
             string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.json");
             string json = JsonConvert.SerializeObject(floor, settings);
             File.WriteAllText(path, json);
+
+            /*
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.csv");
+            File.WriteAllText(path, floor.ToString());
+            */
         }
         private void LoadDungeon()
         {
+
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto
@@ -226,6 +283,18 @@ namespace team6_TextGame
                 int loadlevel = JsonConvert.DeserializeObject<int>(json, settings);
                 floor = loadlevel;
             }
+
+            /*
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.csv");
+            if (File.Exists(path))
+            {
+                string csvContent = File.ReadAllText(path);
+                if (int.TryParse(csvContent, out int loadLevel))
+                {
+                    floor = loadLevel;
+                }
+            }
+            */
         }
     }
 }
