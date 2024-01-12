@@ -19,12 +19,11 @@ namespace team6_TextGame
             this.floor = floor;
             LoadDungeon();
             monsters = new List<Monster>();
-
-            for (int i = 0; i < rand.Next(floor, 4 + floor); i++)
+            int monsterCnt = rand.Next(this.floor, 4 + this.floor);
+            for (int i = 0; i < monsterCnt; i++)
             {
                 monsters.Add(GenerateRandomMonster());
             }
-
         }
 
         private Monster GenerateRandomMonster()
@@ -52,27 +51,28 @@ namespace team6_TextGame
         {
             //TODO : 5층 단위로 마지막 층수의 던전 불러오기
             // ex) 지난번에 47층에서 포기했다면 45층부터 시작
-
-            while(true)
+            //LoadDungeon();
+            while (true)
             {
                 Console.Clear();
 
                 if (StartBattle())
                 {
-                    Console.WriteLine($"{floor}층을 클리어했습니다");
+                    ui.WriteColoredNumbers($"{floor}층을 클리어했습니다");
                     ui.DrawLine();
 
                     switch (ui.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
                     {
                         case 0:
                             //TODO: 다음 층 불러오기
-
                             break;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
+                            if (floor % 5 == 0) SaveDungeon();
                             return;
                     }
-                }else
+                }
+                else
                 {
                     //TODO: 현재 층수 저장
                     return;
@@ -82,7 +82,7 @@ namespace team6_TextGame
 
         public bool StartBattle()   //승리시 true, 패배시 false 리턴
         {
-            while(monsters.Count > 0)
+            while (monsters.Count > 0)
             {
                 Console.Clear();
                 ui.TextColor("던전 " + floor + "층", ConsoleColor.DarkYellow);
@@ -136,7 +136,6 @@ namespace team6_TextGame
             }
             return true;
         }
-
 
         private void VictoryResult()
         {
@@ -211,9 +210,15 @@ namespace team6_TextGame
             string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.json");
             string json = JsonConvert.SerializeObject(floor, settings);
             File.WriteAllText(path, json);
+
+            /*
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.csv");
+            File.WriteAllText(path, floor.ToString());
+            */
         }
         private void LoadDungeon()
         {
+
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto
@@ -226,6 +231,18 @@ namespace team6_TextGame
                 int loadlevel = JsonConvert.DeserializeObject<int>(json, settings);
                 floor = loadlevel;
             }
+
+            /*
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.csv");
+            if (File.Exists(path))
+            {
+                string csvContent = File.ReadAllText(path);
+                if (int.TryParse(csvContent, out int loadLevel))
+                {
+                    floor = loadLevel;
+                }
+            }
+            */
         }
     }
 }
