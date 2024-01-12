@@ -21,6 +21,8 @@ class Program
     {
         LoadGame();
         dungeon = new Dungeon(player);
+        shop.LoadOptions();
+        questboard.LoadOptions();
         StartGame();
     }
 
@@ -264,7 +266,6 @@ class Program
                             if (q.name == "장비를 장착해보자" && q.isActive == true)
                             {
                                 q.achieve_count = 1;
-                                questboard.SaveOptions();
                             }
                         }
                     }
@@ -309,8 +310,6 @@ class Program
         Console.WriteLine("[보유 골드]");
         Console.WriteLine($"{player.gold} G\n");
 
-        Shop shop = new Shop();
-        shop.LoadOptions();
         /*
         foreach (Item item in shop.items)
         {
@@ -356,8 +355,6 @@ class Program
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
 
-            shop.LoadOptions();
-
             // 플레이어가 구매할 수 있는 아이템 목록 생성
             List<Item> purchasableItems = shop.items.Where(item => !player.HasItem(item)).ToList();
             int selectedIndex = UI.SelectList(purchasableItems);
@@ -370,7 +367,6 @@ class Program
                         Item selectedItem = purchasableItems[selectedIndex];
                         int actualIndex = shop.items.IndexOf(selectedItem);
                         shop.BuyItem(actualIndex, player);
-                        SaveGame();
                     }
                     break;
                 case -1:
@@ -384,7 +380,6 @@ class Program
             {
                 case 0:
                     shop.BuyItem(index, player);
-                    SaveGame();
                     break;
                 case -1:
                     return;
@@ -446,7 +441,6 @@ class Program
             UI.TextColor("Quest!!\n", ConsoleColor.Yellow);
             Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
             UI.DrawLine();
-            questboard.LoadOptions();
             questboard.ClearCheck(player);
 
             int index = UI.SelectList(questboard.quests);

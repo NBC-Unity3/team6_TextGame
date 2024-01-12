@@ -13,6 +13,7 @@ namespace team6_TextGame
         public static int SelectList<T>(List<T> list, int cursor = -1)
         {
             int first, last, now;
+            int questIndex = 0;
 
             if (cursor == -1) cursor = Console.CursorTop;   //초기 위치를 입력받지 않을 시 현재커서위치로 설정
             Console.SetCursorPosition(0, cursor);
@@ -24,14 +25,29 @@ namespace team6_TextGame
                 {
                     Quest q = new Quest();
                     q = item as Quest;
-                    WriteColoredNumbers($"   {q.name}");
-                    if (q.isClear == true)
+                    if(q.isAvailable == true)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(" (Clear!)\n");
-                        Console.ResetColor();
+                        if (q.isClear == true)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("   (Clear!) ");
+                            Console.ResetColor();
+                        }
+                        else if (q.isActive == true)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.Write("   (진행중) ");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write("   (New) ");
+                            Console.ResetColor();
+                        }
+                        Console.Write($"{q.name}\n");
                     }
-                    else Console.WriteLine();
+                    else questIndex++;
                 }
                 else if (item is EquipItem equipItem)
                 {

@@ -26,7 +26,6 @@ namespace team6_TextGame
         public void RemoveQuest(Quest quest)
         {
             quests.Remove(quest);
-            SaveOptions();
         }
 
         public void ClearCheck(Character character)
@@ -42,10 +41,14 @@ namespace team6_TextGame
                     quest.isClear = true;
                 }
             }
-            SaveOptions();
         }
         public void ReceiveReward(Quest quest, Player character)
         {
+            if(quest.name == "더욱 더 강해지기!")
+            {
+                Quest nextQuest = quests.Find(element => element.name == "더욱 더 강해지기! (2)");
+                nextQuest.isAvailable = true;
+            }
             quests.Remove(quest);
             character.gold += quest.gold_reward;
             foreach (EquipItem item in quest.item_rewards)
@@ -56,7 +59,6 @@ namespace team6_TextGame
             {
                 character.consumes.Add(item);
             }
-            SaveOptions();
         }
 
         public void SaveOptions()
