@@ -65,7 +65,8 @@ namespace team6_TextGame
                     {
                         case 0:
                             //TODO: 다음 층 불러오기
-                            break;
+                            NextFloor();
+                            continue;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
                             if (floor % 5 == 0) SaveDungeon();
@@ -96,7 +97,7 @@ namespace team6_TextGame
                 Console.WriteLine(); ui.DrawLine();
                 int menu = Console.CursorTop;
 
-                switch (ui.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기"}), menu))
+                switch (ui.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
                 {
                     case 0:
                         Monster target = monsters[ui.SelectList(monsters, 3)];
@@ -135,6 +136,17 @@ namespace team6_TextGame
                 }
             }
             return true;
+        }
+
+        private void NextFloor()
+        {
+            floor++;
+
+            int monsterCnt = rand.Next(this.floor, 4 + this.floor);
+            for (int i = 0; i < monsterCnt; i++)
+            {
+                monsters.Add(GenerateRandomMonster());
+            }
         }
 
         private void VictoryResult()
