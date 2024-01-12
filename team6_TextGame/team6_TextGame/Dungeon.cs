@@ -70,12 +70,14 @@ namespace team6_TextGame
                         case 1 or -1:
                             //TODO: 현재 층수 저장
                             if (floor % 5 == 0) SaveDungeon();
+                            else LoadDungeon();
                             return;
                     }
                 }
                 else
                 {
                     //TODO: 현재 층수 저장
+                    LoadDungeon();
                     return;
                 }
             }
