@@ -72,16 +72,14 @@ namespace team6_TextGame.Characters
             maxHp += hp;
         }
 
-        public virtual int Skill_1(Monster monster)
+        public virtual void Skill_1(Monster monster)
         {
             //단일기
-            return 0;
         }
 
-        public virtual int Skill_2(Monster[] monster)
+        public virtual void Skill_2(List<Monster> monsters)
         {
             //광역기
-            return 0;
         }
 
         public void ReceiveGold(int amount)
