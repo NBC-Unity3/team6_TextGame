@@ -32,13 +32,6 @@ namespace team6_TextGame.Characters
             Console.Clear();
             Console.WriteLine($"{name}의 공격!");
             enemy.Ondamaged(this);
-            switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
-            {
-                case 0:
-                    break;
-                case -1:
-                    break;
-            }
         }
 
         public void Ondamaged(Character enemy, int coefficient = 100)
@@ -48,7 +41,7 @@ namespace team6_TextGame.Characters
 
             if (dodge > new Random().Next(1, 101))  // 회피율 계산식
             {
-                Console.WriteLine($"{name}가 회피했습니다.");
+                Console.WriteLine($"{name}이/가 회피했습니다.");
                 return;
             }
 
