@@ -26,7 +26,7 @@ namespace team6_TextGame
                 player.gold -= items[index].price;
                 player.AddEquipsInven(items[index]);
                 //items.RemoveAt(index);
-                SaveOptions();
+                //SaveOptions();
             }
         }
 
@@ -36,7 +36,7 @@ namespace team6_TextGame
             player.gold += (int)(item.price * 0.8);
             //AddItem(item);
             player.equips.RemoveAt(index);
-            SaveOptions();
+            //SaveOptions();
         }
 
 
