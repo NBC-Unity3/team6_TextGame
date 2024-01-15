@@ -51,21 +51,21 @@ namespace team6_TextGame
                 {
                     if (i == 0)
                     {
-                        //AtkPotion atkPotion = new AtkPotion();
-                        //atkPotion.count = quest.item_rewards2[i];
-                        //character.AddConsumesInven(atkPotion);
+                        AtkPotion atkPotion = new AtkPotion();
+                        atkPotion.count = quest.item_rewards2[i];
+                        character.AddConsumesInven(atkPotion);
                     }
                     else if (i == 1)
                     {
-                        //DefPotion defPotion = new DefPotion();
-                        //defPotion.count = quest.item_rewards2[i];
-                        //character.AddConsumesInven(defPotion);
+                        DefPotion defPotion = new DefPotion();
+                        defPotion.count = quest.item_rewards2[i];
+                        character.AddConsumesInven(defPotion);
                     }
                     else if (i == 2)
                     {
-                        //HpPotion hpPotion = new HpPotion();
-                        //hpPotion.count = quest.item_rewards2[i];
-                        //character.AddConsumesInven(hpPotion);
+                        HpPotion hpPotion = new HpPotion();
+                        hpPotion.count = quest.item_rewards2[i];
+                        character.AddConsumesInven(hpPotion);
                     }
                 }
             }

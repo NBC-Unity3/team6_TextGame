@@ -24,16 +24,7 @@ namespace team6_TextGame
             else
             {
                 player.gold -= items[index].price;
-                if (items[index].type == 3)
-                {
-                    player.AddConsumesInven(items[index]);
-                }
-                else
-                {
-                    player.AddEquipsInven(items[index]);
-                }
-
-                //items.RemoveAt(index);
+                player.AddEquipsInven(items[index]);
             }
         }
 

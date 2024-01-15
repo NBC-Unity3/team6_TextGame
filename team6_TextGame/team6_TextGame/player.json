@@ -1,33 +1,14 @@
 {
-  "weaponEquip": false,
-  "armorEquip": true,
-  "equips": [
-    {
-      "isEquipped": true,
-      "id": 1,
-      "name": "수련자 갑옷",
-      "atk": 0,
-      "def": 5,
-      "hp": 0,
-      "info": "수련에 도움을 주는 갑옷입니다. ",
-      "price": 1000,
-      "type": 2
-    }
+  "f_atk": 10,
+  "f_def": 5,
+  "f_hp": 100,
+  "inven": [
   ],
-  "consumes": [],
-  "job": "전사",
-  "gold": 5500,
-  "exp": 0,
-  "name": "Chad",
   "level": 1,
+  "name": "Chad",
+  "job": "전사",
   "atk": 10,
   "def": 5,
-  "maxHp": 100,
-  "maxMp": 0,
-  "crit": 0,
-  "dodge": 0,
   "hp": 100,
-  "mp": 0,
-  "f_atk": 10,
-  "f_def": 10
+  "gold": 1500
 }
