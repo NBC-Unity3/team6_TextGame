@@ -21,7 +21,10 @@ namespace team6_TextGame
             {
                 character.AddEquipsInven(item);
             }
-            SaveOptions();
+            foreach (ConsumeItem item in quest.item_rewards2)
+            {
+                character.AddConsumesInven(item);
+            }
         }
         public void RemoveQuest(Quest quest)
         {

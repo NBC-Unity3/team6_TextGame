@@ -13,7 +13,6 @@ namespace team6_TextGame
         public static int SelectList<T>(List<T> list, int cursor = -1)
         {
             int first, last, now;
-            int questIndex = 0;
 
             if (cursor == -1) cursor = Console.CursorTop;   //초기 위치를 입력받지 않을 시 현재커서위치로 설정
             Console.SetCursorPosition(0, cursor);
@@ -47,7 +46,6 @@ namespace team6_TextGame
                         }
                         Console.Write($"{q.name}\n");
                     }
-                    else questIndex++;
                 }
                 else if (item is EquipItem equipItem)
                 {
