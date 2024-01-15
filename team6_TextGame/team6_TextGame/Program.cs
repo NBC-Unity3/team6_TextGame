@@ -259,15 +259,10 @@ class Program
             {
                 case 0:
                     player.equips[index].equip(player);
-                    foreach (Quest q in questboard.quests)
+                    if (player.equips[index].isEquipped == true)
                     {
-                        if (player.equips[index].isEquipped == true)
-                        {
-                            if (q.name == "장비를 장착해보자" && q.isActive == true)
-                            {
-                                q.achieve_count = 1;
-                            }
-                        }
+                        Quest thisQuest = questboard.quests.Find(element => element.name == "장비를 장착해보자");
+                        if(thisQuest.isActive == true) thisQuest.achieve_count = 1;
                     }
                     break;
                 case -1:
