@@ -9,7 +9,7 @@
     "hp": 0,
     "info": "수련에 도움을 주는 갑옷입니다. ",
     "price": 1000,
-    "type": 2
+    "type" : 2
   },
   {
     "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
@@ -21,7 +21,7 @@
     "hp": 0,
     "info": "무쇠로 만들어져 튼튼한 갑옷입니다. ",
     "price": 2000,
-    "type": 2
+    "type" : 2
   },
   {
     "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
@@ -33,7 +33,7 @@
     "hp": 0,
     "info": "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.",
     "price": 3500,
-    "type": 2
+    "type" : 2
   },
   {
     "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
@@ -45,7 +45,7 @@
     "hp": 0,
     "info": "쉽게 볼 수 있는 낡은 검 입니다.",
     "price": 600,
-    "type": 1
+    "type" : 1
   },
   {
     "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
@@ -57,7 +57,7 @@
     "hp": 0,
     "info": "어디선가 사용됐던거 같은 도끼입니다.",
     "price": 1500,
-    "type": 1
+    "type" : 1
   },
   {
     "$type": "team6_TextGame.Items.EquipItem, team6_TextGame",
@@ -69,40 +69,6 @@
     "hp": 0,
     "info": "스파르타의 전사들이 사용했다는 전설의 창입니다.",
     "price": 2500,
-    "type": 1
-  },
-  {
-    "$type": "team6_TextGame.Items.ConsumeItem, team6_TextGame",
-    "id": 7,
-    "name": "붉은 포션",
-    "atk": 0,
-    "def": 0,
-    "hp": 50,
-    "info": "체력을 50회복합니다.",
-    "price": 500,
-    "type": 3
-  }/*,
-  {
-    "$type": "team6_TextGame.Items.ConsumeItem, team6_TextGame",
-    "id": 8,
-    "name": "수호자의 영약",
-    "atk": 0,
-    "def": 5,
-    "hp": 0,
-    "info": "영구히 방어력이 5 상승합니다.",
-    "price": 2500,
-    "type": 3
-  },
-  {
-    "$type": "team6_TextGame.Items.ConsumeItem, team6_TextGame",
-    "id": 9,
-    "isEqipped": false,
-    "name": "전사의 영약",
-    "atk": 5,
-    "def": 0,
-    "hp": 0,
-    "info": "영구히 공격력이 5 상승합니다.",
-    "price": 2500,
-    "type": 3
-  }*/
+    "type" : 1
+  }
 ]
