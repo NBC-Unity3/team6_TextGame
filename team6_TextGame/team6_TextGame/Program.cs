@@ -446,11 +446,14 @@ class Program
                 {
                     player.hp = player.maxHp;
                     player.mp = player.maxMp;
-                    Console.WriteLine("회복되었습니다.");
+                    player.gold -= 200;
+                    UI.WriteLine("회복되었습니다.");
+                    Console.ReadKey();
                     break;
                 } else
                 {
-                    UI.TextColor("골드가 부족합니다.", ConsoleColor.Red);
+                    UI.WriteLine("골드가 부족합니다.");
+                    Console.ReadKey();
                     return;
                 }
             case -1:
