@@ -186,14 +186,15 @@ namespace team6_TextGame
 
 
                 //Enemy turn
+                UI.Clear(menu, 8);
                 foreach (var monster in monsters)
                 {
-                    UI.Clear(menu, 8);
                     if (monster.Attack(player))
                     {
                         player.Die();
                         return false;
                     }
+                    Console.WriteLine();
                     UI.Wait();
                 }
             }
