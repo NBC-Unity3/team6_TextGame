@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using team6_TextGame.Characters;
 using team6_TextGame.Characters.Monsters;
 
@@ -136,6 +137,14 @@ namespace team6_TextGame
                                 break;
                             case 1:
                                 player.Skill_2(monsters);
+                                for (int i = monsters.Count - 1; i >= 0; i--)
+                                {
+                                    if (monsters[i].isDead())
+                                    {
+                                        monsters[i].Die();
+                                        monsters.RemoveAt(i);
+                                    }
+                                }
                                 break;
                         }
                         break;
@@ -149,7 +158,7 @@ namespace team6_TextGame
                         continue;
                 }
 
-                if (monsters.Count == 0) break;
+                if (monsters.Count == 0) break; //TODO: 던전 깸
 
                 //Enemy turn
                 foreach (var monster in monsters)
