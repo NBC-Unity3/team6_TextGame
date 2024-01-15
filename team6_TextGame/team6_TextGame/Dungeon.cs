@@ -52,6 +52,7 @@ namespace team6_TextGame
                 // 보상 미리 구해두기, 배틀에서 죽은 몬스터는 배열에서 빠지기 때문
                 int goldReward = CalculateGoldReward(monsters);
                 int expReward = CalculateExpReward(monsters);
+                var itemReward = CalculateItemReward(monsters);
 
                 if (StartBattle())
                 {
@@ -63,6 +64,7 @@ namespace team6_TextGame
                     // 보상 획득
                     player.ReceiveGold(goldReward);
                     player.ReceiveExp(expReward);
+                    player.ReceiveItem(itemReward);
 
                     switch (UI.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
                     {
@@ -204,9 +206,20 @@ namespace team6_TextGame
             return reward;
         }
 
-        private Item CalculateItemReward(List<Monster> monsters)
+        private List<Item> CalculateItemReward(List<Monster> monsters)
         {
-            return null;
+            List<Item> reward = new List<Item>();
+            foreach (Monster monster in monsters)
+            {
+                foreach (var dropItem in monster.dropItems)
+                {
+                    if (rand.NextDouble() < dropItem.Value)
+                    {
+                        reward.Add(dropItem.Key);
+                    }
+                }
+            }
+            return reward;
         }
 
         private void VictoryResult()

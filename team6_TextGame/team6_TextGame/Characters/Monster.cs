@@ -6,6 +6,8 @@ namespace team6_TextGame.Characters
     {
         public int minLv { get; set; }   // 등장할 수 있는 최소 레벨
 
+        public Dictionary<Item, double> dropItems = new Dictionary<Item, double>();
+
         public Monster(string name, int level, int atk, int def, int maxHp, int maxMp, int crit, int dodge, int minLv)
         {
             this.name = name;
