@@ -151,6 +151,34 @@ namespace team6_TextGame
             Console.ResetColor();
         }
 
+        public static void Wait()
+        {
+            var key = Console.ReadKey().Key;
+        }
+
+        public static void Clear(int first, int line = 1)
+        {
+            Console.SetCursorPosition(0, first);
+
+            for (int i = 0; i < line; i++)
+            {
+                Console.WriteLine(new String(' ', 64));
+            }
+            Console.SetCursorPosition(0, first);
+        }
+
+
+        public static void WriteLine(string line)
+        {
+            foreach(char c in line)
+            {
+                Console.Write(c);
+                Thread.Sleep(100);
+            }
+            Console.WriteLine();
+        }
+
+
 
         public void Alert()
         {

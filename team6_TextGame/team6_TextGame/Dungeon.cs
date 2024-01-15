@@ -106,6 +106,7 @@ namespace team6_TextGame
                 }
 
                 Console.WriteLine(); UI.DrawLine();
+                player.ShowStatus(); Console.WriteLine(); UI.DrawLine();
 
                 int menu = Console.CursorTop;
 
@@ -115,8 +116,8 @@ namespace team6_TextGame
                         int index = UI.SelectList(monsters, 3);
                         if (index == -1) continue;
                         Monster target = monsters[index];
-                        player.Attack(target);
-                        if (target.isDead())
+                        UI.Clear(menu, 8);
+                        if (player.Attack(target))
                         {
                             if(target is Minion)
                             {
@@ -124,7 +125,6 @@ namespace team6_TextGame
                                 if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
                             }
                             target.Die();
-                            // TODO: 경험치 획득
                             monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
                         }
                         break;
@@ -181,18 +181,21 @@ namespace team6_TextGame
                     case -1:
                         continue;
                 }
+                UI.Wait();
+                if (monsters.Count == 0) break;
 
-                if (monsters.Count == 0) break; //TODO: 던전 깸
 
                 //Enemy turn
+                UI.Clear(menu, 8);
                 foreach (var monster in monsters)
                 {
-                    monster.Attack(player);
-                    if (player.isDead())
+                    if (monster.Attack(player))
                     {
                         player.Die();
                         return false;
                     }
+                    Console.WriteLine();
+                    UI.Wait();
                 }
             }
             return true;
