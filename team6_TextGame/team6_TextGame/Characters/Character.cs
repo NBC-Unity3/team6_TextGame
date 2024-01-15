@@ -26,13 +26,20 @@ namespace team6_TextGame.Characters
         public int f_def { get; set; }  //현재 방어력
 
 
-        public void Attack(Character enemy)
+        public bool Attack(Character enemy)
         {
             //UI단
-            Console.Clear();
-            Console.WriteLine($"{name}의 공격!");
-            enemy.Ondamaged(this);
-            TurnNext();
+            UI.WriteLine($"{name}의 공격!");
+             
+            if (dodge > new Random().Next(1, 101))  // 회피율 계산식
+            {
+                UI.WriteLine($"{enemy.name}이/가 회피했습니다.");
+                return false;
+            }
+
+            return enemy.Ondamaged(this);
+            
+            
             //switch (UI.SelectList(new List<string>(new string[] { "- 다음" })))
             //{
             //    case 0:
@@ -42,20 +49,14 @@ namespace team6_TextGame.Characters
             //}
         }
 
-        public void Ondamaged(Character enemy, int coefficient = 100)
+        public bool Ondamaged(Character enemy, int coefficient = 100)
         {
             int damage;
             int rand = new Random().Next(9, 12); // 안정치 변수
 
-            if (dodge > new Random().Next(1, 101))  // 회피율 계산식
-            {
-                Console.WriteLine($"{name}이/가 회피했습니다.");
-                return;
-            }
-
             if (crit > new Random().Next(1, 101)) // 치명타시 방어력 무시 및 20% 추가데미지
             {
-                Console.WriteLine("치명적인 공격!");
+                UI.WriteLine("치명적인 공격!");
                 damage = (int)(enemy.f_atk * coefficient * rand * 0.0012);
             }
             else    // {ATK*2*(계수/100) - DEF}/2 * 안정치
@@ -64,8 +65,10 @@ namespace team6_TextGame.Characters
             }
 
             hp -= damage;
-            Console.WriteLine($"{name}에게 {damage}의 데미지를 가했습니다.");
+            UI.WriteLine($"{name}에게 {damage}의 데미지를 가했습니다.");
             if (hp < 0) { hp = 0; }
+
+            return isDead();
         }
 
         public void TurnNext()
