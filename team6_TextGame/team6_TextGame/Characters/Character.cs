@@ -92,7 +92,7 @@ namespace team6_TextGame.Characters
 
         public void Die()
         {
-            UI.WriteLine($"{name}이(가) 쓰러졌습니다");
+            UI.WriteLine($"{name}이(가) 쓰러졌습니다.");
         }
 
     }
