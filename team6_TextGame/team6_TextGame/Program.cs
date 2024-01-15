@@ -21,6 +21,8 @@ class Program
     {
         LoadGame();
         questboard.LoadOptions();
+        dungeon = new Dungeon(player, questboard);
+        shop.LoadOptions();
         StartGame();
     }
 
