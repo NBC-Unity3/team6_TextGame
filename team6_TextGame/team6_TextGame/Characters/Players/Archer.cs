@@ -38,7 +38,6 @@ namespace team6_TextGame.Characters.Players
                 }
             }
             TurnNext();
-            //Console.WriteLine($"{monster.name}에게 {damage}의 데미지를 입혔습니다.");
         }
 
         public override void Skill_2(List<Monster> monsters)

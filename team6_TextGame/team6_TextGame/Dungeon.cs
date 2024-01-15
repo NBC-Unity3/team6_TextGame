@@ -57,6 +57,7 @@ namespace team6_TextGame
                 // 보상 미리 구해두기, 배틀에서 죽은 몬스터는 배열에서 빠지기 때문
                 int goldReward = CalculateGoldReward(monsters);
                 int expReward = CalculateExpReward(monsters);
+                var itemReward = CalculateItemReward(monsters);
 
                 if (StartBattle())
                 {
@@ -65,22 +66,24 @@ namespace team6_TextGame
                     UI.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
                     UI.DrawLine();
 
-                    // 5층 마다 던전 층 저장
-                    if (floor + 1 % 5 == 0) SaveDungeon();
-
                     // 보상 획득
                     player.ReceiveGold(goldReward);
                     player.ReceiveExp(expReward);
+                    player.ReceiveItem(itemReward);
 
                     switch (UI.SelectList(new List<string>(new string[] { "- 다음 층으로", "- 돌아간다" })))
                     {
                         case 0:
                             //TODO: 다음 층 불러오기
                             floor++;
+                            // 5층 마다 던전 층 저장
+                            if (floor % 5 == 0) SaveDungeon();
                             InitMonster();
                             continue;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
+                            // 5층 마다 던전 층 저장
+                            if ((floor + 1) % 5 == 0) SaveDungeon();
                             LoadDungeon();
                             return;
                     }
@@ -108,6 +111,7 @@ namespace team6_TextGame
                 }
 
                 Console.WriteLine(); UI.DrawLine();
+                player.ShowStatus(); Console.WriteLine(); UI.DrawLine();
 
                 int menu = Console.CursorTop;
 
@@ -117,8 +121,8 @@ namespace team6_TextGame
                         int index = UI.SelectList(monsters, 3);
                         if (index == -1) continue;
                         Monster target = monsters[index];
-                        player.Attack(target);
-                        if (target.isDead())
+                        UI.Clear(menu, 8);
+                        if (player.Attack(target))
                         {
                             if(target is Minion)
                             {
@@ -126,7 +130,6 @@ namespace team6_TextGame
                                 if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
                             }
                             target.Die();
-                            // TODO: 경험치 획득
                             monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
                         }
                         break;
@@ -186,18 +189,21 @@ namespace team6_TextGame
                     case -1:
                         continue;
                 }
+                UI.Wait();
+                if (monsters.Count == 0) break;
 
-                if (monsters.Count == 0) break; //TODO: 던전 깸
 
                 //Enemy turn
+                UI.Clear(menu, 8);
                 foreach (var monster in monsters)
                 {
-                    monster.Attack(player);
-                    if (player.isDead())
+                    if (monster.Attack(player))
                     {
                         player.Die();
                         return false;
                     }
+                    Console.WriteLine();
+                    UI.Wait();
                 }
             }
             return true;
@@ -241,9 +247,20 @@ namespace team6_TextGame
             return reward;
         }
 
-        private Item CalculateItemReward(List<Monster> monsters)
+        private List<Item> CalculateItemReward(List<Monster> monsters)
         {
-            return null;
+            List<Item> reward = new List<Item>();
+            foreach (Monster monster in monsters)
+            {
+                foreach (var dropItem in monster.dropItems)
+                {
+                    if (rand.NextDouble() < dropItem.Value)
+                    {
+                        reward.Add(dropItem.Key);
+                    }
+                }
+            }
+            return reward;
         }
 
         private void VictoryResult()

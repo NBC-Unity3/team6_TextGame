@@ -25,8 +25,6 @@ namespace team6_TextGame
             {
                 player.gold -= items[index].price;
                 player.AddEquipsInven(items[index]);
-
-                //items.RemoveAt(index);
             }
         }
 
