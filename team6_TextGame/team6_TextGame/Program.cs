@@ -443,7 +443,7 @@ class Program
 
             if (index >= 0)
             {
-                for(int i = 0; i < index; i++)
+                for(int i = 0; i <= index; i++)
                 {
                     if (questboard.quests[i].isAvailable == false) aCnt++;
                 }
