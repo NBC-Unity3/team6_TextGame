@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System;
 using team6_TextGame.Characters;
 using team6_TextGame.Characters.Players;
+using System.Reflection;
 
 
 class Program
@@ -137,7 +138,7 @@ class Program
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
             UI.DrawLine();
 
-            switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : " + dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.퀘스트", "6.저장" })))
+            switch (UI.SelectList(new List<string>(new string[] { "1.상태보기", "2.전투 시작(현재 진행 : " + dungeon.floor + "층)", "3.인벤토리", "4.상점", "5.회복하기", "6.퀘스트", "7.저장" })))
             {
                 case 0:
                     Status();
@@ -153,9 +154,12 @@ class Program
                     Shop();
                     break;
                 case 4:
-                    Quest();
+                    Heal();
                     break;
                 case 5:
+                    Quest();
+                    break;
+                case 6:
                     SaveGame();
                     break;
                 case -1:
@@ -428,6 +432,34 @@ class Program
         }
     }
 
+    static void Heal()
+    {
+        Console.Clear();
+        UI.TextColor("회복하기", ConsoleColor.Yellow);
+        Console.WriteLine("200G를 지불하여 HP와 MP를 회복할 수 있습니다. (나가기: esc)\n");
+        UI.DrawLine();
+
+        switch (UI.SelectList(new List<string>(new string[] { "- 회복하기" })))
+        {
+            case 0:
+                if(player.gold >= 200)
+                {
+                    player.hp = player.maxHp;
+                    player.mp = player.maxMp;
+                    player.gold -= 200;
+                    UI.WriteLine("회복되었습니다.");
+                    Console.ReadKey();
+                    break;
+                } else
+                {
+                    UI.WriteLine("골드가 부족합니다.");
+                    Console.ReadKey();
+                    return;
+                }
+            case -1:
+                return;
+        }
+    }
     static void Quest()
     {
         while (true)

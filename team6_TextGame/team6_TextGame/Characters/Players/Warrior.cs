@@ -23,7 +23,6 @@ namespace team6_TextGame.Characters.Players
                 monster.Ondamaged(this, 200);
             }
             TurnNext();
-            //Console.WriteLine($"알파 스트라이크!\n{monster.name}에게 {damage}만큼의 대미지를 입혔습니다.");
         }
 
         public override void Skill_2(List<Monster> monsters)
