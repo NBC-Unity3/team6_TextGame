@@ -14,7 +14,9 @@
       }
     ],
     "item_rewards2": [
-      0, 0, 2
+      0,
+      0,
+      2
     ],
     "name": "마을을 위협하는 미니언 처치",
     "explain": "이봐! 마을 근처에 미니언들이 너무 많아졌다고 생각하지 않나?\n마을주민들의 안전을 위해서라도 저것들 수를 좀 줄여야 한다고!\n모험가인 자네가 좀 처치해주게!\n",
@@ -41,7 +43,9 @@
       }
     ],
     "item_rewards2": [
-      0, 0, 1
+      0,
+      0,
+      1
     ],
     "name": "장비를 장착해보자",
     "explain": "진정한 모험가라면 장비가 중요하다는 것쯤은 알고 있겠지?\n아무 장비라도 좋으니 한 번이라도 장비를 착용해보게.\n",
@@ -56,7 +60,9 @@
   {
     "item_rewards": [],
     "item_rewards2": [
-      0, 0, 2
+      0,
+      0,
+      2
     ],
     "name": "더욱 더 강해지기!",
     "explain": "행색을 보아하니 아직 햇병아리 모험가구만!\n더 성장해서 나보다 강해지면 보상을 주마!\n",
@@ -71,7 +77,9 @@
   {
     "item_rewards": [],
     "item_rewards2": [
-      0, 1, 0
+      0,
+      1,
+      0
     ],
     "name": "더욱 더 강해지기! (2)",
     "explain": "이 정도면 어디 가서 명함은 내밀 수 있는 모험가라고 할 수 있지!\n하지만 더 강한 몬스터들을 무찌르기 위해서는 더욱 더 강해져야 한다네!\n",
@@ -80,6 +88,23 @@
     "goal_count": 30,
     "gold_reward": 1000,
     "isAvailable": false,
+    "isActive": false,
+    "isClear": false
+  },
+  {
+    "item_rewards": [],
+    "item_rewards2": [
+      0,
+      0,
+      2
+    ],
+    "name": "거저 주는 퀘스트",
+    "explain": "보상을 그냥 준다!\n",
+    "goal_description": "보상 받기",
+    "achieve_count": 1,
+    "goal_count": 1,
+    "gold_reward": 500,
+    "isAvailable": true,
     "isActive": false,
     "isClear": false
   }
