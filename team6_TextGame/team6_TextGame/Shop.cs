@@ -33,6 +33,12 @@ namespace team6_TextGame
         public void SellItem(int index, Player player)
         {
             Item item = player.equips[index];
+
+            if (player.equips[index].isEquipped == true)
+            {
+                player.equips[index].equip(player); // 판매시 장착 해제
+            }
+
             player.gold += (int)(item.price * 0.8);
             //AddItem(item);
             player.equips.RemoveAt(index);
