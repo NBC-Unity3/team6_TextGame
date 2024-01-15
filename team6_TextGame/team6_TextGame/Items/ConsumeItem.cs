@@ -22,14 +22,6 @@ namespace team6_TextGame.Items
             return sb.ToString();
         }
 
-        public void ShowState()
-        {
-            if (count > 0)
-                Console.WriteLine(ToString());
-            else
-                return;
-        }
-
         public void Consume(Player player)
         {
             if (atk > 0)

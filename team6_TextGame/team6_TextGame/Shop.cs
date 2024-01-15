@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using team6_TextGame.Characters;
 using team6_TextGame.Items;
 
@@ -24,7 +25,21 @@ namespace team6_TextGame
             else
             {
                 player.gold -= items[index].price;
-                player.AddEquipsInven(items[index]);
+
+                if (items[index].id > 6)
+                {
+                    ConsumeItem consume = new ConsumeItem();
+                    consume.id = items[index].id;
+                    consume.name = items[index].name;
+                    consume.hp = items[index].hp;
+                    consume.info = items[index].info;
+                    consume.price = items[index].price;
+                    consume.count++;
+
+                    player.AddConsumesInven(consume);
+                }
+                else
+                    player.AddEquipsInven(items[index]);
             }
         }
 

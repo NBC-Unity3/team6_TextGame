@@ -4,7 +4,7 @@
     {
         public AtkPotion()
         {
-            id = 2;
+            id = 9;
             name = "전사의 영약";
             atk = 3;
             def = 0;

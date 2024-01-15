@@ -4,7 +4,7 @@
     {
         public DefPotion()
         {
-            id = 3;
+            id = 8;
             name = "수호자의 영약";
             atk = 0;
             def = 3;

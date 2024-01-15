@@ -51,6 +51,10 @@ namespace team6_TextGame
                 {
                     WriteColoredNumbers($"   {equipItem.ToString()}\n");
                 }
+                else if (item is ConsumeItem consumeItem)
+                {
+                    WriteColoredNumbers($"   {consumeItem.ToString()}\n");
+                }
                 else if (item is AtkPotion atkpotion)
                 {
                     WriteColoredNumbers($"   {atkpotion.ToString()}\n");

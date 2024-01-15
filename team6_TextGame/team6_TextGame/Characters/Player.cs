@@ -105,22 +105,24 @@ namespace team6_TextGame.Characters
 
         public void UseItem(ConsumeItem item)
         {
-            if (item.id == 2)
+            if (item.id == 9)
             {
-                f_atk += 2;
+                f_atk += 3;
                 item.count--;
-                UI.WriteLine("전사의 영약을 사용했습니다.\n공격력이 2 상승했습니다.");
+                UI.WriteLine("전사의 영약을 사용했습니다.\n공격력이 3 상승했습니다.");
             }
-            else if (item.id == 3)
+            else if (item.id == 8)
             {
                 f_def += 3;
                 item.count--;
                 UI.WriteLine("수호자의 영약을 사용했습니다.\n방어력이 3 상승했습니다.");
             }
-            else if (item.id == 1)
+            else if (item.id == 7)
             {
                 hp += 50;
                 item.count--;
+                if (hp > 100)
+                    hp = 100;
                 UI.WriteLine("붉은 물약을 사용했습니다.\nHp가 50 상승했습니다.");
             }
             if (item.count == 0)
