@@ -144,10 +144,9 @@ namespace team6_TextGame.Characters
                 return false;
             } else
             {
-                Console.Write($"MP : {mp} → ");
+                UI.TextColor($"MP: {mp} → {mp + amount}", ConsoleColor.Blue);
                 mp += amount;
                 if (mp < 0) mp = 0;
-                Console.WriteLine(mp);
                 return true;
             }
         }

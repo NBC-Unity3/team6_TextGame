@@ -15,10 +15,9 @@ namespace team6_TextGame.Characters.Players
 
         public override void Skill_1(Monster monster)
         {
-            Console.Clear();
             if(ChangeMP(-15))
             {
-                Console.WriteLine($"궁수의 한발! {name}이 단일 공격을 시전했습니다.\n");
+                UI.WriteLine($"궁수의 한발! {name}이 단일 공격을 시전했습니다.\n");
                 //단일기, 명중 부위 따라 데미지가 다른 설정
                 Random rand = new Random();
                 int part = rand.Next(1, 100);
@@ -37,20 +36,17 @@ namespace team6_TextGame.Characters.Players
                     monster.Ondamaged(this, 80);
                 }
             }
-            TurnNext();
         }
 
         public override void Skill_2(List<Monster> monsters)
         {
-            Console.Clear();
             //광역기, 한발마다 mp 닳게 몬스터 숫자 비례 mp 사용
-            Console.WriteLine($"궁수의 연사! {name}이 광역 공격을 시전했습니다.\n");
+            UI.WriteLine($"궁수의 연사! {name}이 광역 공격을 시전했습니다.\n");
             foreach (Monster m in monsters)
             {
                 if (!ChangeMP(-5)) break;
                 m.Ondamaged(this, 80);
             }
-            TurnNext();
         }
     }
 }

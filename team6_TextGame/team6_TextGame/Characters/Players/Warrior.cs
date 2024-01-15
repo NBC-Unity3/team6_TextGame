@@ -15,22 +15,19 @@ namespace team6_TextGame.Characters.Players
 
         public override void Skill_1(Monster monster)
         {
-            Console.Clear();
             //단일기
             if(ChangeMP(-10))
             {
-                Console.WriteLine($"전사의 검술! {name}이 단일 공격을 시전했습니다.\n");
+                UI.WriteLine($"전사의 검술! {name}이 단일 공격을 시전했습니다.\n");
                 monster.Ondamaged(this, 200);
             }
-            TurnNext();
         }
 
         public override void Skill_2(List<Monster> monsters)
         {
-            Console.Clear();
             if(ChangeMP(-15))
             {
-                Console.WriteLine($"전사의 포효! {name}이 광역 공격을 시전했습니다.\n");
+                UI.WriteLine($"전사의 포효! {name}이 광역 공격을 시전했습니다.\n");
                 //광역기
                 //두마리만 데미지 주기
                 int cnt = 0;
@@ -45,7 +42,6 @@ namespace team6_TextGame.Characters.Players
                     cnt++;
                 }
             }
-            TurnNext();
         }
     }
 }

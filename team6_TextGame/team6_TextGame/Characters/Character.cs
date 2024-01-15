@@ -71,6 +71,7 @@ namespace team6_TextGame.Characters
             return isDead();
         }
 
+        /*
         public void TurnNext()
         {
             Console.WriteLine();
@@ -81,7 +82,8 @@ namespace team6_TextGame.Characters
                 case -1:
                     break;
             }
-        }
+        } */
+
         public bool isDead()
         {
             if (hp == 0) return true;

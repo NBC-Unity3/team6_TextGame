@@ -144,6 +144,7 @@ namespace team6_TextGame
                                 {
                                     case 0:
                                         target = monsters[UI.SelectList(monsters, 3)];
+                                        UI.Clear(menu, 8);
                                         player.Skill_1(target);
                                         if (target.isDead())
                                         {
@@ -158,6 +159,7 @@ namespace team6_TextGame
                                         }
                                         break;
                                     case 1:
+                                        UI.Clear(menu, 8);
                                         player.Skill_2(monsters);
                                         for (int i = monsters.Count - 1; i >= 0; i--)
                                         {
