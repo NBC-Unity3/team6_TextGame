@@ -30,7 +30,7 @@ namespace team6_TextGame
             {
                 if (item_rewards2[i] != 0)
                 {
-                    if(i == 0)
+                    if (i == 0)
                     {
                         str += "  전사의 영약 x" + item_rewards2[i] + "\n";
                     }

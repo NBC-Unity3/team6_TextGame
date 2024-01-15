@@ -12,6 +12,7 @@ namespace team6_TextGame
         public int hp { get; set; }
         public string info { get; set; }
         public int price { get; set; }
+        public int type { get; set; }
 
         public abstract string ToString();
     }

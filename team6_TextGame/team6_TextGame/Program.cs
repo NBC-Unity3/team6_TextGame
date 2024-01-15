@@ -291,7 +291,8 @@ class Program
             switch (UI.SelectList(new List<string>(new string[] { "- 사용" })))
             {
                 case 0:
-                    // write code
+                    player.consumes[index].Consume(player);
+                    player.consumes.RemoveAt(index);
                     break;
                 case -1:
                     break;
@@ -354,6 +355,7 @@ class Program
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.gold} G\n");
 
+            /*
             // 플레이어가 구매할 수 있는 아이템 목록 생성
             List<Item> purchasableItems = shop.items.Where(item => !player.HasItem(item)).ToList();
             int selectedIndex = UI.SelectList(purchasableItems);
@@ -371,8 +373,9 @@ class Program
                 case -1:
                     return;
             }
+            */
 
-            /*
+            
             int index = UI.SelectList(shop.items);
 
             switch (UI.SelectList(new List<string>(new string[] { "- 아이템 구매" })))
@@ -383,7 +386,7 @@ class Program
                 case -1:
                     return;
             }
-            */
+            
         }
     }
 
