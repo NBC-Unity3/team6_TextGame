@@ -11,7 +11,7 @@ namespace team6_TextGame
         public int goal_count { get; set; } // 필요 달성 횟수
         public int gold_reward { get; set; } // 보상 골드
         public List<EquipItem> item_rewards = new List<EquipItem>(); // 보상 아이템
-        public List<ConsumeItem> item_rewards2 = new List<ConsumeItem>(); // 보상 아이템
+        public int[] item_rewards2 = new int[3];
         public bool isAvailable { get; set; } = false;
         public bool isActive { get; set; } = false;
         public bool isClear { get; set; } = false;
@@ -26,9 +26,24 @@ namespace team6_TextGame
             {
                 str += "  " + item.name + " x1\n";
             }
-            foreach (ConsumeItem item in item_rewards2)
+            for (int i = 0; i < 3; i++)
             {
-                str += "  " + item.name + " x" + item.count + "\n";
+                if (item_rewards2[i] != 0)
+                {
+                    if(i == 0)
+                    {
+                        str += "  전사의 영약 x" + item_rewards2[i] + "\n";
+                    }
+                    else if (i == 1)
+                    {
+                        str += "  수호자의 영약 x" + item_rewards2[i] + "\n";
+                    }
+                    else if (i == 2)
+                    {
+                        str += "  붉은 포션 x" + item_rewards2[i] + "\n";
+                    }
+
+                }
             }
             str += "  " + gold_reward + "G\n";
 
