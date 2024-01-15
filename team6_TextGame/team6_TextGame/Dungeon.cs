@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using team6_TextGame.Characters;
 using team6_TextGame.Characters.Monsters;
 
@@ -129,26 +130,36 @@ namespace team6_TextGame
                         break;
                     case 1:
                         //TODO: 스킬 1,2 출력
-                        switch(UI.SelectList(new List<string>(new string[] { "- 단일 공격", "- 광역 공격" })))
+                        if(player.mp > 0)
                         {
-                            case 0:
-                                target = monsters[UI.SelectList(monsters, 3)];
-                                player.Skill_1(target);
-                                if (target.isDead())
-                                {
-                                    if (target is Minion)
+                            switch (UI.SelectList(new List<string>(new string[] { "- 단일 공격", "- 광역 공격" })))
+                            {
+                                case 0:
+                                    target = monsters[UI.SelectList(monsters, 3)];
+                                    player.Skill_1(target);
+                                    if (target.isDead())
                                     {
-                                        Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
-                                        if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                                        target.Die();
+                                        // TODO: 경험치 획득
+                                        monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
                                     }
-                                    target.Die();
-                                    // TODO: 경험치 획득
-                                    monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
-                                }
-                                break;
-                            case 1:
-                                player.Skill_2(monsters);
-                                break;
+                                    break;
+                                case 1:
+                                    player.Skill_2(monsters);
+                                    for (int i = monsters.Count - 1; i >= 0; i--)
+                                    {
+                                        if (monsters[i].isDead())
+                                        {
+                                            monsters[i].Die();
+                                            monsters.RemoveAt(i);
+                                        }
+                                    }
+                                    break;
+                            }
+                        } else // TODO: 안내 출력 안됨
+                        {
+                            Console.WriteLine("MP가 부족해 스킬을 사용할 수 없습니다.");
+                            continue;
                         }
                         break;
                     case 2:
@@ -161,7 +172,7 @@ namespace team6_TextGame
                         continue;
                 }
 
-                if (monsters.Count == 0) break;
+                if (monsters.Count == 0) break; //TODO: 던전 깸
 
                 //Enemy turn
                 foreach (var monster in monsters)

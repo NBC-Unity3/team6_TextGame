@@ -80,10 +80,20 @@ namespace team6_TextGame.Characters
             maxHp += hp;
         }
 
-        public void ChangeMP(int amount)
+        public bool ChangeMP(int amount)
         {
-            mp += amount;
-            if(mp < 0) mp = 0;
+            if(mp + amount < 0)
+            {
+                UI.TextColor("마나가 부족합니다.", ConsoleColor.Red);
+                return false;
+            } else
+            {
+                Console.Write($"MP : {mp} → ");
+                mp += amount;
+                if (mp < 0) mp = 0;
+                Console.WriteLine(mp);
+                return true;
+            }
         }
 
         public virtual void Skill_1(Monster monster)
