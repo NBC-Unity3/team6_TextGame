@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Text;
 using team6_TextGame.Items;
 
 namespace team6_TextGame.Characters
@@ -45,10 +46,31 @@ namespace team6_TextGame.Characters
             Console.Write($"방어력 : {f_def} ");
             if (f_def - def != 0) UI.TextColor($"(+{f_def - def})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"H    P : {hp} \n");
-            //if (maxHp - hp != 0) Program.ui.TextColor($"(+{maxHp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            //if (maxHp - hp != 0) Program.UI.TextColor($"(+{maxHp - hp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.Write($"M    P : {mp} \n");
-            //if (maxMp - mp != 0) Program.ui.TextColor($"(+{maxMp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
+            //if (maxMp - mp != 0) Program.UI.TextColor($"(+{maxMp - mp})", ConsoleColor.Yellow); else { Console.WriteLine(); }
             Console.WriteLine($"Gold : {gold} G");
+        }
+
+        public void ShowStatus()
+        {
+            Console.WriteLine($"[{name}]");
+
+            var sb = new StringBuilder();
+            sb.Append("Lv.");
+            sb.Append(level);
+            sb.Append(' ');
+            sb.Append(" HP ");
+            sb.Append(hp);
+            sb.Append("/");
+            sb.Append(maxHp);
+            sb.Append(' ');
+            sb.Append(" MP ");
+            sb.Append(mp);
+            sb.Append("/");
+            sb.Append(maxMp);
+
+            Console.WriteLine(sb.ToString());
         }
 
         /*

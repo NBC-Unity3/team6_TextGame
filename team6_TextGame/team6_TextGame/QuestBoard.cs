@@ -13,16 +13,6 @@ namespace team6_TextGame
             quests.Add(quest);
         }
 
-        public void QuestClear(Quest quest, Player character)
-        {
-            quests.Remove(quest);
-            character.gold += quest.gold_reward;
-            foreach (EquipItem item in quest.item_rewards) 
-            {
-                character.AddEquipsInven(item);
-            }
-            SaveOptions();
-        }
         public void RemoveQuest(Quest quest)
         {
             quests.Remove(quest);
@@ -55,10 +45,35 @@ namespace team6_TextGame
             {
                 character.equips.Add(item);
             }
-            foreach (ConsumeItem item in quest.item_rewards2)
+            for (int i = 0; i < 3; i++)
+            {
+                if (quest.item_rewards2[i] != 0)
+                {
+                    if (i == 0)
+                    {
+                        AtkPotion atkPotion = new AtkPotion();
+                        atkPotion.count = quest.item_rewards2[i];
+                        character.AddConsumesInven(atkPotion);
+                    }
+                    else if (i == 1)
+                    {
+                        DefPotion defPotion = new DefPotion();
+                        defPotion.count = quest.item_rewards2[i];
+                        character.AddConsumesInven(defPotion);
+                    }
+                    else if (i == 2)
+                    {
+                        HpPotion hpPotion = new HpPotion();
+                        hpPotion.count = quest.item_rewards2[i];
+                        character.AddConsumesInven(hpPotion);
+                    }
+                }
+            }
+            /*
+            foreach (var item in quest.item_rewards2)
             {
                 character.consumes.Add(item);
-            }
+            }*/
         }
 
         public void SaveOptions()

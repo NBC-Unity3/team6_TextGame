@@ -20,9 +20,9 @@ class Program
     static void Main(String[] args)
     {
         LoadGame();
-        dungeon = new Dungeon(player);
-        shop.LoadOptions();
         questboard.LoadOptions();
+        dungeon = new Dungeon(player, questboard);
+        shop.LoadOptions();
         StartGame();
     }
 
@@ -259,15 +259,10 @@ class Program
             {
                 case 0:
                     player.equips[index].equip(player);
-                    foreach (Quest q in questboard.quests)
+                    if (player.equips[index].isEquipped == true)
                     {
-                        if (player.equips[index].isEquipped == true)
-                        {
-                            if (q.name == "장비를 장착해보자" && q.isActive == true)
-                            {
-                                q.achieve_count = 1;
-                            }
-                        }
+                        Quest thisQuest = questboard.quests.Find(element => element.name == "장비를 장착해보자");
+                        if(thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count = 1;
                     }
                     break;
                 case -1:
@@ -437,6 +432,7 @@ class Program
     {
         while (true)
         {
+            int aCnt = 0;
             Console.Clear();
             UI.TextColor("Quest!!\n", ConsoleColor.Yellow);
             Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
@@ -447,7 +443,11 @@ class Program
 
             if (index >= 0)
             {
-                QuestDetail(index);
+                for(int i = 0; i <= index; i++)
+                {
+                    if (questboard.quests[i].isAvailable == false) aCnt++;
+                }
+                QuestDetail(index + aCnt);
             }
             else break;
         }
@@ -479,7 +479,6 @@ class Program
                 {
                     case 0:
                         questboard.quests[n].isActive = true;
-                        questboard.SaveOptions();
                         break;
                     case 1:
                         questboard.RemoveQuest(questboard.quests[n]);
