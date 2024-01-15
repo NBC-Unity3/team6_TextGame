@@ -14,8 +14,5 @@ namespace team6_TextGame
         public int price { get; set; }
 
         public abstract string ToString();
-
-
-
     }
 }

@@ -147,6 +147,21 @@ namespace team6_TextGame.Characters
                 LvUp();
         }
 
+        public void ReceiveItem(List<Item> amount)
+        {
+            foreach (Item item in amount)
+            {
+                if (item is EquipItem equipItem)
+                {
+                    equips.Add(equipItem);
+                }
+                else if (item is ConsumeItem consumeItem)
+                {
+                    consumes.Add(consumeItem);
+                }
+            }
+        }
+
         private void LvUp()
         {
             exp -= expToLvUp[level - 1];
