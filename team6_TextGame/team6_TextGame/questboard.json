@@ -3,6 +3,7 @@
     "item_rewards": [
       {
         "isEquipped": false,
+        "type": 2,
         "id": 10,
         "name": "쓸만한 방패",
         "atk": 0,
@@ -31,6 +32,7 @@
         "isEquipped": false,
         "id": 11,
         "name": "쓸만한 검",
+        "type": 1,
         "atk": 3,
         "def": 0,
         "hp": 0,
