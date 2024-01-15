@@ -35,6 +35,8 @@ namespace team6_TextGame.Items
             else if (hp > 0)
             {
                 player.hp += hp;
+                if (player.hp > 100)
+                    player.hp = 100;
                 Console.WriteLine("체력이 " + hp + " 상승하였습니다.");
             }
         }
