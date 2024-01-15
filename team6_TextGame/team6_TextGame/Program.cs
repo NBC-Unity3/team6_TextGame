@@ -291,7 +291,7 @@ class Program
             switch (UI.SelectList(new List<string>(new string[] { "- 사용" })))
             {
                 case 0:
-                    // write code
+                    player.UseItem(player.consumes[index]);
                     break;
                 case -1:
                     break;
