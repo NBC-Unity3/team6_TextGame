@@ -20,8 +20,6 @@ class Program
     static void Main(String[] args)
     {
         LoadGame();
-        dungeon = new Dungeon(player);
-        shop.LoadOptions();
         questboard.LoadOptions();
         StartGame();
     }
@@ -262,7 +260,7 @@ class Program
                     if (player.equips[index].isEquipped == true)
                     {
                         Quest thisQuest = questboard.quests.Find(element => element.name == "장비를 장착해보자");
-                        if(thisQuest.isActive == true) thisQuest.achieve_count = 1;
+                        if(thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count = 1;
                     }
                     break;
                 case -1:

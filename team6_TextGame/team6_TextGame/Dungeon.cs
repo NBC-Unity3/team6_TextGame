@@ -7,14 +7,16 @@ namespace team6_TextGame
     internal class Dungeon
     {
         private Player player;
+        private QuestBoard questBoard;
         private int start_player_hp;
         private List<Monster> monsters;
         private Random rand = new Random();
         public int floor { get; set; }
 
-        public Dungeon(Player player, int floor = 1)
+        public Dungeon(Player player, QuestBoard questBoard, int floor = 1)
         {
             this.player = player;
+            this.questBoard = questBoard;
             this.floor = floor;
             LoadDungeon();
             monsters = new List<Monster>();
@@ -115,6 +117,11 @@ namespace team6_TextGame
                         player.Attack(target);
                         if (target.isDead())
                         {
+                            if(target is Minion)
+                            {
+                                Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
+                                if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                            }
                             target.Die();
                             // TODO: 경험치 획득
                             monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
@@ -129,6 +136,11 @@ namespace team6_TextGame
                                 player.Skill_1(target);
                                 if (target.isDead())
                                 {
+                                    if (target is Minion)
+                                    {
+                                        Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
+                                        if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                                    }
                                     target.Die();
                                     // TODO: 경험치 획득
                                     monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
