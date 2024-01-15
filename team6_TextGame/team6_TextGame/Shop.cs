@@ -20,7 +20,8 @@ namespace team6_TextGame
         {
             if (items[index].price > player.gold)
             {
-                Console.WriteLine("Gold가 부족합니다.");
+                UI.TextColor("골드가 부족합니다.", ConsoleColor.Red);
+                UI.Wait();
             }
             else
             {
