@@ -68,9 +68,40 @@ namespace team6_TextGame.Characters
             equips.Add(item as EquipItem);
         }
 
-        public void AddConsumesInven(Item item)
+        public void AddConsumesInven(ConsumeItem item)
         {
-            consumes.Add(item as ConsumeItem);
+            var thisItem = consumes.Find(consumeItem => consumeItem.id == item.id);
+            if (thisItem != null)
+            {
+                thisItem.count += item.count;
+            }
+            else
+            {
+                consumes.Add(item);
+            }
+        }
+
+        public void UseItem(ConsumeItem item)
+        {
+            if (item.id == 2)
+            {
+                f_atk += 2;
+                item.count--;
+            }
+            else if (item.id == 3)
+            {
+                f_def += 3;
+                item.count--;
+            }
+            else if (item.id == 1)
+            {
+                hp += 50;
+                item.count--;
+            }
+            if (item.count == 0)
+            {
+                consumes.Remove(item);
+            }
         }
 
         public void ChangeStatus(int atk, int def, int hp)
