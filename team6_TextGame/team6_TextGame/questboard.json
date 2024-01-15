@@ -2,26 +2,26 @@
   {
     "item_rewards": [
       {
-        "isEqipped": false,
+        "isEquipped": false,
         "id": 10,
         "name": "쓸만한 방패",
         "atk": 0,
-        "def": 2,
+        "def": 6,
         "hp": 0,
         "info": "그냥 그런 방패이다.",
-        "price": 300
+        "price": 1100
       }
     ],
     "item_rewards2": [
       {
         "count": 2,
-        "id": 3,
-        "name": "방어력 물약",
+        "id": 1,
+        "name": "붉은 포션",
         "atk": 0,
-        "def": 2,
-        "hp": 0,
-        "info": "방어력을 올려주는 포션이다.",
-        "price": 2000
+        "def": 0,
+        "hp": 50,
+        "info": "체력을 50회복합니다.",
+        "price": 500
       }
     ],
     "name": "마을을 위협하는 미니언 처치",
@@ -29,40 +29,80 @@
     "goal_description": "미니언 5마리 처치",
     "achieve_count": 0,
     "goal_count": 5,
-    "gold_reward": 50,
+    "gold_reward": 700,
+    "isAvailable": true,
     "isActive": false,
     "isClear": false
   },
   {
     "item_rewards": [
       {
-        "isEqipped": false,
+        "isEquipped": false,
         "id": 11,
         "name": "쓸만한 검",
-        "atk": 2,
+        "atk": 3,
         "def": 0,
         "hp": 0,
         "info": "그냥 그런 검이다.",
-        "price": 300
+        "price": 800
       }
     ],
+    "item_rewards2": [],
     "name": "장비를 장착해보자",
     "explain": "진정한 모험가라면 장비가 중요하다는 것쯤은 알고 있겠지?\n아무 장비라도 좋으니 한 번이라도 장비를 착용해보게.\n",
     "goal_description": "장비 장착해보기",
-    "achieve_count": 0,
+    "achieve_count": 1,
     "goal_count": 1,
-    "gold_reward": 50,
+    "gold_reward": 300,
+    "isAvailable": true,
     "isActive": false,
     "isClear": false
   },
   {
     "item_rewards": [],
+    "item_rewards2": [
+      {
+        "count": 2,
+        "id": 1,
+        "name": "붉은 포션",
+        "atk": 0,
+        "def": 0,
+        "hp": 50,
+        "info": "체력을 50회복합니다.",
+        "price": 500
+      }
+    ],
     "name": "더욱 더 강해지기!",
     "explain": "행색을 보아하니 아직 햇병아리 모험가구만!\n더 성장해서 나보다 강해지면 보상을 주마!\n",
     "goal_description": "공격력 20 이상으로 올리기",
-    "achieve_count": 0,
+    "achieve_count": 10,
     "goal_count": 20,
-    "gold_reward": 60,
+    "gold_reward": 500,
+    "isAvailable":  true,
+    "isActive": false,
+    "isClear": false
+  },
+  {
+    "item_rewards": [],
+    "item_rewards2": [
+      {
+        "count": 1,
+        "id": 3,
+        "name": "수호자의 영약",
+        "atk": 0,
+        "def": 3,
+        "hp": 0,
+        "info": "방어력이 영구히 3상승합니다.",
+        "price": 2500
+      }
+    ],
+    "name": "더욱 더 강해지기! (2)",
+    "explain": "이 정도면 어디 가서 명함은 내밀 수 있는 모험가라고 할 수 있지!\n하지만 더 강한 몬스터들을 무찌르기 위해서는 더욱 더 강해져야 한다네!\n",
+    "goal_description": "공격력 30 이상으로 올리기",
+    "achieve_count": 0,
+    "goal_count": 30,
+    "gold_reward": 1000,
+    "isAvailable": false,
     "isActive": false,
     "isClear": false
   }
