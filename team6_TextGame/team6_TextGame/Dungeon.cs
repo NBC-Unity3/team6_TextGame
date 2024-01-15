@@ -101,6 +101,7 @@ namespace team6_TextGame
         {
             while (monsters.Count > 0)
             {
+                int c = 0;
                 Console.Clear();
                 UI.TextColor("던전 " + floor + "층", ConsoleColor.DarkYellow);
                 UI.DrawLine(); Console.WriteLine();
@@ -115,80 +116,96 @@ namespace team6_TextGame
 
                 int menu = Console.CursorTop;
 
-                switch (UI.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
+                while(true)
                 {
-                    case 0:
-                        int index = UI.SelectList(monsters, 3);
-                        if (index == -1) continue;
-                        Monster target = monsters[index];
-                        UI.Clear(menu, 8);
-                        if (player.Attack(target))
-                        {
-                            if(target is Minion)
+                    switch (UI.SelectList(new List<string>(new string[] { "- 공격한다", "- 스킬 사용", "- 아이템 사용", "- 도망가기" }), menu))
+                    {
+                        case 0:
+                            int index = UI.SelectList(monsters, 3);
+                            if (index == -1) continue;
+                            Monster target = monsters[index];
+                            UI.Clear(menu, 8);
+                            if (player.Attack(target))
                             {
-                                Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
-                                if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                                if (target is Minion)
+                                {
+                                    Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
+                                    if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                                }
+                                target.Die();
+                                monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
                             }
-                            target.Die();
-                            monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
-                        }
-                        break;
-                    case 1:
-                        //TODO: 스킬 1,2 출력
-                        if(player.mp > 0)
-                        {
-                            switch (UI.SelectList(new List<string>(new string[] { "- 단일 공격", "- 광역 공격" })))
+                            break;
+                        case 1:
+                            //TODO: 스킬 1,2 출력
+                            if (player.mp > 0)
                             {
-                                case 0:
-                                    target = monsters[UI.SelectList(monsters, 3)];
-                                    player.Skill_1(target);
-                                    if (target.isDead())
-                                    {
-                                        if (target is Minion)
+                                switch (UI.SelectList(new List<string>(new string[] { "- 단일 공격", "- 광역 공격" })))
+                                {
+                                    case 0:
+                                        target = monsters[UI.SelectList(monsters, 3)];
+                                        player.Skill_1(target);
+                                        if (target.isDead())
                                         {
-                                            Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
-                                            if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
-                                        }
-                                        target.Die();
-                                        // TODO: 경험치 획득
-                                        monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
-                                    }
-                                    break;
-                                case 1:
-                                    player.Skill_2(monsters);
-                                    for (int i = monsters.Count - 1; i >= 0; i--)
-                                    {
-                                        if (monsters[i].isDead())
-                                        {
-                                            if (monsters[i] is Minion)
+                                            if (target is Minion)
                                             {
                                                 Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
                                                 if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
                                             }
-                                            monsters[i].Die();
-                                            monsters.RemoveAt(i);
+                                            target.Die();
+                                            // TODO: 경험치 획득
+                                            monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
                                         }
-                                    }
-                                    break;
+                                        break;
+                                    case 1:
+                                        player.Skill_2(monsters);
+                                        for (int i = monsters.Count - 1; i >= 0; i--)
+                                        {
+                                            if (monsters[i].isDead())
+                                            {
+                                                if (monsters[i] is Minion)
+                                                {
+                                                    Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
+                                                    if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                                                }
+                                                monsters[i].Die();
+                                                monsters.RemoveAt(i);
+                                            }
+                                        }
+                                        break;
+                                }
                             }
-                        } else // TODO: 안내 출력 안됨
-                        {
-                            Console.WriteLine("MP가 부족해 스킬을 사용할 수 없습니다.");
+                            else // TODO: 안내 출력 안됨
+                            {
+                                Console.WriteLine("MP가 부족해 스킬을 사용할 수 없습니다.");
+                                continue;
+                            }
+                            break;
+                        case 2:
+                            //TODO: 아이템 사용 구현
+                            c = UI.SelectList(player.consumes);
+                            if (c == -1) break;
+                            UI.Clear(menu, 12);
+                            player.UseItem(player.consumes[c]);
+                            break;
+                        case 3:
+                            //TODO: 도망가기 UI
+                            return false;
+                        case -1:
                             continue;
-                        }
+                    }
+                    if (c != -1)
+                    {
+                        UI.Clear(menu, 8);
                         break;
-                    case 2:
-                        //TODO: 아이템 사용 구현
-                        int c = UI.SelectList(player.consumes);
-                        if (c == -1) break;
-                        player.UseItem(player.consumes[c]);
-                        break;
-                    case 3:
-                        //TODO: 도망가기 UI
-                        return false;
-                    case -1:
-                        continue;
+                    }
+                    else
+                    {
+                        c = 0;
+                        UI.Clear(menu, 8);
+                    }
                 }
+                
                 UI.Wait();
                 if (monsters.Count == 0) break;
 

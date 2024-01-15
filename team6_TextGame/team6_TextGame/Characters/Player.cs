@@ -109,16 +109,19 @@ namespace team6_TextGame.Characters
             {
                 f_atk += 2;
                 item.count--;
+                UI.WriteLine("전사의 영약을 사용했습니다.\n공격력이 2 상승했습니다.");
             }
             else if (item.id == 3)
             {
                 f_def += 3;
                 item.count--;
+                UI.WriteLine("수호자의 영약을 사용했습니다.\n방어력이 3 상승했습니다.");
             }
             else if (item.id == 1)
             {
                 hp += 50;
                 item.count--;
+                UI.WriteLine("붉은 물약을 사용했습니다.\nHp가 50 상승했습니다.");
             }
             if (item.count == 0)
             {
@@ -188,7 +191,7 @@ namespace team6_TextGame.Characters
                 }
                 else if (item is ConsumeItem consumeItem)
                 {
-                    consumes.Add(consumeItem);
+                    AddConsumesInven(consumeItem);
                 }
             }
         }
