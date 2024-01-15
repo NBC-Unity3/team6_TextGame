@@ -1,7 +1,9 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using team6_TextGame.Characters;
 using team6_TextGame.Characters.Monsters;
+using team6_TextGame.Items;
 
 namespace team6_TextGame
 {
@@ -174,6 +176,9 @@ namespace team6_TextGame
                         break;
                     case 2:
                         //TODO: 아이템 사용 구현
+                        int c = UI.SelectList(player.consumes);
+                        if (c == -1) break;
+                        player.UseItem(player.consumes[c]);
                         break;
                     case 3:
                         //TODO: 도망가기 UI
