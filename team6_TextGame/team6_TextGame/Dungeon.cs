@@ -60,9 +60,6 @@ namespace team6_TextGame
                     UI.WriteColoredNumbers($"{floor}층을 클리어했습니다\n");
                     UI.DrawLine();
 
-                    // 5층 마다 던전 층 저장
-                    if (floor + 1 % 5 == 0) SaveDungeon();
-
                     // 보상 획득
                     player.ReceiveGold(goldReward);
                     player.ReceiveExp(expReward);
@@ -72,10 +69,14 @@ namespace team6_TextGame
                         case 0:
                             //TODO: 다음 층 불러오기
                             floor++;
+                            // 5층 마다 던전 층 저장
+                            if (floor % 5 == 0) SaveDungeon();
                             InitMonster();
                             continue;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
+                            // 5층 마다 던전 층 저장
+                            if ((floor + 1) % 5 == 0) SaveDungeon();
                             LoadDungeon();
                             return;
                     }
