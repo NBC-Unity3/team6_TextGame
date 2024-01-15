@@ -437,6 +437,7 @@ class Program
     {
         while (true)
         {
+            int aCnt = 0;
             Console.Clear();
             UI.TextColor("Quest!!\n", ConsoleColor.Yellow);
             Console.WriteLine("퀘스트를 확인할 수 있습니다.(나가기: esc)\n");
@@ -447,7 +448,11 @@ class Program
 
             if (index >= 0)
             {
-                QuestDetail(index);
+                for(int i = 0; i < index; i++)
+                {
+                    if (questboard.quests[i].isAvailable == false) aCnt++;
+                }
+                QuestDetail(index + aCnt);
             }
             else break;
         }
@@ -479,7 +484,6 @@ class Program
                 {
                     case 0:
                         questboard.quests[n].isActive = true;
-                        questboard.SaveOptions();
                         break;
                     case 1:
                         questboard.RemoveQuest(questboard.quests[n]);
