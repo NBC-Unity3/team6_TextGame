@@ -139,6 +139,11 @@ namespace team6_TextGame
                                     player.Skill_1(target);
                                     if (target.isDead())
                                     {
+                                        if (target is Minion)
+                                        {
+                                            Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
+                                            if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                                        }
                                         target.Die();
                                         // TODO: 경험치 획득
                                         monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
@@ -150,6 +155,11 @@ namespace team6_TextGame
                                     {
                                         if (monsters[i].isDead())
                                         {
+                                            if (monsters[i] is Minion)
+                                            {
+                                                Quest thisQuest = questBoard.quests.Find(element => element.name == "마을을 위협하는 미니언 처치");
+                                                if (thisQuest != null && thisQuest.isActive == true) thisQuest.achieve_count++;
+                                            }
                                             monsters[i].Die();
                                             monsters.RemoveAt(i);
                                         }
