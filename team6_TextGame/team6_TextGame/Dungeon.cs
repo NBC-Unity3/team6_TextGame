@@ -176,7 +176,18 @@ namespace team6_TextGame
                         }
                         break;
                     case 2:
-                        //TODO: 아이템 사용 구현
+                        int index2 = UI.SelectList(player.consumes);
+                        UI.DrawLine();
+
+                        switch (UI.SelectList(new List<string>(new string[] { "- 사용" })))
+                        {
+                            case 0:
+                                player.consumes[index2].Consume(player);
+                                player.consumes.RemoveAt(index2);
+                                break;
+                            case -1:
+                                break;
+                        }
                         break;
                     case 3:
                         //TODO: 도망가기 UI

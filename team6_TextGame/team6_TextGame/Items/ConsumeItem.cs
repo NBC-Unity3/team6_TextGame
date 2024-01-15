@@ -6,27 +6,18 @@ namespace team6_TextGame.Items
 {
     internal class ConsumeItem : Item
     {
-        public int count = 0;
-
         public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append(name);
             sb.Append(" | ");
-            sb.Append(info);
+            if (atk != 0) { sb.Append("공격력 + " + atk + " "); }
+            if (def != 0) { sb.Append("방어력 + " + def + " "); }
+            if (hp != 0) { sb.Append("체력 + " + hp + " "); }
             sb.Append("| ");
-            sb.Append(count);
-            sb.Append("개");
+            sb.Append(info);
 
             return sb.ToString();
-        }
-
-        public void ShowState()
-        {
-            if (count > 0)
-                Console.WriteLine(ToString());
-            else
-                return;
         }
 
         public void Consume(Player player)
@@ -44,6 +35,8 @@ namespace team6_TextGame.Items
             else if (hp > 0)
             {
                 player.hp += hp;
+                if (player.hp > 100)
+                    player.hp = 100;
                 Console.WriteLine("체력이 " + hp + " 상승하였습니다.");
             }
         }
