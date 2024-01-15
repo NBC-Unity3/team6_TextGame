@@ -9,6 +9,9 @@ namespace team6_TextGame.Characters
         public int gold { get; set; }
         public int exp { get; set; }
 
+        public bool weaponEquip = false;
+        public bool armorEquip = false;
+
         public List<EquipItem> equips = new List<EquipItem>();      //장비 아이템 리스트
         public List<ConsumeItem> consumes = new List<ConsumeItem>();
         private List<int> expToLvUp = new List<int>() { 10, 35, 65, 100 }; // 레벨업 필요 경험치
