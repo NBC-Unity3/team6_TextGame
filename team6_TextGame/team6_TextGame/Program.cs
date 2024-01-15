@@ -286,6 +286,10 @@ class Program
 
             int index = UI.SelectList(player.consumes);
             if (index == -1) return;
+
+            Console.Clear();
+            UI.TextColor("선택한 아이템:", ConsoleColor.Yellow);
+            Console.WriteLine($"{player.consumes[index].ToString()}\n");
             UI.DrawLine();
 
             switch (UI.SelectList(new List<string>(new string[] { "- 사용" })))
