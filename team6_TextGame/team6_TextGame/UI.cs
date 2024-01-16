@@ -10,7 +10,7 @@ namespace team6_TextGame
     internal class UI
     {
 
-        public static int SelectList<T>(List<T> list, int cursor = -1)
+        public static int SelectList<T>(List<T> list, bool clear = false, int cursor = -1)
         {
             int first, last, now;
 
@@ -96,7 +96,10 @@ namespace team6_TextGame
                         }
                         continue;
                     case ConsoleKey.Enter:
-                        Console.SetCursorPosition(0, last + 2);
+                        if (clear)
+                        {
+                            Clear(first);
+                        }else Console.SetCursorPosition(0, last + 2);
                         if (list.Count == 0) return -1;
                         return now - first;
                     case ConsoleKey.Escape:
@@ -160,7 +163,7 @@ namespace team6_TextGame
             var key = Console.ReadKey().Key;
         }
 
-        public static void Clear(int first, int line = 1)
+        public static void Clear(int first, int line = 8)
         {
             Console.SetCursorPosition(0, first);
 
