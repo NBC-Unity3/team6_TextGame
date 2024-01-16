@@ -9,6 +9,7 @@ namespace team6_TextGame.Characters
         public string job { get; set; }
         public int gold { get; set; }
         public int exp { get; set; }
+        public int dungeonFloor { get; set; }
 
         public bool weaponEquip = false;
         public bool armorEquip = false;
@@ -18,7 +19,7 @@ namespace team6_TextGame.Characters
         private List<int> expToLvUp = new List<int>() { 10, 35, 65, 100 }; // 레벨업 필요 경험치
 
         [JsonConstructor]
-        protected Player(string name = "", int atk = 0, int def = 0, int hp = 0, int mp = 0, string jop = "플레이어", int gold = 1500, int exp = 0, int level = 1)
+        protected Player(string name = "", int atk = 0, int def = 0, int hp = 0, int mp = 0, string jop = "플레이어", int gold = 1500, int exp = 0, int level = 1, int dungeonFloor = 1)
         {
             this.name = name;
             this.level = level;
@@ -33,6 +34,7 @@ namespace team6_TextGame.Characters
             this.job = jop;
             this.gold = gold;
             this.exp = exp;
+            this.dungeonFloor = dungeonFloor;
         }
 
         public void ShowInfo()
@@ -218,6 +220,12 @@ namespace team6_TextGame.Characters
                 // 레벨업 UI 메시지
                 Console.WriteLine($"레벨업! 현재 레벨: {level}");
             }
+        }
+
+        public void DungeonFloorUp()
+        {
+            if (dungeonFloor == 1) dungeonFloor += 4;
+            else dungeonFloor += 5;
         }
     }
 }
