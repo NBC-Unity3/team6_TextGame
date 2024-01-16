@@ -135,6 +135,7 @@ namespace team6_TextGame
                                 target.Die();
                                 monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
                             }
+                            UI.Wait();
                             break;
                         case 1:
                             //TODO: 스킬 1,2 출력
@@ -157,6 +158,7 @@ namespace team6_TextGame
                                             // TODO: 경험치 획득
                                             monsters.Remove(target);    //TODO: 제거 후 리스트 다시 출력할 필요 있음
                                         }
+                                        UI.Wait();
                                         break;
                                     case 1:
                                         UI.Clear(menu, 8);
@@ -174,12 +176,14 @@ namespace team6_TextGame
                                                 monsters.RemoveAt(i);
                                             }
                                         }
+                                        UI.Wait();
                                         break;
                                 }
                             }
                             else // TODO: 안내 출력 안됨
                             {
                                 Console.WriteLine("MP가 부족해 스킬을 사용할 수 없습니다.");
+                                UI.Wait();
                                 continue;
                             }
                             break;
@@ -208,7 +212,7 @@ namespace team6_TextGame
                     }
                 }
                 
-                UI.Wait();
+                //UI.Wait();
                 if (monsters.Count == 0) break;
 
 
