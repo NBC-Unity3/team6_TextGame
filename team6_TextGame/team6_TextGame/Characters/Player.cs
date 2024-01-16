@@ -153,12 +153,18 @@ namespace team6_TextGame.Characters
             }
         }
 
-        public virtual void Skill_1(Monster monster)
+        public bool EnoughMp(int cost)
+        {
+            if (mp > cost) { mp -= cost;  return true; }
+            else { UI.WriteLine("Mp가 부족합니다."); return false; }
+        }
+
+        public virtual void Skill_1(List<Monster> monsters, int menu)
         {
             //단일기
         }
 
-        public virtual void Skill_2(List<Monster> monsters)
+        public virtual void Skill_2(List<Monster> monsters, int menu)
         {
             //광역기
         }

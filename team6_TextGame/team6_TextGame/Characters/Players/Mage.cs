@@ -13,8 +13,9 @@ namespace team6_TextGame.Characters.Players
         {
         }
 
-        public override void Skill_1(Monster monster)
+        public override void Skill_1(List<Monster> monsters, int menu)
         {
+            /*
             if(ChangeMP(-15))
             {
                 UI.WriteLine($"마법사의 냉기! {name}이 단일 공격을 시전했습니다.\n");
@@ -22,10 +23,12 @@ namespace team6_TextGame.Characters.Players
                 int coef = monster.atk * 8 + 100; // 140 164 172
                 monster.Ondamaged(this, coef);
             }
+            */
         }
 
-        public override void Skill_2(List<Monster> monsters)
+        public override void Skill_2(List<Monster> monsters, int menu)
         {
+            /*
             if(ChangeMP(-20))
             {
                 UI.WriteLine($"마법사의 불구덩이! {name}이 광역 공격을 시전했습니다.\n");
@@ -36,6 +39,7 @@ namespace team6_TextGame.Characters.Players
                     m.Ondamaged(this, 120);
                 }
             }
+            */
         }
     }
 }

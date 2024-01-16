@@ -13,35 +13,56 @@ namespace team6_TextGame.Characters.Players
         {
         }
 
-        public override void Skill_1(Monster monster)
+        public override void Skill_1(List<Monster> monsters, int menu)
         {
-            //단일기
-            if(ChangeMP(-10))
+            if(EnoughMp(10))
             {
-                UI.WriteLine($"전사의 검술! {name}이 단일 공격을 시전했습니다.\n");
-                monster.Ondamaged(this, 200);
+                Character monster = monsters[UI.SelectList(monsters, false, 3)];
+                UI.Clear(menu);
+                UI.WriteLine($"전사의 방패강타!");
+                if (isDodged(monster)) return;
+
+                if (monster.Ondamaged(this, 120))
+                {
+                    monster.Die();
+                    monsters.Remove((Monster)monster);
+                }
             }
+            UI.Wait();
         }
 
-        public override void Skill_2(List<Monster> monsters)
+        public override void Skill_2(List<Monster> monsters, int menu)
         {
-            if(ChangeMP(-15))
+            if (EnoughMp(15))
             {
-                UI.WriteLine($"전사의 포효! {name}이 광역 공격을 시전했습니다.\n");
-                //광역기
-                //두마리만 데미지 주기
-                int cnt = 0;
+                UI.Clear(menu);
+                UI.WriteLine($"전사의 워크라이!");
 
+                foreach (Monster monster in monsters)
+                {
+                    if (isDodged(monster)) return;
+
+                    if (monster.Ondamaged(this, 90))
+                    {
+                        monster.Die();
+                        monsters.Remove((Monster)monster);
+                    }
+                }
+
+                /*
+                int cnt = 0;
                 while (cnt < 2 && monsters.Count > 0)
                 {
                     Random rand = new Random();
                     int i = rand.Next(0, monsters.Count - 1);
 
-                    monsters[i].Ondamaged(this, 120);
+                    monsters[i].Ondamaged(this, 90);
                     monsters.RemoveAt(i);
                     cnt++;
                 }
+                */
             }
+            UI.Wait();
         }
     }
 }

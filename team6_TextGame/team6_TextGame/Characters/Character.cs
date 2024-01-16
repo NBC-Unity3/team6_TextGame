@@ -30,12 +30,8 @@ namespace team6_TextGame.Characters
         {
             //UI단
             UI.WriteLine($"{name}의 공격!");
-             
-            if (dodge > new Random().Next(1, 101))  // 회피율 계산식
-            {
-                UI.WriteLine($"{enemy.name}이/가 회피했습니다.");
-                return false;
-            }
+
+            if (isDodged(enemy)) return false;
 
             return enemy.Ondamaged(this);
             
@@ -47,6 +43,16 @@ namespace team6_TextGame.Characters
             //    case -1:
             //        break;
             //}
+        }
+
+        public bool isDodged(Character enemy)
+        {
+            if (dodge > new Random().Next(1, 101))  // 회피율 계산식
+            {
+                UI.WriteLine($"{enemy.name}이/가 회피했습니다.");
+                return true;
+            }
+            return false;
         }
 
         public bool Ondamaged(Character enemy, int coefficient = 100)
@@ -90,7 +96,7 @@ namespace team6_TextGame.Characters
             else return false;
         }
 
-        public void Die()
+        public virtual void Die()
         {
             UI.WriteLine($"{name}이(가) 쓰러졌습니다.");
         }
