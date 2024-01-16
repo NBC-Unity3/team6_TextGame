@@ -20,8 +20,8 @@ namespace team6_TextGame
         {
             this.player = player;
             this.questBoard = questBoard;
-            this.floor = floor;
-            LoadDungeon();
+            this.floor = player.dungeonFloor;
+            //LoadDungeon();
             monsters = new List<Monster>();
         }
 
@@ -77,21 +77,21 @@ namespace team6_TextGame
                             //TODO: 다음 층 불러오기
                             floor++;
                             // 5층 마다 던전 층 저장
-                            if (floor % 5 == 0) SaveDungeon();
+                            if (floor % 5 == 0) player.DungeonFloorUp();
                             InitMonster();
                             continue;
                         case 1 or -1:
                             //TODO: 현재 층수 저장
                             // 5층 마다 던전 층 저장
-                            if ((floor + 1) % 5 == 0) SaveDungeon();
-                            LoadDungeon();
+                            if ((floor + 1) % 5 == 0) player.DungeonFloorUp();
+                            //LoadDungeon();
                             return;
                     }
                 }
                 else
                 {
                     //TODO: 현재 층수 저장
-                    LoadDungeon();
+                    //LoadDungeon();
                     return;
                 }
             }
@@ -359,6 +359,8 @@ namespace team6_TextGame
             File.WriteAllText(path, floor.ToString());
             */
         }
+
+        /*
         private void LoadDungeon()
         {
 
@@ -373,7 +375,7 @@ namespace team6_TextGame
                 string json = File.ReadAllText(path);
                 int loadlevel = JsonConvert.DeserializeObject<int>(json, settings);
                 floor = loadlevel;
-            }
+            } */
 
             /*
             string path = Path.Combine(Directory.GetCurrentDirectory(), "dungeon.csv");
@@ -385,7 +387,7 @@ namespace team6_TextGame
                     floor = loadLevel;
                 }
             }
-            */
-        }
+            
+        }*/
     }
 }
