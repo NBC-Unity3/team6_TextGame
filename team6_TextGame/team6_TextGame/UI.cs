@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,23 +49,23 @@ namespace team6_TextGame
                 }
                 else if (item is EquipItem equipItem)
                 {
-                    WriteColoredNumbers($"   {equipItem.ToString()}\n");
+                    WriteColoredNumbers($"   {equipItem.ToString()} | {equipItem.price} G\n");
                 }
                 else if (item is ConsumeItem consumeItem)
                 {
-                    WriteColoredNumbers($"   {consumeItem.ToString()}\n");
+                    WriteColoredNumbers($"   {consumeItem.ToString()} | {consumeItem.price} G\n");
                 }
                 else if (item is AtkPotion atkpotion)
                 {
-                    WriteColoredNumbers($"   {atkpotion.ToString()}\n");
+                    WriteColoredNumbers($"   {atkpotion.ToString()} | {atkpotion.price} G\n");
                 }
                 else if (item is DefPotion defposion)
                 {
-                    WriteColoredNumbers($"   {defposion.ToString()}\n");
+                    WriteColoredNumbers($"   {defposion.ToString()} | {defposion.price} G\n");
                 }
                 else if (item is HpPotion hppotion)
                 {
-                    WriteColoredNumbers($"   {hppotion.ToString()}\n");
+                    WriteColoredNumbers($"   {hppotion.ToString()} | {hppotion.price} G\n");
                 }
                 else WriteColoredNumbers($"   {item}\n");
             }
